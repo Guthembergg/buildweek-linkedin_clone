@@ -1,5 +1,6 @@
 import { Row, Col, Card, Button, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
+import FotoExp from "../assets/FotoCardExp.jpeg";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useEffect } from "react";
 import { useState } from "react";
