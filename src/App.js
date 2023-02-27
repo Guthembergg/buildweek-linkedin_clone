@@ -1,14 +1,17 @@
 //import logo from "./logo.svg";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Aside from "./Components/Aside";
+import MainProfile from "./Components/MainProfile";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Aside />
-        <Routes>{/* <Route path="/" element={<Home />}></Route> */}</Routes>
+        <Routes>
+          <Route path="/" element={<MainProfile />}></Route>{" "}
+        </Routes>
       </BrowserRouter>
     </>
   );
