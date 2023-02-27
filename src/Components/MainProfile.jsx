@@ -5,14 +5,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Aside from "../Components/Aside";
+import { useDispatch } from "react-redux";
 
 const MainProfile = () => {
+  const dispatch = useDispatch();
   const param = useParams();
   let check;
-  if (param.id === "") {
+  if (param.id === undefined) {
     check = "me";
   } else {
-    check = "";
+    check = param.id;
   }
   const [me, setMe] = useState();
   const MainProfile = async () => {
@@ -25,6 +27,9 @@ const MainProfile = () => {
       if (response.ok) {
         const data = await response.json();
         setMe(data);
+        if (check === "me") {
+          dispatch({ type: "ADD_MY_PROFILE", payload: data });
+        }
       } else {
         console.log("mainPage errore in if");
       }
@@ -50,12 +55,16 @@ const MainProfile = () => {
                   <Image
                     roundedCircle={true}
                     alt=""
-                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    src={
+                      me.image
+                        ? me.image
+                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    }
                     className="position-absolute imageProfile "
                   />
                 </Card.Title>
-                <p className="m-0 p-0">scecialista informatico</p>
-                <i className="m-0 p-0">Ferrara</i>
+                <p className="m-0 p-0">{me.title}</p>
+                <i className="m-0 p-0">{me.area}</i>
                 <div className="mt-2">
                   <Button>Disponibile per</Button>
                   <Button className="ms-2" variant="outline-primary">
@@ -95,6 +104,100 @@ const MainProfile = () => {
                   <BsFillEyeFill className="me-2" />
                   Solo per te
                 </p>
+              </Card.Body>
+            </Card>
+            <Card className="d-flex m-3 position-relative">
+              <Card.Body className="d-flex flex-column">
+                <Card.Title>Esperienza</Card.Title>
+                <section className="d-flex ">
+                  <div className="col-1">
+                    <Image
+                      style={{ width: "60%" }}
+                      src={FotoExp}
+                      alt="FotoExp"
+                    />
+                  </div>
+                  <div className="col-11">
+                    <h6 className="m-0">Macellaio</h6>
+                    <p className="m-0">EPICODE Global · Part-time</p>
+                    <p className="text-secondary m-0">
+                      mag 2021 - Presente · 1 anno 10 mesi
+                    </p>
+                    <p className="mt-2">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                      Eius, quod necessitatibus error, neque aut quia mollitia
+                      consequuntur nostrum dolore sed repellendus quidem
+                      reiciendis delectus dolorum recusandae adipisci odit
+                      tempore reprehenderit.
+                    </p>
+                  </div>
+                </section>
+              </Card.Body>
+            </Card>
+            <Card className="d-flex m-3 position-relative">
+              <Card.Body className="d-flex flex-column">
+                <Card.Title>Formazione</Card.Title>
+                <section className="d-flex ">
+                  <div className="col-1">
+                    <Image
+                      style={{ width: "60%" }}
+                      src={FotoExp}
+                      alt="FotoExp"
+                    />
+                  </div>
+                  <div className="col-11">
+                    <h6 className="m-0">Astronauta</h6>
+                    <p className="m-0">EPICODE Global · Part-time</p>
+                    <p className="text-secondary m-0">2020-2021</p>
+                    <p className="mt-2">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Asperiores magni soluta ducimus perferendis voluptatibus
+                      distinctio? Cumque hic tempora quaerat consequuntur
+                      eveniet sapiente beatae qui molestiae quasi ipsa. Quam,
+                      error doloribus!
+                    </p>
+                  </div>
+                </section>
+              </Card.Body>
+            </Card>
+            <Card className="d-flex m-3 position-relative">
+              <Card.Body className="d-flex flex-column">
+                <Card.Title>Licenze e certificazioni</Card.Title>
+                <section className="d-flex ">
+                  <div className="col-1">
+                    <Image
+                      style={{ width: "60%" }}
+                      src={FotoExp}
+                      alt="FotoExp"
+                    />
+                  </div>
+                  <div className="col-11">
+                    <h6 className="m-0">Astronauta</h6>
+                    <p className="m-0">EPICODE Global · Part-time</p>
+                    <p className="text-secondary m-0">2020-2021</p>
+                  </div>
+                </section>
+              </Card.Body>
+            </Card>
+            <Card className="d-flex m-3 position-relative">
+              <Card.Body className="d-flex flex-column">
+                <Card.Title>Lingue</Card.Title>
+                <section className="d-flex flex-column mt-1 ">
+                  <div>
+                    <h6>Inglese</h6>
+                    <p className="text-secondary mb-0">Madrelingua</p>
+                  </div>
+                  <hr />
+                  <div>
+                    <h6>Italiano</h6>
+                    <p className="text-secondary mb-0">Conoscenza base</p>
+                  </div>
+                </section>
+                <hr />
+                <div>
+                  <h6>Francese </h6>
+                  <p className="text-secondary mb-0">Conoscenza base</p>
+                </div>
               </Card.Body>
             </Card>
           </Col>

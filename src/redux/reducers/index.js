@@ -1,9 +1,11 @@
 const initialState = {
-  data: "",
+  myProfile: [],
 };
 
 const MainReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "ADD_MY_PROFILE":
+      return { ...state, data: action.payload };
     default:
       return state;
   }
