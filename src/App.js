@@ -2,15 +2,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Aside from "./Components/Aside";
+
+import MainProfile from "./Components/MainProfile";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Aside />
         <Routes>
-          {/* <Route path="/profile" element={<Home />}></Route> */}
+          <Route path="/" element={<MainProfile />}></Route>{" "}
         </Routes>
       </BrowserRouter>
     </>

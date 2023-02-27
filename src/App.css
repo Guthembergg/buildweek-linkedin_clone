@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.imageProfile {
+  top: -180px;
+  left: 0;
+  z-index: 2 !important;
+  width: 150px;
+}
