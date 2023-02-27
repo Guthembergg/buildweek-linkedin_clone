@@ -3,6 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import MainProfile from "./Components/MainProfile";
+import CustomNavbar from "./Components/CustomNavbar";
+import CustomeFooter from "./Components/CustomFooter";
+
+// import Aside from "./Components/Aside";
 
 function App() {
   return (
