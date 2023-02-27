@@ -2,7 +2,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Aside from "./Components/Aside";
 import MainProfile from "./Components/MainProfile";
 
 function App() {
@@ -10,7 +9,8 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<MainProfile />}></Route>{" "}
+          <Route path="/" element={<MainProfile />}></Route>
+          <Route path="/:id" element={<MainProfile />}></Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -3,14 +3,23 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillEyeFill } from "react-icons/bs";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import Aside from "../Components/Aside";
 
 const MainProfile = () => {
+  const param = useParams();
+  let check;
+  if (param.id === "") {
+    check = "me";
+  } else {
+    check = "";
+  }
   const [me, setMe] = useState();
   const MainProfile = async () => {
     try {
       const token = process.env.REACT_APP_TOKEN;
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/me`,
+        `https://striveschool-api.herokuapp.com/api/profile/${check}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.ok) {
@@ -88,6 +97,9 @@ const MainProfile = () => {
                 </p>
               </Card.Body>
             </Card>
+          </Col>
+          <Col xs={3} className="mt-5">
+            <Aside />
           </Col>
         </Row>
       )}
