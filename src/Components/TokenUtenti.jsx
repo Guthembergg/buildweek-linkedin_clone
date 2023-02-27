@@ -3,7 +3,7 @@ import { Row, Col, Button, Image } from "react-bootstrap";
 const TokenUtenti = ({ profile }) => {
   return (
     <>
-      <Row>
+      <Row className="p-1">
         <Col xs={3} className="d-flex justify-content-center align-items-start">
           <Image
             className="rounded-circle"
@@ -13,15 +13,15 @@ const TokenUtenti = ({ profile }) => {
         </Col>
         <Col xs={9}>
           <div>
-            <p className="mb-0">
-              {profile.name} {profile.surname}
-              <span> 2°</span>
-            </p>
+            <h6 className="mb-0">
+               {profile.name} {profile.surname}
+              <span className="text-secondary"> - 2°</span>
+            </h6>
           </div>
           <div>
             <p>{profile.title}</p>
           </div>
-          <div>
+          <div className="ms-4">
             <Button>Segui</Button>
           </div>
         </Col>
