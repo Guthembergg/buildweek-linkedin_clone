@@ -4,29 +4,26 @@ const TokenUtenti = ({ profile }) => {
   return (
     <>
       <Row>
-        <Col
-          xs={3}
-          className="d-flex justify-content-center align-items-center"
-        >
+        <Col xs={3} className="d-flex justify-content-center align-items-start">
           <Image
             className="rounded-circle"
-            style={{ width: "85%" }}
+            style={{ width: "100%" }}
             src={profile.image}
           ></Image>
         </Col>
         <Col xs={9}>
-          <Row>
-            <p>
+          <div>
+            <p className="mb-0">
               {profile.name} {profile.surname}
               <span> 2°</span>
             </p>
-          </Row>
-          <Row>
+          </div>
+          <div>
             <p>{profile.title}</p>
-          </Row>
-          <Row>
+          </div>
+          <div>
             <Button>Segui</Button>
-          </Row>
+          </div>
         </Col>
       </Row>
     </>

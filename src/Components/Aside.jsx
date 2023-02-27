@@ -35,9 +35,9 @@ const Aside = () => {
 
   console.log(utenti);
   return (
-    <>
+    <div className="m-3">
       {/* primo div */}
-      <div style={{ border: "1px solid gray" }}>
+      <div className="mb-2" style={{ border: "1px solid gray" }}>
         <div>
           Modifica il tuo profilo e l'URL
           <span className="ps-2">
@@ -53,47 +53,40 @@ const Aside = () => {
         </div>
       </div>
       {/* secondo div */}
-      <div className="p-3" style={{ border: "1px solid gray" }}>
-        <Row>
+      <div className="mb-2" style={{ border: "1px solid gray" }}>
+        <div>
           Annuncio
-          <p>
+          <span>
             <BsThreeDots />
-          </p>
-        </Row>
-        <Row>Visita la pagina di E.Distribuzione</Row>
-        <Row>
-          <Col sx={6}>immagine profilo</Col>
-          <Col sx={6}>e-d logo</Col>
-        </Row>
-        <Row>Diamo molto più valore all'energia</Row>
-        <Row>
+          </span>
+        </div>
+        <div>Visita la pagina di E.Distribuzione</div>
+        <div className="">
+          <span>immagine profilo </span>
+          <span> e-d logo</span>
+        </div>
+        <div>Diamo molto più valore all'energia</div>
+        <div className="d-flex justify-content-center">
           <Button>Segui</Button>
-        </Row>
+        </div>
       </div>
       {/* terzo div */}
-      <div style={{ border: "1px solid gray" }}>
+      <div className="mb-2" style={{ border: "1px solid gray" }}>
         <div>Altre aziende consultate</div>
-        {utenti && utenti.map((e) => <TokenUtenti profile={e} />)}
+        {utenti &&
+          utenti
+            .filter((_, i) => i < 5)
+            .map((e) => <TokenUtenti profile={e} />)}
       </div>
-      <div>
+      {/* quarto div */}
+      <div className="mb-2" style={{ border: "1px solid gray" }}>
         <div>Persone che potresti conoscere</div>
-        <Row>
-          <Col xs={2}>img</Col>
-          <Col xs={10}>
-            <Row>
-              <p>nome e cognome</p>
-              <p>2°</p>
-            </Row>
-            <Row>
-              <p>Lavoro</p>
-            </Row>
-            <Row>
-              <Button>Segui</Button>
-            </Row>
-          </Col>
-        </Row>
+        {utenti &&
+          utenti
+            .filter((_, i) => i < 5)
+            .map((e) => <TokenUtenti profile={e} />)}
       </div>
-    </>
+    </div>
   );
 };
 

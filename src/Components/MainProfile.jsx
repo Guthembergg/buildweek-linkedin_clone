@@ -1,5 +1,6 @@
 import { Row, Col, Card, Button, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
+import Aside from "./Aside";
 
 const MainProfile = () => {
   return (
@@ -38,6 +39,9 @@ const MainProfile = () => {
               </Card>
             </div>
           </Card>
+        </Col>
+        <Col xs={3}>
+          <Aside />
         </Col>
       </Row>
     </>
