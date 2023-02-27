@@ -1,5 +1,6 @@
 //import logo from "./logo.svg";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Aside from "./Components/Aside";
 
@@ -8,7 +9,9 @@ function App() {
     <>
       <BrowserRouter>
         <Aside />
-        <Routes>{/* <Route path="/" element={<Home />}></Route> */}</Routes>
+        <Routes>
+          {/* <Route path="/profile" element={<Home />}></Route> */}
+        </Routes>
       </BrowserRouter>
     </>
   );
