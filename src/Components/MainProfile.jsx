@@ -67,11 +67,17 @@ const MainProfile = () => {
                 <p className="m-0 p-0">{me.title}</p>
                 <i className="m-0 p-0">{me.area}</i>
                 <div className="mt-2">
-                  <Button>Disponibile per</Button>
-                  <Button className="ms-2" variant="outline-primary">
+                  <Button variant="rounded-pill">Disponibile per</Button>
+                  <Button
+                    className="ms-2"
+                    variant="outline-primary rounded-pill"
+                  >
                     Aggiungi sezione del profilo
                   </Button>
-                  <Button className="ms-2" variant="outline-secondary">
+                  <Button
+                    className="ms-2"
+                    variant="outline-secondary rounded-pill"
+                  >
                     Altro
                   </Button>
                 </div>
