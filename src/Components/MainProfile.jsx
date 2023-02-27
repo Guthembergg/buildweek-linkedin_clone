@@ -1,4 +1,4 @@
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 
 const MainProfile = () => {
@@ -6,8 +6,15 @@ const MainProfile = () => {
     <>
       <Row>
         <Col xs={9}>
-          <Card className="d-flex m-3 ">
+          <Card className="d-flex m-3 position-relative">
             <Card.Img variant="top" src={imageBackground} />
+            <Image
+              roundedCircle={true}
+              style={{ width: "170px" }}
+              alt=""
+              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              className="position-absolute imageProfile"
+            />
             <Card.Body>
               <Card.Title className="mt-5">Nome Utente</Card.Title>
               <p className="m-0 p-0">scecialista informatico</p>
