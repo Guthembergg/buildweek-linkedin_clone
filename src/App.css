@@ -36,3 +36,129 @@
     transform: rotate(360deg);
   }
 }
+
+.navigation, .footer{
+  padding: 0 7rem;
+  background-color: white;
+  color: gray
+}
+.navigation{
+  border-bottom: 1px solid lightgray;
+}
+
+.leftNav, .rightNav{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0 0;
+}
+
+.leftNav{
+  border-right: 1px solid lightgray;
+  
+}
+.leftNav .form{
+  position: relative;
+  margin-left: 10px;
+  width: 20rem;
+  height: 45px;
+}
+.rightNav{
+  justify-content: center;
+}
+
+.linkedinIcon{
+  font-size: 55px;
+  color: darkblue;
+}
+
+.searchBar{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.me-2{
+  background-color: lightblue;
+    padding-left: 45px;
+    
+}
+
+.navBarUl{
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  /* width: 50%; */
+  margin: 0;
+  padding: 0;
+}
+.navBarUl li{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 0.8em;
+}
+.navBarUl li span{
+  display: flex;
+  align-items: center;
+}
+
+.navBarUl li a{
+  color:#282c34
+}
+.arrowGiu{
+  font-size: 22px;
+}
+
+.navIcon{
+  font-size: 25px;
+}
+
+.bordedLi{
+  border-right: 1px solid lightgray; 
+}
+.lente{
+  position: absolute;
+  top: 15px;
+  font-size: 20px;
+  left: 17px;
+}
+
+.footerLeftCol, .footerCopiright{
+  padding: 0;
+}
+.footerCopiright{
+  font-size: 0.8em;
+}
+
+.footerLeftCol ul{
+  list-style: none;
+  display: flex;
+  margin:0;
+  padding:0
+
+}
+
+.footerLeftCol ul li{
+  margin:10px 0;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.footerTitle{
+  color:blue;
+  margin: 0;
+  padding: 0;
+}
+
+.footerIcon{
+  font-size: 25px;
+}
+
+.footer select{
+  width:100%
+}
+/* .footerTitle div{
+  background-color: blue;
+  display: inline;
+  color:white
+} */
