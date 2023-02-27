@@ -37,6 +37,8 @@
   }
 }
 .imageProfile {
-  top: 170px;
-  left: 20px;
+  top: -180px;
+  left: 0;
+  z-index: 2 !important;
+  width: 150px;
 }

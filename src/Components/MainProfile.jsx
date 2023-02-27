@@ -8,15 +8,16 @@ const MainProfile = () => {
         <Col xs={9}>
           <Card className="d-flex m-3 position-relative">
             <Card.Img variant="top" src={imageBackground} />
-            <Image
-              roundedCircle={true}
-              style={{ width: "170px" }}
-              alt=""
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              className="position-absolute imageProfile"
-            />
             <Card.Body>
-              <Card.Title className="mt-5">Nome Utente</Card.Title>
+              <Card.Title className="mt-5 position-relative ">
+                Nome Utente
+                <Image
+                  roundedCircle={true}
+                  alt=""
+                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  className="position-absolute imageProfile "
+                />
+              </Card.Title>
               <p className="m-0 p-0">scecialista informatico</p>
               <i className="m-0 p-0">Ferrara</i>
               <div>
