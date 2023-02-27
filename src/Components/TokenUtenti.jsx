@@ -22,7 +22,7 @@ const TokenUtenti = ({ profile }) => {
             <p>{profile.title}</p>
           </div>
           <div className="ms-4">
-            <Button>Segui</Button>
+            <Button variant="outline-dark" className="rounded-pill">Segui</Button>
           </div>
         </Col>
       </Row>

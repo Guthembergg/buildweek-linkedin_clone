@@ -36,10 +36,10 @@ const Aside = () => {
 
   console.log(utenti);
   return (
-    <div className="m-3">
+    <div className="m-3 ">
       {/* primo div */}
       <div
-        className="mb-2 p-2 text-secondary rounded"
+        className="mb-2 p-2 text-secondary rounded bg-white"
         style={{
           fontSize: "0.95em",
           fontWeight: "500",
@@ -62,7 +62,7 @@ const Aside = () => {
       </div>
       {/* secondo div */}
       <div
-        className="mb-2 p-2 text-secondary text-center rounded"
+        className="mb-2 p-2 text-secondary text-center rounded bg-white"
         style={{
           fontSize: "0.9em",
           fontWeight: "500",
@@ -97,7 +97,7 @@ const Aside = () => {
       </div>
       {/* terzo div */}
       <div
-        className="mb-2 p-2 rounded"
+        className="mb-2 p-2 rounded bg-white"
         style={{ border: "1px solid lightgray" }}
       >
         <div style={{ fontWeight: "600", fontSize: "1.15em" }} className="mb-1">
@@ -110,7 +110,7 @@ const Aside = () => {
       </div>
       {/* quarto div */}
       <div
-        className="mb-2 p-2 rounded"
+        className="mb-2 p-2 rounded bg-white"
         style={{ border: "1px solid lightgray" }}
       >
         <div style={{ fontWeight: "600", fontSize: "1.15em" }} className="mb-1">

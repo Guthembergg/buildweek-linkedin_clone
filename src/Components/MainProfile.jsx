@@ -46,8 +46,8 @@ const MainProfile = () => {
   return (
     <>
       {me && (
-        <Row className="w-100">
-          <Col xs={9}>
+        <Row className="w-100 d-flex justify-content-center">
+          <Col xs={10} md={6}>
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body>
@@ -67,7 +67,7 @@ const MainProfile = () => {
                 <p className="m-0 p-0">{me.title}</p>
                 <i className="m-0 p-0">{me.area}</i>
                 <div className="mt-2">
-                  <Button variant="rounded-pill">Disponibile per</Button>
+                  <Button variant="primary rounded-pill">Disponibile per</Button>
                   <Button
                     className="ms-2"
                     variant="outline-primary rounded-pill"
@@ -208,7 +208,7 @@ const MainProfile = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col xs={3} className="mt-5">
+          <Col className="d-none d-md-block" md={3} >
             <Aside />
           </Col>
         </Row>

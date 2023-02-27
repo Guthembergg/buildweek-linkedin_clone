@@ -57,13 +57,10 @@
 .leftNav,
 .rightNav {
   display: flex;
-  justify-content: space-between;
+  
   padding: 10px 0 0;
 }
 
-.leftNav {
-  border-right: 1px solid lightgray;
-}
 .leftNav .form {
   position: relative;
   margin-left: 10px;
@@ -76,7 +73,7 @@
 
 .linkedinIcon {
   font-size: 55px;
-  color: darkblue;
+  color: rgb(10,102,194);
 }
 
 .searchBar {
@@ -84,8 +81,8 @@
   justify-content: flex-start;
   align-items: center;
 }
-.me-2 {
-  background-color: lightblue;
+.formBlue {
+  background-color: #EEF3F8;
   padding-left: 45px;
 }
 
@@ -128,6 +125,10 @@
   top: 15px;
   font-size: 20px;
   left: 17px;
+}
+
+.footer{
+  background-color: #f3f2ef 
 }
 
 .footerLeftCol,

@@ -9,16 +9,16 @@ import { GoSearch } from "react-icons/go";
 
 const CustomNavbar = () => {
     return(
-        <Row className="navigation">
+        <Row className="w-100 navigation d-flex justify-content-center">
         
-        <Col className="leftNav" xs={10}>
+        <Col className="leftNav d-flex justify-content-center align-items-center" xs={10}>
             <div className="searchBar">
                 <AiFillLinkedin className="linkedinIcon"/>
-                <Form className="d-flex form">
+                <Form className="d-flex form d-none d-lg-block">
                     <Form.Control
                         type="search"
                         placeholder="Cerca"
-                        className="me-2"
+                        className="me-2 formBlue"
                         aria-label="Search"
                         
                     />
@@ -29,41 +29,38 @@ const CustomNavbar = () => {
                 <ul className="navBarUl">
                     <li>
                         < MdHome className="navIcon"/>
-                        <span>Home</span>
+                        <span className="d-none d-lg-block">Home</span>
                     </li>
                     <li>
                         < BsFillPeopleFill className="navIcon"/>
-                        <span>Rete</span>
+                        <span className="d-none d-lg-block">Rete</span>
                     </li>
                     <li>
                         < MdWork className="navIcon"/>
-                        <span>Lavoro</span>
+                        <span className="d-none d-lg-block">Lavoro</span>
                     </li>
                     <li>
                         < AiFillMessage className="navIcon"/>
-                        <span>Messaggistica</span>
+                        <span className="d-none d-lg-block">Messaggistica</span>
                     </li>
                     <li>
                         < MdNotifications className="navIcon"/>
-                        <span>Notifiche</span>
+                        <span className="d-none d-lg-block">Notifiche</span>
                     </li>
                     <li >
                         < BsFillPersonFill className="navIcon"/>
-                        <span>Tu <IoMdArrowDropdown className="arrowGiu"/></span>
+                        <span className="d-none d-lg-block">Tu <IoMdArrowDropdown className="arrowGiu"/></span>
                     </li>
                     </ul>
-                    
-        </Col>
-        <Col xs={2} className="rightNav" >
-            <ul className="navBarUl">
+                    <ul className="navBarUl">
                         <li>
                             < CgMenuGridR className="navIcon"/>
-                            <span>Lavoro <IoMdArrowDropdown className="arrowGiu"/></span>
+                            <span className="d-none d-lg-block">Lavoro <IoMdArrowDropdown className="arrowGiu"/></span>
                         </li>
-                        <li>
+                        <li >
                             <a href="a">Prova Premium</a>
                         </li>
-                    </ul>
+                    </ul>                    
         </Col>
         {/* <Col className= "rightNav" xs={2}>
             <div>seconda col</div>

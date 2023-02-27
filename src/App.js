@@ -12,10 +12,12 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <CustomNavbar />
         <Routes>
           <Route path="/" element={<MainProfile />}></Route>
           <Route path="/:id" element={<MainProfile />}></Route>
         </Routes>
+        <CustomeFooter />
       </BrowserRouter>
     </>
   );

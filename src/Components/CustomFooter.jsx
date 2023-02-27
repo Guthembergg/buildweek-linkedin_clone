@@ -7,7 +7,7 @@ const CustomeFooter = () => {
 
         <>
             
-            <Row className="footer">
+            <Row className="footer w-100">
             <h3 className="footerTitle">Linkedin</h3>
                 <Col xs={6} className="footerLeftCol">
                     <ul>
