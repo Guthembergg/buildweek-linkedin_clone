@@ -97,8 +97,8 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
-               <div className="modalPencil d-flex justify-content-center align-items-center"><ModalProfile me={me}/></div>          
-                {check === "me" && <HiOutlinePencil className="modalPencil" />}
+               <div className="modalPencil d-flex justify-content-center align-items-center">{check === "me" && <ModalProfile me={me}/>}</div>          
+                
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
                   <Image

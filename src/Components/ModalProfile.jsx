@@ -48,7 +48,7 @@ function ModalProfile(props) {
   
   return (
     <>
-      <HiOutlinePencil onClick={handleShow}> </HiOutlinePencil>
+      <HiOutlinePencil onClick={handleShow}/>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
