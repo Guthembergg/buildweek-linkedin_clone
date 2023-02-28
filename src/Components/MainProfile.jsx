@@ -6,8 +6,7 @@ import { useParams } from "react-router-dom";
 import Aside from "../Components/Aside";
 import { useDispatch} from "react-redux";
 import ModalProfile from "./ModalProfile";
-import ModalInfo from "./ModalInfo"
-import { HiOutlinePencil } from "react-icons/hi";
+import ModalInfo from "./ModalInfo";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import ModalExp from "./ModalExp";

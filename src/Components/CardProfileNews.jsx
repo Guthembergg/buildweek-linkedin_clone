@@ -2,22 +2,61 @@ import { Card, Image } from "react-bootstrap"
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import {BsFillBookmarkFill} from "react-icons/bs"
 import {GrCheckbox} from "react-icons/gr"
-import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch} from "react-redux";
+import { useParams } from "react-router-dom";
 
 
 const CardProfile = () => {
+    const token = process.env.REACT_APP_TOKEN;
+    const [me, setMe] = useState();
+    const param = useParams();
+    const dispatch = useDispatch();
+    let check;
+
+    if (param.id === undefined) {
+      check = "me";
+    } else {
+      check = param.id;
+    }
+
+    const MainProfile = async () => {
+        try {
+          const response = await fetch(
+            `https://striveschool-api.herokuapp.com/api/profile/${check}`,
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          if (response.ok) {
+            const data = await response.json();
+            setMe(data);
+            if (check === "me") {
+              dispatch({ type: "ADD_MY_PROFILE", payload: data });
+            }
+           
+          } else {
+            console.log("mainPage: Main profile. errore in if");
+          }
+        } catch (err) {
+          console.log("mainPage: Main profile. err in catch");
+        }
+      };
+    
+      useEffect(() => {
+        MainProfile();
+      }, []);
+    
     return (
         <section>
             <Card className="d-flex mt-3">
               <Card.Img variant="top" src={imageBackground}/>
               <Card.Body className="border-bottom border-tertiary">         
-                <Card.Title className="mt-1 position-relative m-0 fs-6">Nome e Cognome                 
+                <Card.Title className="mt-1 position-relative m-0 fs-6">{me?.name} {me?.surname}               
                   <Image className="position-absolute imageProfileNews" roundedCircle={true}
                     alt=""
                     src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                     />
                 </Card.Title>
-                <Card.Text> title del fetch</Card.Text>              
+                <Card.Text>{me?.title}</Card.Text>              
             </Card.Body>
             <Card.Body className="cardProfileText border-bottom border-tertiary">         
                 <p className=" text-secondary mb-0 d-flex justify-content-between"> Collegamenti<span className="text-primary">52</span></p>
