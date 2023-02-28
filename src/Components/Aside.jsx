@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Row, Col, Button, Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import { AiFillQuestionCircle } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import TokenUtenti from "./TokenUtenti";
