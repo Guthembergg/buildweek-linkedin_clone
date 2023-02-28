@@ -185,19 +185,12 @@
   cursor: pointer;
 }
 
-.modalPencil {
-  position: absolute;
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-  top: 15px;
-  right: 15px;
-  font-size: 30px ;
-  color: rgb(77, 77, 77);
+.disc {
+  width: 40px;
+  height: 40px;
 }
-
-.modalPencil:hover {
-  border-radius: 30px;
+.disc:hover {
+  border-radius: 100px;
   background-color: rgba(126, 125, 125, 0.267);
   cursor: pointer;
 }

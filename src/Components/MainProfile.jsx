@@ -1,16 +1,15 @@
+import { useState, useEffect } from "react";
 import { Row, Col, Card, Button, Image } from "react-bootstrap";
-import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
-import FotoExp from "../assets/FotoCardExp.jpeg";
-import { BsFillEyeFill } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import Aside from "../Components/Aside";
-import { useDispatch} from "react-redux";
 import ModalProfile from "./ModalProfile";
 import ModalInfo from "./ModalInfo";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import ModalExp from "./ModalExp";
+import Aside from "../Components/Aside";
 import ModalSingleExp from "./ModalSingleExp";
+import FotoExp from "../assets/FotoCardExp.jpeg";
+import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
+import { BsFillEyeFill } from "react-icons/bs";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -96,8 +95,10 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
-               <div className="modalPencil d-flex justify-content-center align-items-center">{check === "me" && <ModalProfile me={me}/>}</div>          
-                
+                <div className="modalPencil d-flex justify-content-center align-items-center">
+                  {check === "me" && <ModalProfile me={me} />}
+                </div>
+
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
                   <Image
@@ -154,7 +155,6 @@ const MainProfile = () => {
                 </p>
               </Card.Body>
             </Card>
-
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Analisi</Card.Title>
@@ -164,27 +164,48 @@ const MainProfile = () => {
                 </p>
               </Card.Body>
             </Card>
+
             <Card className="d-flex m-3 position-relative">
               <Card.Body className="d-flex flex-column position-relative">
-                <Card.Title>Informazioni</Card.Title>
-                <div className="modalPencil d-flex justify-content-center align-items-center"><ModalInfo me={me}/></div>
+                <Row className="d-flex align-items-center justify-content-between pe-3">
+                  <Col xs={8}>
+                    <Card.Title className="d-flex align-items-center p-0">
+                      Informazioni
+                    </Card.Title>
+                  </Col>
+
+                  <Col xs={1}>
+                    <div className="disc d-flex justify-content-center align-items-center fs-4 p-0">
+                      <ModalInfo me={me} />
+                    </div>
+                  </Col>
+                </Row>
+
                 <p>{me.bio}</p>
-                
               </Card.Body>
             </Card>
-            <Card className="d-flex m-3 position-relative">
-              <Card.Body className="d-flex flex-column">
-                {check === "me" && (
-                  <>
-                    <div className="modalPencil m-0 ms-1 p-0">
-                      <ModalExp />
-                    </div>
-                  </>
-                )}
 
-                {experience && (
-                  <>
-                    <Card.Title>Esperienza</Card.Title>
+            {experience && (
+              <>
+                <Card className="d-flex m-3 position-relative">
+                  <Card.Body className="d-flex flex-column">
+                    <Row className="d-flex align-items-center justify-content-between pe-3">
+                      <Col xs={8}>
+                        <Card.Title className="d-flex align-items-center p-0">
+                          Esperienza
+                        </Card.Title>
+                      </Col>
+                      <Col xs={1}>
+                        {check === "me" && (
+                          <>
+                            <div className="m-0 ms-1 disc d-flex justify-content-center align-items-center fs-4 p-0">
+                              <ModalExp />
+                            </div>
+                          </>
+                        )}
+                      </Col>
+                    </Row>
+
                     {experience.map((e) => (
                       <Row>
                         <Col xs={10}>
@@ -221,10 +242,10 @@ const MainProfile = () => {
                         )}
                       </Row>
                     ))}
-                  </>
-                )}
-              </Card.Body>
-            </Card>
+                  </Card.Body>
+                </Card>
+              </>
+            )}
             <Card className="d-flex m-3 position-relative">
               <Card.Body className="d-flex flex-column">
                 <Card.Title>Formazione</Card.Title>
