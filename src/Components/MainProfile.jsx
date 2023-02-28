@@ -2,6 +2,7 @@ import { Row, Col, Card, Button, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import FotoExp from "../assets/FotoCardExp.jpeg";
 import { BsFillEyeFill } from "react-icons/bs";
+import {HiOutlinePencil} from "react-icons/hi"
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -50,7 +51,8 @@ const MainProfile = () => {
           <Col className="p-0" xs={10} md={6} >
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground}/>
-              <Card.Body>
+              <Card.Body className="position-relative">
+                <HiOutlinePencil className="modalPencil"/>
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
                   <Image
