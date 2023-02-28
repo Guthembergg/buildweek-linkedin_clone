@@ -3,14 +3,17 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import FotoExp from "../assets/FotoCardExp.jpeg";
 import { BsFillEyeFill } from "react-icons/bs";
 import { HiOutlinePencil } from "react-icons/hi";
-import { useEffect } from "react";
-import { useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
+
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Aside from "../Components/Aside";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ModalExp from "./ModalExp";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
+  const modalBody = useSelector((state) => state.myExperience);
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
   let check;
@@ -48,11 +51,15 @@ const MainProfile = () => {
     MainProfile();
   }, []);
 
-  const ExperiencesFetch = async (me) => {
+  const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${me._id}/experiences`,
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          method: ourMethod,
+          headers: { Authorization: `Bearer ${token}` },
+          body: ourBody,
+        }
       );
       if (response.ok) {
         const data = await response.json();
@@ -66,8 +73,12 @@ const MainProfile = () => {
   };
 
   useEffect(() => {
-    ExperiencesFetch(me);
+    ExperiencesGetFetch(me, "GET");
   }, [me]);
+
+  useEffect(() => {
+    ExperiencesGetFetch(me, "POST", modalBody);
+  }, [modalBody]);
 
   console.log("me", me);
   console.log("experience", experience);
@@ -80,7 +91,7 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
-                <HiOutlinePencil className="modalPencil" />
+                {check === "me" && <HiOutlinePencil className="modalPencil" />}
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
                   <Image
@@ -127,6 +138,7 @@ const MainProfile = () => {
                 </Card>
               </div>
             </Card>
+
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Consigliato per te</Card.Title>
@@ -136,6 +148,7 @@ const MainProfile = () => {
                 </p>
               </Card.Body>
             </Card>
+
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Analisi</Card.Title>
@@ -147,7 +160,17 @@ const MainProfile = () => {
             </Card>
             <Card className="d-flex m-3 position-relative">
               <Card.Body className="d-flex flex-column">
+                {check === "me" && (
+                  <>
+                    <AiOutlinePlus className="modalPlus" />
+                    <div className="modalPencil m-0 ms-1 p-0">
+                      <ModalExp />
+                    </div>
+                  </>
+                )}
+
                 <Card.Title>Esperienza</Card.Title>
+
                 <section className="d-flex ">
                   <div className="col-1">
                     <Image
