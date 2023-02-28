@@ -2,30 +2,35 @@ import { Row, Col, Card, Button, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import FotoExp from "../assets/FotoCardExp.jpeg";
 import { BsFillEyeFill } from "react-icons/bs";
-
-import { useEffect } from "react";
-import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Aside from "../Components/Aside";
 import { useDispatch} from "react-redux";
 import ModalProfile from "./ModalProfile";
 import ModalInfo from "./ModalInfo"
+import { HiOutlinePencil } from "react-icons/hi";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import ModalExp from "./ModalExp";
+import ModalSingleExp from "./ModalSingleExp";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
+  const modalBody = useSelector((state) => state.myExperience);
   const param = useParams();
-  
-  
+  const token = process.env.REACT_APP_TOKEN;
   let check;
+
   if (param.id === undefined) {
     check = "me";
   } else {
     check = param.id;
   }
+
   const [me, setMe] = useState();
+  const [experience, setExperience] = useState();
+
   const MainProfile = async () => {
     try {
-      const token = process.env.REACT_APP_TOKEN;
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${check}`,
         { headers: { Authorization: `Bearer ${token}` } }
@@ -37,26 +42,63 @@ const MainProfile = () => {
           dispatch({ type: "ADD_MY_PROFILE", payload: data });
         }
       } else {
-        console.log("mainPage errore in if");
+        console.log("mainPage: Main profile. errore in if");
       }
     } catch (err) {
-      console.log("mainPage err in catch");
+      console.log("mainPage: Main profile. err in catch");
     }
   };
 
   useEffect(() => {
     MainProfile();
   }, []);
-  console.log(me);
+
+  const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${me._id}/experiences`,
+        {
+          method: ourMethod,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(ourBody),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setExperience(data);
+      } else {
+        console.log("mainPage: Experiences. errore in if");
+      }
+    } catch (err) {
+      console.log("mainPage: Experiences. err in catch");
+    }
+  };
+
+  useEffect(() => {
+    ExperiencesGetFetch(me, "GET");
+  }, [me]);
+
+  useEffect(() => {
+    ExperiencesGetFetch(me, "POST", modalBody);
+  }, [modalBody]);
+
+  console.log("me", me);
+  console.log("experience", experience);
+
   return (
     <>
       {me && (
         <Row className="w-100 d-flex justify-content-center">
-          <Col className="p-0" xs={10} md={6} >
+          <Col className="p-0" xs={10} md={6}>
             <Card className="d-flex m-3 position-relative">
-              <Card.Img variant="top" src={imageBackground}/>
+              <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
                <div className="modalPencil d-flex justify-content-center align-items-center"><ModalProfile me={me}/></div>          
+                {check === "me" && <HiOutlinePencil className="modalPencil" />}
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
                   <Image
@@ -73,7 +115,9 @@ const MainProfile = () => {
                 <p className="m-0 p-0">{me.title}</p>
                 <i className="m-0 p-0">{me.area}</i>
                 <div className="mt-2">
-                  <Button variant="primary rounded-pill">Disponibile per</Button>
+                  <Button variant="primary rounded-pill">
+                    Disponibile per
+                  </Button>
                   <Button
                     className="ms-2"
                     variant="outline-primary rounded-pill"
@@ -101,6 +145,7 @@ const MainProfile = () => {
                 </Card>
               </div>
             </Card>
+
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Consigliato per te</Card.Title>
@@ -110,6 +155,7 @@ const MainProfile = () => {
                 </p>
               </Card.Body>
             </Card>
+
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Analisi</Card.Title>
@@ -129,30 +175,55 @@ const MainProfile = () => {
             </Card>
             <Card className="d-flex m-3 position-relative">
               <Card.Body className="d-flex flex-column">
-                <Card.Title>Esperienza</Card.Title>
-                <section className="d-flex ">
-                  <div className="col-1">
-                    <Image
-                      style={{ width: "60%" }}
-                      src={FotoExp}
-                      alt="FotoExp"
-                    />
-                  </div>
-                  <div className="col-11">
-                    <h6 className="m-0">Macellaio</h6>
-                    <p className="m-0">EPICODE Global · Part-time</p>
-                    <p className="text-secondary m-0">
-                      mag 2021 - Presente · 1 anno 10 mesi
-                    </p>
-                    <p className="mt-2">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Eius, quod necessitatibus error, neque aut quia mollitia
-                      consequuntur nostrum dolore sed repellendus quidem
-                      reiciendis delectus dolorum recusandae adipisci odit
-                      tempore reprehenderit.
-                    </p>
-                  </div>
-                </section>
+                {check === "me" && (
+                  <>
+                    <div className="modalPencil m-0 ms-1 p-0">
+                      <ModalExp />
+                    </div>
+                  </>
+                )}
+
+                {experience && (
+                  <>
+                    <Card.Title>Esperienza</Card.Title>
+                    {experience.map((e) => (
+                      <Row>
+                        <Col xs={10}>
+                          <section className="d-flex ">
+                            <div className="col-1">
+                              {e.image && (
+                                <Image
+                                  style={{ width: "60%" }}
+                                  src={e.image}
+                                  alt="FotoExp"
+                                />
+                              )}
+                            </div>
+                            <div className="col-11">
+                              <h6 className="m-0">{e.role}</h6>
+                              <p className="m-0">{e.company}</p>
+                              <p className="text-secondary m-0">
+                                `{e.startDate.slice(0, 10)} -{" "}
+                                {e.endDate.slice(0, 10)}`
+                              </p>
+                              <p className="mt-2">{e.decription}</p>
+                            </div>
+                          </section>
+                        </Col>
+                        {check === "me" && (
+                          <Col
+                            xs={2}
+                            className="d-flex align-items-center justify-content-center"
+                          >
+                            <div className="fs-5">
+                              <ModalSingleExp e={e} me={me} />
+                            </div>
+                          </Col>
+                        )}
+                      </Row>
+                    ))}
+                  </>
+                )}
               </Card.Body>
             </Card>
             <Card className="d-flex m-3 position-relative">
@@ -222,7 +293,7 @@ const MainProfile = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col className="d-none d-md-block p-0" md={4} lg={3} >
+          <Col className="d-none d-md-block p-0" md={4} lg={3}>
             <Aside />
           </Col>
         </Row>
