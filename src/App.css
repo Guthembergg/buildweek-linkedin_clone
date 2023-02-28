@@ -56,8 +56,7 @@
 
 .leftNav,
 .rightNav {
-  display: flex;
-  
+  display: flex;  
   padding: 10px 0 0;
 }
 
