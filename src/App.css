@@ -174,15 +174,30 @@
 
 .modalPencil {
   position: absolute;
-  padding: 10px;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
   top: 15px;
   right: 15px;
-  font-size: 45px ;
+  font-size: 30px ;
   color: rgb(77, 77, 77);
 }
 
 .modalPencil:hover {
-  border-radius: 20px;
+  border-radius: 30px;
   background-color: rgba(126, 125, 125, 0.267);
   cursor: pointer;
+}
+
+.imageProfileNews {
+  top: -60px;
+  left: 40px;
+  z-index: 2 !important;
+  width: 60px;
+}
+
+.cardProfileText {
+  font-size: 0.9em;
+  font-weight: 600;
+  
 }

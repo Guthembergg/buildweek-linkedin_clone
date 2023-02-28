@@ -2,16 +2,20 @@ import { Row, Col, Card, Button, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import FotoExp from "../assets/FotoCardExp.jpeg";
 import { BsFillEyeFill } from "react-icons/bs";
-import {HiOutlinePencil} from "react-icons/hi"
+
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Aside from "../Components/Aside";
-import { useDispatch } from "react-redux";
+import { useDispatch} from "react-redux";
+import ModalProfile from "./ModalProfile";
+import ModalInfo from "./ModalInfo"
 
 const MainProfile = () => {
   const dispatch = useDispatch();
   const param = useParams();
+  
+  
   let check;
   if (param.id === undefined) {
     check = "me";
@@ -52,7 +56,7 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground}/>
               <Card.Body className="position-relative">
-                <HiOutlinePencil className="modalPencil"/>
+               <div className="modalPencil d-flex justify-content-center align-items-center"><ModalProfile me={me}/></div>          
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
                   <Image
@@ -113,6 +117,14 @@ const MainProfile = () => {
                   <BsFillEyeFill className="me-2" />
                   Solo per te
                 </p>
+              </Card.Body>
+            </Card>
+            <Card className="d-flex m-3 position-relative">
+              <Card.Body className="d-flex flex-column position-relative">
+                <Card.Title>Informazioni</Card.Title>
+                <div className="modalPencil d-flex justify-content-center align-items-center"><ModalInfo me={me}/></div>
+                <p>{me.bio}</p>
+                
               </Card.Body>
             </Card>
             <Card className="d-flex m-3 position-relative">
