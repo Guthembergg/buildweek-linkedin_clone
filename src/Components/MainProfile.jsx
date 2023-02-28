@@ -47,9 +47,9 @@ const MainProfile = () => {
     <>
       {me && (
         <Row className="w-100 d-flex justify-content-center">
-          <Col xs={10} md={6}>
+          <Col className="p-0" xs={10} md={6} >
             <Card className="d-flex m-3 position-relative">
-              <Card.Img variant="top" src={imageBackground} />
+              <Card.Img variant="top" src={imageBackground}/>
               <Card.Body>
                 <Card.Title className="mt-5 position-relative m-0">
                   {me.name} {me.surname}
@@ -208,7 +208,7 @@ const MainProfile = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col className="d-none d-md-block" md={3} >
+          <Col className="d-none d-md-block p-0" md={4} lg={3} >
             <Aside />
           </Col>
         </Row>
