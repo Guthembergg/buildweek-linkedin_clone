@@ -56,8 +56,7 @@
 
 .leftNav,
 .rightNav {
-  display: flex;
-  
+  display: flex;  
   padding: 10px 0 0;
 }
 
@@ -170,3 +169,20 @@
   display: inline;
   color:white
 } */
+
+
+
+.modalPencil {
+  position: absolute;
+  padding: 10px;
+  top: 15px;
+  right: 15px;
+  font-size: 45px ;
+  color: rgb(77, 77, 77);
+}
+
+.modalPencil:hover {
+  border-radius: 20px;
+  background-color: rgba(126, 125, 125, 0.267);
+  cursor: pointer;
+}

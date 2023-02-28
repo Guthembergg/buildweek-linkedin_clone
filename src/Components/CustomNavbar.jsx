@@ -9,7 +9,7 @@ import { GoSearch } from "react-icons/go";
 
 const CustomNavbar = () => {
     return(
-        <Row className="w-100 navigation d-flex justify-content-center">
+        <Row className="w-100 navigation d-flex justify-content-center align-items-center">
         
         <Col className="leftNav d-flex justify-content-center align-items-center" xs={10}>
             <div className="searchBar">
