@@ -1,12 +1,21 @@
 import { React, useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
-import { AiOutlinePlus } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { HiOutlinePencil } from "react-icons/hi";
 
-function ModalExp() {
+function ModalSingleExp({ e, me }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [modalInfo, setModalInfo] = useState();
+  const [modalInfo, setModalInfo] = useState({
+    role: e.role,
+    company: e.company,
+    description: e.description,
+    area: e.area,
+    startDate: e.startDate,
+    endDate: e.endDate,
+  });
+
+  const token = process.env.REACT_APP_TOKEN;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,12 +48,37 @@ function ModalExp() {
     dispatch({ type: "ADD_EXP", payload: modalInfo });
   };
 
+  const ModalSingleFetch = async (ourMethod, ourBody) => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${me}/experiences/${e._id}`,
+        {
+          method: ourMethod,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(ourBody),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        console.log("data modalSingleEpx", data);
+      } else {
+        console.log("mainPage: Experiences. errore in if");
+      }
+    } catch (err) {
+      console.log("mainPage: Experiences. err in catch");
+    }
+  };
+
   return (
     <>
-      <AiOutlinePlus onClick={handleShow}></AiOutlinePlus>
+      <HiOutlinePencil onClick={handleShow}></HiOutlinePencil>
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Aggiungi Esperienza</Modal.Title>
+          <Modal.Title>Modifica Esperienza</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -54,6 +88,7 @@ function ModalExp() {
                 onChange={handleChangeRuolo}
                 type="text"
                 placeholder="Ruolo"
+                value={modalInfo.role}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -105,11 +140,20 @@ function ModalExp() {
             Close
           </Button>
           <Button
+            variant="secondary"
+            onClick={() => {
+              handleClose();
+              ModalSingleFetch("DELETE", modalInfo);
+            }}
+          >
+            Delete
+          </Button>
+          <Button
             variant="primary"
             type="submit"
             onClick={() => {
               handleClose();
-              handleSubmit();
+              ModalSingleFetch("PUT", modalInfo);
             }}
           >
             Save Changes
@@ -120,4 +164,4 @@ function ModalExp() {
   );
 }
 
-export default ModalExp;
+export default ModalSingleExp;

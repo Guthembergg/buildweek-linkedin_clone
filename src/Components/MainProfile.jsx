@@ -3,13 +3,13 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import FotoExp from "../assets/FotoCardExp.jpeg";
 import { BsFillEyeFill } from "react-icons/bs";
 import { HiOutlinePencil } from "react-icons/hi";
-import { AiOutlinePlus } from "react-icons/ai";
 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Aside from "../Components/Aside";
 import { useDispatch, useSelector } from "react-redux";
 import ModalExp from "./ModalExp";
+import ModalSingleExp from "./ModalSingleExp";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -57,8 +57,12 @@ const MainProfile = () => {
         `https://striveschool-api.herokuapp.com/api/profile/${me._id}/experiences`,
         {
           method: ourMethod,
-          headers: { Authorization: `Bearer ${token}` },
-          body: ourBody,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(ourBody),
         }
       );
       if (response.ok) {
@@ -162,38 +166,53 @@ const MainProfile = () => {
               <Card.Body className="d-flex flex-column">
                 {check === "me" && (
                   <>
-                    <AiOutlinePlus className="modalPlus" />
                     <div className="modalPencil m-0 ms-1 p-0">
                       <ModalExp />
                     </div>
                   </>
                 )}
 
-                <Card.Title>Esperienza</Card.Title>
-
-                <section className="d-flex ">
-                  <div className="col-1">
-                    <Image
-                      style={{ width: "60%" }}
-                      src={FotoExp}
-                      alt="FotoExp"
-                    />
-                  </div>
-                  <div className="col-11">
-                    <h6 className="m-0">Macellaio</h6>
-                    <p className="m-0">EPICODE Global · Part-time</p>
-                    <p className="text-secondary m-0">
-                      mag 2021 - Presente · 1 anno 10 mesi
-                    </p>
-                    <p className="mt-2">
-                      Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                      Eius, quod necessitatibus error, neque aut quia mollitia
-                      consequuntur nostrum dolore sed repellendus quidem
-                      reiciendis delectus dolorum recusandae adipisci odit
-                      tempore reprehenderit.
-                    </p>
-                  </div>
-                </section>
+                {experience && (
+                  <>
+                    <Card.Title>Esperienza</Card.Title>
+                    {experience.map((e) => (
+                      <Row>
+                        <Col xs={10}>
+                          <section className="d-flex ">
+                            <div className="col-1">
+                              {e.image && (
+                                <Image
+                                  style={{ width: "60%" }}
+                                  src={e.image}
+                                  alt="FotoExp"
+                                />
+                              )}
+                            </div>
+                            <div className="col-11">
+                              <h6 className="m-0">{e.role}</h6>
+                              <p className="m-0">{e.company}</p>
+                              <p className="text-secondary m-0">
+                                `{e.startDate.slice(0, 10)} -{" "}
+                                {e.endDate.slice(0, 10)}`
+                              </p>
+                              <p className="mt-2">{e.decription}</p>
+                            </div>
+                          </section>
+                        </Col>
+                        {check === "me" && (
+                          <Col
+                            xs={2}
+                            className="d-flex align-items-center justify-content-center"
+                          >
+                            <div className="fs-5">
+                              <ModalSingleExp e={e} me={me} />
+                            </div>
+                          </Col>
+                        )}
+                      </Row>
+                    ))}
+                  </>
+                )}
               </Card.Body>
             </Card>
             <Card className="d-flex m-3 position-relative">
