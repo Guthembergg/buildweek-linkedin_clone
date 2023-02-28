@@ -35,8 +35,10 @@ function ModalExp() {
     setModalInfo({ ...modalInfo, endDate: e.target.value });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {  
+    e.preventDefault()
     dispatch({ type: "ADD_EXP", payload: modalInfo });
+    
   };
 
   return (
@@ -98,23 +100,23 @@ function ModalExp() {
                 </Form.Group>
               </Col>
             </Row>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+            <Modal.Footer>
+        {/*   <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
+          </Button> */}
           <Button
             variant="primary"
             type="submit"
-            onClick={() => {
-              handleClose();
-              handleSubmit();
-            }}
+            onClick={        
+              handleClose             
+          }
           >
             Save Changes
           </Button>
         </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      
       </Modal>
     </>
   );

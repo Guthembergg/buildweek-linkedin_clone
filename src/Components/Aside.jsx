@@ -106,7 +106,7 @@ const Aside = () => {
         {utenti &&
           utenti
             .filter((_, i) => i < 5)
-            .map((e) => <TokenUtenti profile={e} />)}
+            .map((e, i) => <TokenUtenti key={`aziende-${i}`} profile={e} />)}
       </div>
       {/* quarto div */}
       <div
@@ -118,8 +118,8 @@ const Aside = () => {
         </div>
         {utenti &&
           utenti
-            .filter((_, i) => i < 5)
-            .map((e) => <TokenUtenti profile={e} />)}
+            .filter((_, i) => i > 5 && i < 11)
+            .map((e, i) => <TokenUtenti key={`utenti-${i}`} profile={e} />)}
       </div>
     </div>
   );

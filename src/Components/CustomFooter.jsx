@@ -71,7 +71,7 @@ const CustomeFooter = () => {
                 <Col xs={3}>
                     <label>Seleziona lingua</label>
                     <select name="language" id="" >
-                        <option value="0" selected="selected"> Italiano - Italiano</option>
+                        <option value="0" selectedvalue="selected"> Italiano - Italiano</option>
                         <option value="1">English - Inglese</option>
                         <option value="2">Français - Francese</option>
                     </select>

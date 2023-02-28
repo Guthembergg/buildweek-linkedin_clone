@@ -25,7 +25,7 @@ const MainProfile = () => {
   }
 
   const [me, setMe] = useState();
-  const [experience, setExperience] = useState();
+  const [experience, setExperience] = useState([]);
 
   const MainProfile = async () => {
     try {
@@ -67,7 +67,10 @@ const MainProfile = () => {
       );
       if (response.ok) {
         const data = await response.json();
+        if (ourMethod === "GET") {
         setExperience(data);
+        }
+
       } else {
         console.log("mainPage: Experiences. errore in if");
       }
@@ -206,8 +209,8 @@ const MainProfile = () => {
                       </Col>
                     </Row>
 
-                    {experience.map((e) => (
-                      <Row>
+                    {experience?.map((e, i) => (
+                      <Row key={`exp-${i}`}>
                         <Col xs={10}>
                           <section className="d-flex ">
                             <div className="col-1">
