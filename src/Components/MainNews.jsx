@@ -2,6 +2,8 @@ import { Row, Col, Card} from "react-bootstrap"
 import CardProfile from "./CardProfileNews";
 import{BiHash} from "react-icons/bi"
 import {AiOutlinePlus} from "react-icons/ai"
+import {BsInfoSquareFill} from "react-icons/bs"
+import {RxDotFilled} from "react-icons/rx"
 
 const MainNews = () => {
     return (
@@ -38,7 +40,68 @@ const MainNews = () => {
             </Card>
                 </Col>
             <Col xs={5}> FEED NEWS</Col>
-            <Col xs={3}> SIDEBAR</Col>
+            <Col xs={3}> 
+            <Card className="mt-2">
+            <Card.Body className="position-relative px-0 py-2">
+              <h6 className="d-flex justify-content-between mb-2 px-3"> Linkedin Notizie <span><BsInfoSquareFill/></span></h6>
+                <section className="d-flex px-3">
+                    <div className="d-flex justify-content-center align-items-start">
+                        <p><RxDotFilled/></p>
+                    </div>
+                    <div>
+                      <p className="fs-6 m-0"><strong>A volte basta chiedere</strong></p>
+                      <p className="text-secondary mb-1 fs-6">23 anni fa - 3 lettori</p> 
+                    </div>                
+                </section>
+                <section className="d-flex px-3">
+                    <div className="d-flex justify-content-center align-items-start">
+                        <p><RxDotFilled/></p>
+                    </div>
+                    <div>
+                      <p className="fs-6 m-0"><strong>A volte basta chiedere</strong></p>
+                      <p className="text-secondary mb-1 fs-6">23 anni fa - 3 lettori</p> 
+                    </div>                
+                </section>
+                <section className="d-flex px-3">
+                    <div className="d-flex justify-content-center align-items-start">
+                        <p><RxDotFilled/></p>
+                    </div>
+                    <div>
+                      <p className="fs-6 m-0"><strong>A volte basta chiedere</strong></p>
+                      <p className="text-secondary mb-1 fs-6">23 anni fa - 3 lettori</p> 
+                    </div>                
+                </section>
+                <section className="d-flex px-3">
+                    <div className="d-flex justify-content-center align-items-start">
+                        <p><RxDotFilled/></p>
+                    </div>
+                    <div>
+                      <p className="fs-6 m-0"><strong>A volte basta chiedere</strong></p>
+                      <p className="text-secondary mb-1 fs-6">23 anni fa - 3 lettori</p> 
+                    </div>                
+                </section>
+                <section className="d-flex px-3">
+                    <div className="d-flex justify-content-center align-items-start">
+                        <p><RxDotFilled/></p>
+                    </div>
+                    <div>
+                      <p className="fs-6 m-0"><strong>A volte basta chiedere</strong></p>
+                      <p className="text-secondary mb-1 fs-6">23 anni fa - 3 lettori</p> 
+                    </div>                
+                </section>
+                <section className="d-flex px-3">
+                    <div className="d-flex justify-content-center align-items-start">
+                        <p><RxDotFilled/></p>
+                    </div>
+                    <div>
+                      <p className="fs-6 m-0"><strong>A volte basta chiedere</strong></p>
+                      <p className="text-secondary mb-1 fs-6">23 anni fa - 3 lettori</p> 
+                    </div>                
+                </section>
+                             
+              </Card.Body>
+              </Card>
+            </Col>
         </Row>
     )
 }
