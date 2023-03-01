@@ -47,7 +47,7 @@ const CardProfile = () => {
     
     return (
         <section>
-            <Card className="d-flex mt-3">
+            <Card className="d-flex">
               <Card.Img variant="top" src={imageBackground}/>
               <Card.Body className="border-bottom border-tertiary">         
                 <Card.Title className="mt-1 position-relative m-0 fs-6">{me?.name} {me?.surname}               
