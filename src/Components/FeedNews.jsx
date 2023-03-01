@@ -21,7 +21,7 @@ const FeedNews = (props) => {
                       }/>
                     </div>
                   <div className="p-2">
-                    <Link className="text-decoration-none text-dark" to={`/${props.news?.user._id}`}><h6 className="m-0">{props.news?.user.name} {props.news?.user.surname}</h6></Link>
+                    <Link className="text-decoration-none text-dark" to={`/profile/${props.news?.user._id}`}><h6 className="m-0">{props.news?.user.name} {props.news?.user.surname}</h6></Link>
                     <p className="m-0 text-secondary">{props.news?.user.title}</p>
                     <p className="m-0 text-secondary"><span>{props.news?.createdAt.slice(12,16)} - {props.news?.createdAt.slice(8,10)}/{props.news?.createdAt.slice(5,7)}/{props.news?.createdAt.slice(0,4)}</span></p>
                   </div>
@@ -31,11 +31,11 @@ const FeedNews = (props) => {
             <Card.Body className="border-top">
                 <p>{props.news.text}</p>
             </Card.Body>
-            <section className="d-flex justify-content-center text-tertiary border-top">
-                <div className="iconPost rounded"><span className="me-2"><SlLike/></span>Consiglia </div>
-                <div className="iconPost rounded"><span className="me-2"><AiOutlineComment/></span>Commenta </div>
-                <div className="iconPost rounded"><span className="me-2"><ImLoop/></span> Diffondi il post</div>
-                <div className="iconPost rounded"><span className="me-2"><FiSend/></span> Invia</div>
+            <section className="d-flex justify-content-around text-tertiary border-top">
+                <div className="iconPost rounded"><span className="me-2"><SlLike/></span> <span className="d-none d-md-inline">Consiglia </span></div>
+                <div className="iconPost rounded"><span className="me-2"><AiOutlineComment/></span> <span className="d-none d-md-inline">Commenta</span> </div>
+                <div className="iconPost rounded"><span className="me-2"><ImLoop/></span> <span className="d-none d-md-inline">Diffondi il post</span> </div>
+                <div className="iconPost rounded"><span className="me-2"><FiSend/></span> <span className="d-none d-md-inline">Invia</span></div>
             </section>       
             
         </Card>

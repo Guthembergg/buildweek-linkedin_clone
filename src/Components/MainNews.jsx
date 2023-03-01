@@ -34,7 +34,7 @@ const MainNews = () => {
   }, []);
   return (
     <Row className="d-flex justify-content-center py-3">
-      <Col className="d-none d-lg-block" lg={2}>
+      <Col className="d-none d-md-block " md={3} xl={2}>
         <CardProfile />
         <Card className="d-flex mt-3">
           <Card.Body className="position-relative px-0">
@@ -88,7 +88,7 @@ const MainNews = () => {
           </Card.Body>
         </Card>
       </Col>
-      <Col xs={8} lg={5}>
+      <Col xs={10} md={8} lg={6}>
         <ModalPost/>
         {postList &&
           postList
@@ -96,7 +96,7 @@ const MainNews = () => {
             .filter((_, i) => i < 10)
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
-      <Col className="d-none d-lg-block" lg={3}>
+      <Col className="d-none d-lg-block" xl={2}>
         <Card>
           <Card.Body className="position-relative px-0 py-2">
             <h6 className="d-flex justify-content-between mb-2 px-3">

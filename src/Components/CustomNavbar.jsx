@@ -6,10 +6,15 @@ import { BsFillPeopleFill, BsFillPersonFill } from "react-icons/bs";
 import { CgMenuGridR } from "react-icons/cg";
 import { GoSearch } from "react-icons/go";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const CustomNavbar = () => {
+  const profile = useSelector(state=>state.myProfile)
+
+ 
+
   return (
-    <Row className="w-100 navigation d-flex justify-content-center align-items-center">
+    <Row className="w-100 navigation d-flex justify-content-center">
       <Col
         className="leftNav d-flex justify-content-center align-items-center"
         xs={10}
@@ -30,11 +35,11 @@ const CustomNavbar = () => {
           </Form>
         </div>
 
-        <ul className="navBarUl">
-          <li>
+        <ul className="navBarUl d-flex justify-content-center align-items-center">
+          <Link className="text-secondary text-decoration-none" to={"/"}><li>
             <MdHome className="navIcon" />
             <span className="d-none d-lg-block">Home</span>
-          </li>
+          </li></Link>
           <li>
             <BsFillPeopleFill className="navIcon" />
             <span className="d-none d-lg-block">Rete</span>
@@ -59,7 +64,7 @@ const CustomNavbar = () => {
                 id="dropdown-basic"
               >
                 <BsFillPersonFill className="navIcon" />
-                <span className="d-none d-lg-block">Tu</span>
+                <span className="d-none d-lg-block"></span>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
@@ -70,22 +75,27 @@ const CustomNavbar = () => {
                         roundedCircle={true}
                         style={{ width: "50px" }}
                         alt=""
-                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        src={
+                          profile?.image
+                            ? profile?.image
+                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        }
                       />
                     </Col>
                     <Col xs={9}>
-                      <Row>Nome e cognome</Row>
-                      <Row>impiego</Row>
+                      <Row>{profile?.name}{profile?.surname}</Row>
+                      <Row>{profile?.title}</Row>
                     </Col>
                   </Row>
-                  <Row className="ps-4 pe-4 pt-2">
-                    <Button
+                  <Row className="text-center pt-2">
+                  <Link className="text-secondary text-decoration-none" to={"/profile/me"}><Button
                       variant="outline-primary rounded-pill"
                       className="fs-6"
                     >
                       Visualizza profilo
-                    </Button>
+                    </Button></Link>
                   </Row>
+
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item href="#/action-2">
