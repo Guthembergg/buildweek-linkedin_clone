@@ -1,13 +1,17 @@
 import { Col, Row } from "react-bootstrap"
 import { IoMdArrowDropdown, IoMdSettings } from "react-icons/io";
 import { AiFillQuestionCircle } from "react-icons/ai";
+import { useLocation } from "react-router-dom";
 
 const CustomeFooter = () => {
+
+    const location = useLocation()
+
     return(
 
         <>
             
-            <Row className="footer w-100">
+            {location.pathname !== "/news" && <Row className="footer w-100">
             <h3 className="footerTitle">Linkedin</h3>
                 <Col xs={6} className="footerLeftCol">
                     <ul>
@@ -33,19 +37,7 @@ const CustomeFooter = () => {
                             <li>Piccole imprese</li>
                         </Col >
     
-                        {/* <li>Informazioni</li>
-                        <li>Accessibilità</li>
-                        <li>Talent Solutions</li>
-                        <li>Linee guida della comunity</li>
-                        <li>Carriera</li>
-                        <li>Soluzioni di marketing</li>
-                        <li>Privacy e condizioni <IoMdArrowDropdown className="arrowGiu"/></li>
-                        <li>Opzioni di annuncio</li>
-                        <li>Pubblicità</li>
-                        <li>Sales Solutions</li>
-                        <li>Mobile</li>
-                        <li>Piccole imprese</li>
-                        <li>Centro sicurezza</li> */}
+                        
                     </ul>
                 </Col>
                 <Col xs={3}>
@@ -78,7 +70,7 @@ const CustomeFooter = () => {
                 </Col>
                 <span className="footerCopiright">Linkedin Corporation © 2023</span>
                 
-            </Row>
+            </Row>}
         </>
     )
 }
