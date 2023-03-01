@@ -1,21 +1,20 @@
-import { Card, Image, Form, NavDropdown } from "react-bootstrap";
+import { Card, Image, NavDropdown } from "react-bootstrap";
 import { SlLike } from "react-icons/sl";
 import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
 import { ImLoop } from "react-icons/im";
 import { Link } from "react-router-dom";
-import { RiDeleteBin6Fill } from "react-icons/ri";
-import { HiOutlinePencil, HiDotsHorizontal } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
+import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
-
 import { useSelector } from "react-redux";
+
 const FeedNews = (props) => {
   const myId = useSelector((state) => state.myProfile._id);
   console.log(myId);
   console.log(props);
   console.log(props.news.user._id);
+
   return (
     <Card className="mb-3 p-2">
       <section className="d-flex p-2">
