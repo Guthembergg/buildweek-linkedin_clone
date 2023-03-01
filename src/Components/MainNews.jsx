@@ -4,14 +4,39 @@ import{BiHash} from "react-icons/bi"
 import {AiOutlinePlus} from "react-icons/ai"
 import {BsInfoSquareFill} from "react-icons/bs"
 import {RxDotFilled} from "react-icons/rx"
+import { useEffect, useState } from "react";
+import FeedNews from "./FeedNews";
 
 const MainNews = () => {
+  const [postList, setPostList] = useState();
+  const token = process.env.REACT_APP_TOKEN;
+
+  const fetchGetPost = async () => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setPostList(data);
+      } else {
+        console.log("News: fetch Post. errore in if");
+      }
+    } catch (err) {
+      console.log("News: fetch Post. err in catch");
+    }
+  };
+
+  useEffect(() => {
+    fetchGetPost();
+  }, []);
     return (
-        <Row className="d-flex justify-content-center">
-            <Col xs={2}>
+        <Row className="d-flex justify-content-center py-3">
+            <Col className="d-none d-lg-block" lg={2}>
                 <CardProfile/>
-            <Card className="d-flex mt-2">
-              <Card.Body className="position-relative px-0 py-2">
+            <Card className="d-flex mt-3">
+              <Card.Body className="position-relative px-0">
               <p className="text-secondary mb-1 px-3"> Recenti</p>
                 <section>
                 <p className="cardProfileText px-3 mb-1"><BiHash/> produttività</p>
@@ -39,9 +64,14 @@ const MainNews = () => {
               </Card.Body>
             </Card>
                 </Col>
-            <Col xs={5}> FEED NEWS</Col>
-            <Col xs={3}> 
-            <Card className="mt-2">
+            <Col xs={8} lg={4}>
+                {postList && postList
+                .reverse()
+                .filter((_, i) => i < 10)
+                .map((e, i)=> <FeedNews key={`news-${i}`} news={e} />)}
+            </Col>
+            <Col className="d-none d-lg-block" lg={3}> 
+            <Card>
             <Card.Body className="position-relative px-0 py-2">
               <h6 className="d-flex justify-content-between mb-2 px-3"> Linkedin Notizie <span><BsInfoSquareFill/></span></h6>
                 <section className="d-flex px-3">
