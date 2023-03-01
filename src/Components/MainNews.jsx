@@ -6,7 +6,7 @@ import { BsInfoSquareFill } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import FeedNews from "./FeedNews";
-import ModalPost from "./ModalPost"
+import ModalPost from "./ModalPost";
 
 const MainNews = () => {
   const [postList, setPostList] = useState();
@@ -20,7 +20,7 @@ const MainNews = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setPostList(data);
+        setPostList(data.reverse().slice(0, 100));
       } else {
         console.log("News: fetch Post. errore in if");
       }
@@ -32,6 +32,7 @@ const MainNews = () => {
   useEffect(() => {
     fetchGetPost();
   }, []);
+
   return (
     <Row className="d-flex justify-content-center py-3">
       <Col className="d-none d-md-block " md={3} xl={2}>
@@ -89,10 +90,9 @@ const MainNews = () => {
         </Card>
       </Col>
       <Col xs={10} md={8} lg={6}>
-        <ModalPost/>
+        <ModalPost />
         {postList &&
           postList
-            .reverse()
             .filter((_, i) => i < 10)
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>

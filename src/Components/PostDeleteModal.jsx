@@ -40,6 +40,7 @@ function PostDeleteModal(props) {
       <>
         <NavDropdown.Item onClick={handleShow}>
           <RiDeleteBin6Fill />
+          <span className="ps-2">Elimina post</span>
         </NavDropdown.Item>
       </>
 

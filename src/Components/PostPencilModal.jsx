@@ -67,6 +67,7 @@ function NewPostProva(props) {
       <>
         <NavDropdown.Item onClick={handleShow}>
           <HiOutlinePencil />
+          <span className="ps-2">Modifica post</span>
         </NavDropdown.Item>
       </>
 
