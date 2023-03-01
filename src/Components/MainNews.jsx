@@ -6,6 +6,7 @@ import { BsInfoSquareFill } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import FeedNews from "./FeedNews";
+import ModalPost from "./ModalPost"
 
 const MainNews = () => {
   const [postList, setPostList] = useState();
@@ -88,6 +89,7 @@ const MainNews = () => {
         </Card>
       </Col>
       <Col xs={8} lg={5}>
+        <ModalPost/>
         {postList &&
           postList
             .reverse()
