@@ -48,7 +48,7 @@ function ModalProfile(props) {
     <>
       <HiOutlinePencil onClick={handleShow} />
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title>Modifica introduzione</Modal.Title>
         </Modal.Header>

@@ -1,4 +1,5 @@
 import { Row, Col, Button, Image } from "react-bootstrap";
+import { BsPersonPlusFill } from "react-icons/bs";
 
 const TokenUtenti = ({ profile }) => {
   return (
@@ -14,7 +15,7 @@ const TokenUtenti = ({ profile }) => {
         <Col xs={9}>
           <div>
             <h6 className="mb-0">
-               {profile.name} {profile.surname}
+              {profile.name} {profile.surname}
               <span className="text-secondary"> - 2°</span>
             </h6>
           </div>
@@ -22,7 +23,9 @@ const TokenUtenti = ({ profile }) => {
             <p>{profile.title}</p>
           </div>
           <div className="ms-4">
-            <Button variant="outline-dark" className="rounded-pill">Segui</Button>
+            <Button variant="outline-dark" className="rounded-pill">
+              <BsPersonPlusFill></BsPersonPlusFill> Segui
+            </Button>
           </div>
         </Col>
       </Row>

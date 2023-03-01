@@ -9,7 +9,8 @@ import Aside from "../Components/Aside";
 import ModalSingleExp from "./ModalSingleExp";
 import FotoExp from "../assets/FotoCardExp.jpeg";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
-import { BsFillEyeFill } from "react-icons/bs";
+import { BsFillEyeFill, BsFillPeopleFill, BsSearch } from "react-icons/bs";
+import { HiDotsHorizontal, HiOutlinePencil } from "react-icons/hi";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -68,9 +69,8 @@ const MainProfile = () => {
       if (response.ok) {
         const data = await response.json();
         if (ourMethod === "GET") {
-        setExperience(data);
+          setExperience(data);
         }
-
       } else {
         console.log("mainPage: Experiences. errore in if");
       }
@@ -94,7 +94,7 @@ const MainProfile = () => {
     <>
       {me && (
         <Row className="w-100 d-flex justify-content-center">
-          <Col className="p-0" xs={10} md={6}>
+          <Col className="p-0 m-0" xs={12} md={8} xl={6}>
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
@@ -117,7 +117,7 @@ const MainProfile = () => {
                 </Card.Title>
                 <p className="m-0 p-0">{me.title}</p>
                 <i className="m-0 p-0">{me.area}</i>
-                <div className="mt-2">
+                <div className="mt-2 d-flex flex-wrap-nowrap">
                   <Button variant="primary rounded-pill">
                     Disponibile per
                   </Button>
@@ -131,20 +131,46 @@ const MainProfile = () => {
                     className="ms-2"
                     variant="outline-secondary rounded-pill"
                   >
-                    Altro
+                    <HiDotsHorizontal></HiDotsHorizontal>
                   </Button>
                 </div>
               </Card.Body>
               <div className="d-flex ms-3 pb-3">
                 <Card className="p-2">
-                  <Card.Title>Disponibile a lavorare</Card.Title>
-                  <p className="m-0 p-0">Ruoli specialista IT</p>
-                  <a href="s">inizia</a>
+                  <Row>
+                    <Col xs={10}>
+                      <h6 className="m-0">Disponibile a lavorare</h6>
+                      <p className="m-0 p-0">Ruoli specialista IT</p>
+                      <p
+                        href="s"
+                        className="fw-semibold"
+                        style={{ color: "blue" }}
+                      >
+                        inizia
+                      </p>
+                    </Col>
+                    <Col xs={2} className="p-0">
+                      <HiOutlinePencil></HiOutlinePencil>
+                    </Col>
+                  </Row>
                 </Card>
                 <Card className="p-2 ms-3">
-                  <Card.Title>Fai sapere che stai facendo selezione</Card.Title>
-                  <p className="m-0 p-0">candidati qualificati</p>
-                  <a href="s">inizia</a>
+                  <Row>
+                    <Col xs={10}>
+                      <h6>Fai sapere che stai facendo selezione</h6>
+                      <p className="m-0 p-0">candidati qualificati</p>
+                      <p
+                        href="s"
+                        className="fw-semibold"
+                        style={{ color: "blue" }}
+                      >
+                        inizia
+                      </p>
+                    </Col>
+                    <Col xs={2} className="p-0">
+                      <HiOutlinePencil></HiOutlinePencil>
+                    </Col>
+                  </Row>
                 </Card>
               </div>
             </Card>
@@ -165,6 +191,34 @@ const MainProfile = () => {
                   <BsFillEyeFill className="me-2" />
                   Solo per te
                 </p>
+                <Row>
+                  <Col xs={6}>
+                    <Row className="p-2">
+                      <Col xs={1}>
+                        <BsFillPeopleFill></BsFillPeopleFill>
+                      </Col>
+                      <Col xs={11}>
+                        <h5>n visualizzazioni del tuo profilo</h5>
+                        <p className="fs-6">
+                          Scopri chi ha visto il tuo profilo
+                        </p>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col xs={6}>
+                    <Row className="p-2">
+                      <Col xs={1}>
+                        <BsSearch></BsSearch>
+                      </Col>
+                      <Col xs={11}>
+                        <h5>n compars* nei motori di ricerca</h5>
+                        <p className="fs-6">
+                          Vedi quante volte compari nei motori di ricerca
+                        </p>
+                      </Col>
+                    </Row>
+                  </Col>
+                </Row>
               </Card.Body>
             </Card>
 
@@ -198,15 +252,15 @@ const MainProfile = () => {
                           Esperienza
                         </Card.Title>
                       </Col>
-                      <Col xs={1}>
-                        {check === "me" && (
-                          <>
+                      {check === "me" && (
+                        <>
+                          <Col xs={1}>
                             <div className="m-0 ms-1 disc d-flex justify-content-center align-items-center fs-4 p-0">
                               <ModalExp />
                             </div>
-                          </>
-                        )}
-                      </Col>
+                          </Col>
+                        </>
+                      )}
                     </Row>
 
                     {experience?.map((e, i) => (
@@ -316,7 +370,7 @@ const MainProfile = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col className="d-none d-md-block p-0" md={4} lg={3}>
+          <Col className="d-none d-md-block p-0 m-0" xs={0} md={4} xl={3}>
             <Aside />
           </Col>
         </Row>
