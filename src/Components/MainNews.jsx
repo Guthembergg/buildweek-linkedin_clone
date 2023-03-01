@@ -47,7 +47,7 @@ const MainNews = () => {
   }, [deletedPost]);
 
   return (
-    <Row className="d-flex justify-content-center py-3">
+    <Row className="d-flex justify-content-center py-3 m-0 w-100">
       <Col className="d-none d-md-block " md={3} xl={2}>
         <CardProfile />
         <Card className="d-flex mt-3">

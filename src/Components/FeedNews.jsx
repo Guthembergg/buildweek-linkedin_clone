@@ -20,6 +20,7 @@ const FeedNews = (props) => {
       <section className="d-flex p-2">
         <div>
           <Image
+            className=""
             roundedCircle={true}
             style={{ width: "50px", height: "50px" }}
             src={
