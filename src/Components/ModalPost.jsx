@@ -13,12 +13,14 @@ import { RiArticleFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { TbMessage2 } from "react-icons/tb";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 
 function NewPostProva() {
   const myProfile = useSelector((state) => state.myProfile);
   const [innerData, setInnerData] = useState({
     text: "",
   });
+  const dispatch = useDispatch();
 
   const token = process.env.REACT_APP_TOKEN;
 
@@ -58,6 +60,7 @@ function NewPostProva() {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchNewsPost();
+    dispatch({ type: "NEW_POST", payload: innerData });
   };
 
   return (

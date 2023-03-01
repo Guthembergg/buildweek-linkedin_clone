@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Modal, Button, NavDropdown } from "react-bootstrap";
 
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 
 function PostDeleteModal(props) {
   const token = process.env.REACT_APP_TOKEN;
@@ -10,7 +11,7 @@ function PostDeleteModal(props) {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const dispatch = useDispatch();
   const fetchDeletePost = async () => {
     try {
       const response = await fetch(
@@ -58,6 +59,7 @@ function PostDeleteModal(props) {
               onClick={() => {
                 handleClose();
                 fetchDeletePost();
+                dispatch({ type: "DELETE_POST", payload: props.id });
               }}
             >
               Cancella

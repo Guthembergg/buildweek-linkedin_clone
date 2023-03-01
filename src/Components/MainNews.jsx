@@ -7,10 +7,14 @@ import { RxDotFilled } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import FeedNews from "./FeedNews";
 import ModalPost from "./ModalPost";
+import { useSelector } from "react-redux";
 
 const MainNews = () => {
   const [postList, setPostList] = useState();
   const token = process.env.REACT_APP_TOKEN;
+  const newPost = useSelector((state) => state.newPost);
+  const modifiedPost = useSelector((state) => state.modifiedPost);
+  const deletedPost = useSelector((state) => state.deletedPost);
 
   const fetchGetPost = async () => {
     try {
@@ -20,7 +24,7 @@ const MainNews = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setPostList(data.reverse().slice(0, 100));
+        setPostList(data.reverse().slice(0, 30));
       } else {
         console.log("News: fetch Post. errore in if");
       }
@@ -32,6 +36,15 @@ const MainNews = () => {
   useEffect(() => {
     fetchGetPost();
   }, []);
+  useEffect(() => {
+    fetchGetPost();
+  }, [newPost]);
+  useEffect(() => {
+    fetchGetPost();
+  }, [modifiedPost]);
+  useEffect(() => {
+    fetchGetPost();
+  }, [deletedPost]);
 
   return (
     <Row className="d-flex justify-content-center py-3">
