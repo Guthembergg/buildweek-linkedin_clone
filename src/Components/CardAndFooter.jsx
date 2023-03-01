@@ -1,4 +1,4 @@
-import CustomeFooter from "./CustomFooter"
+
 import { HiOutlineDotsHorizontal } from "react-icons/hi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { IoMdArrowDropdown } from "react-icons/io";

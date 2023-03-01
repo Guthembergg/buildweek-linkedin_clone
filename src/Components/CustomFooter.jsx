@@ -11,7 +11,7 @@ const CustomeFooter = () => {
 
         <>
             
-            {location.pathname !== "/news" && <Row className="footer w-100">
+            {location.pathname !== "/" && <Row className="footer w-100">
             <h3 className="footerTitle">Linkedin</h3>
                 <Col xs={6} className="footerLeftCol">
                     <ul>
