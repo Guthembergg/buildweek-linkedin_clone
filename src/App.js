@@ -15,9 +15,9 @@ function App() {
       <BrowserRouter>
         <CustomNavbar />
         <Routes>
-          <Route path="/news" element={<MainNews />}></Route>
-          <Route path="/" element={<MainProfile />}></Route>
-          <Route path="/:id" element={<MainProfile />}></Route>
+          <Route path="/" element={<MainNews />}></Route>
+          <Route path="/profile" element={<MainProfile />}></Route>
+          <Route path="/profile/:id" element={<MainProfile />}></Route>
         </Routes>
         <CustomeFooter />
       </BrowserRouter>

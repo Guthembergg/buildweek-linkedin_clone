@@ -56,7 +56,7 @@ function NewPostProva() {
   return (
     <>
       <>
-        <Card body>
+        <Card body className="mb-3">
           <Row>
             <Col xs={2}>
               <Image
@@ -68,24 +68,24 @@ function NewPostProva() {
             </Col>
             <Col xs={10}>
               <Form onClick={handleShow}>
-                <Form.Group className="ms-0 m-2">
-                  <Form.Control type="text" placeholder="Avvia un post" />
+                <Form.Group className="ms-0 m-2 ">
+                  <Form.Control className="rounded-pill" type="text" placeholder="Avvia un post" />
                 </Form.Group>
               </Form>
             </Col>
           </Row>
-          <Row>
-            <Col xs={3}>
-              <BsImageFill /> Foto
+          <Row className="d-flex justify-content-center align-items-center py-2">
+            <Col xs={3} md={2} className="d-flex justify-content-center align-items-center">
+              <BsImageFill  className="text-primary" /><span className="d-none d-md-block ms-2">Foto</span>
             </Col>
-            <Col xs={3}>
-              <BsFillPlayBtnFill /> Video
+            <Col xs={3} md={2} className="d-flex justify-content-center align-items-center">
+              <BsFillPlayBtnFill  className="text-success" />  <span className="d-none d-md-block ms-2">Video</span>
             </Col>
-            <Col xs={3}>
-              <BsFillCalendar2EventFill /> Evento
+            <Col xs={3} md={2} className="d-flex justify-content-center align-items-center">
+              <BsFillCalendar2EventFill style={{color: "brown"}} />  <span className="d-none d-md-block ms-2">Evento</span>
             </Col>
-            <Col xs={3}>
-              <RiArticleFill /> Scrivi un aticolo
+            <Col xs={3} md={4} className="d-flex justify-content-center align-items-center">
+              <RiArticleFill style={{color: "orange"}} />  <span className="d-none d-md-block ms-2">Scrivi un articolo</span>
             </Col>
           </Row>
         </Card>

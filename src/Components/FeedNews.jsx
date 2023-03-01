@@ -12,8 +12,6 @@ import PostDeleteModal from "./PostDeleteModal";
 
 import { useSelector } from "react-redux";
 const FeedNews = (props) => {
-  const navigate = useNavigate();
-
   const myId = useSelector((state) => state.myProfile._id);
   console.log(myId);
   console.log(props);
@@ -21,7 +19,6 @@ const FeedNews = (props) => {
   return (
     <Card className="mb-3 p-2">
       <section className="d-flex p-2">
-        <div></div>
         <div>
           <Image
             roundedCircle={true}
@@ -36,7 +33,7 @@ const FeedNews = (props) => {
         <div className="p-2">
           <Link
             className="text-decoration-none text-dark"
-            to={`/${props.news?.user._id}`}
+            to={`/profile/${props.news?.user._id}`}
           >
             <h6 className="m-0">
               {props.news?.user.name} {props.news?.user.surname}
@@ -52,49 +49,35 @@ const FeedNews = (props) => {
             </span>
           </p>
         </div>
-        {myId === props.news.user._id && (
-          <div className="d-flex ">
-            <NavDropdown
-              title={
-                <span>
-                  <HiDotsHorizontal />
-                </span>
-              }
-              id="collasible-nav-dropdown"
-            >
-              <PostPencilModal id={props.news._id} text={props.news.text} />
-              <PostDeleteModal id={props.news._id} />
-            </NavDropdown>
-          </div>
-        )}
+        <div></div>
       </section>
       <Card.Body className="border-top">
         <p>{props.news.text}</p>
       </Card.Body>
-      <section className="d-flex justify-content-center text-tertiary border-top">
+      <section className="d-flex justify-content-around text-tertiary border-top">
         <div className="iconPost rounded">
           <span className="me-2">
             <SlLike />
-          </span>
-          Consiglia{" "}
+          </span>{" "}
+          <span className="d-none d-md-inline">Consiglia </span>
         </div>
         <div className="iconPost rounded">
           <span className="me-2">
             <AiOutlineComment />
-          </span>
-          Commenta{" "}
+          </span>{" "}
+          <span className="d-none d-md-inline">Commenta</span>{" "}
         </div>
         <div className="iconPost rounded">
           <span className="me-2">
             <ImLoop />
-          </span>
-          Diffondi il post
+          </span>{" "}
+          <span className="d-none d-md-inline">Diffondi il post</span>{" "}
         </div>
         <div className="iconPost rounded">
           <span className="me-2">
             <FiSend />
           </span>{" "}
-          Invia
+          <span className="d-none d-md-inline">Invia</span>
         </div>
       </section>
     </Card>
