@@ -94,7 +94,7 @@ const MainProfile = () => {
     <>
       {me && (
         <Row className="w-100 d-flex justify-content-center">
-          <Col className="p-0" xs={10} md={6}>
+          <Col className="p-0 m-0" xs={12} md={8} xl={6}>
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
@@ -191,25 +191,32 @@ const MainProfile = () => {
                   <BsFillEyeFill className="me-2" />
                   Solo per te
                 </p>
-                <Row className="p-2">
-                  <Col xs={1}>
-                    <BsFillPeopleFill></BsFillPeopleFill>
+                <Row>
+                  <Col xs={6}>
+                    <Row className="p-2">
+                      <Col xs={1}>
+                        <BsFillPeopleFill></BsFillPeopleFill>
+                      </Col>
+                      <Col xs={11}>
+                        <h5>n visualizzazioni del tuo profilo</h5>
+                        <p className="fs-6">
+                          Scopri chi ha visto il tuo profilo
+                        </p>
+                      </Col>
+                    </Row>
                   </Col>
-                  <Col xs={11}>
-                    <h5>n visualizzazioni del tuo profilo</h5>
-                    <p className="fs-6">Scopri chi ha visto il tuo profilo</p>
-                  </Col>
-                </Row>
-                <hr />
-                <Row className="p-2">
-                  <Col xs={1}>
-                    <BsSearch></BsSearch>
-                  </Col>
-                  <Col xs={11}>
-                    <h5>n compars* nei motori di ricerca</h5>
-                    <p className="fs-6">
-                      Vedi quante volte compari nei motori di ricerca
-                    </p>
+                  <Col xs={6}>
+                    <Row className="p-2">
+                      <Col xs={1}>
+                        <BsSearch></BsSearch>
+                      </Col>
+                      <Col xs={11}>
+                        <h5>n compars* nei motori di ricerca</h5>
+                        <p className="fs-6">
+                          Vedi quante volte compari nei motori di ricerca
+                        </p>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </Card.Body>
@@ -363,7 +370,7 @@ const MainProfile = () => {
               </Card.Body>
             </Card>
           </Col>
-          <Col className="d-none d-md-block p-0" md={4} lg={3}>
+          <Col className="d-none d-md-block p-0 m-0" xs={0} md={4} xl={3}>
             <Aside />
           </Col>
         </Row>

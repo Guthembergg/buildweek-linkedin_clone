@@ -68,8 +68,9 @@ const CustomNavbar = () => {
                     <Col xs={3}>
                       <Image
                         roundedCircle={true}
+                        style={{ width: "50px" }}
                         alt=""
-                        src="../assets/FotoCardExp.jpeg"
+                        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                       />
                     </Col>
                     <Col xs={9}>
