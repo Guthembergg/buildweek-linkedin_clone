@@ -4,6 +4,7 @@ import{BiHash} from "react-icons/bi"
 import {AiOutlinePlus} from "react-icons/ai"
 import {BsInfoSquareFill} from "react-icons/bs"
 import {RxDotFilled} from "react-icons/rx"
+import CardAndFooter from "./CardAndFooter";
 
 const MainNews = () => {
     return (
@@ -101,6 +102,7 @@ const MainNews = () => {
                              
               </Card.Body>
               </Card>
+              <CardAndFooter />
             </Col>
         </Row>
     )

@@ -15,6 +15,12 @@
   border-bottom: 1px solid lightgray;
 }
 
+.navigation, .cardFooter{
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
 .leftNav,
 .rightNav {
   display: flex;
@@ -215,3 +221,97 @@
   color: blue;
   cursor: pointer;
 }
+ 
+/* CardAndFooter CSS */
+
+.annuncio{
+  display: flex;
+    align-items: center;
+    align-self: flex-end;
+}
+.annuncio h6{
+  font-size: 0.9em;
+  margin:0 9px 2px 0;
+  padding: 0;
+}
+.threeDots{
+  font-size: 20px;
+}
+
+.innerCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color:gray
+
+}
+.innerCard p {
+  font-size: 0.8em;
+  margin: 15px 0 0 0;
+}
+
+.innerCard .innerCardIcon{
+  margin: 10px 10px
+}
+.innerCard .innerCardIcon:nth-of-type(1){
+  font-size: 70px;
+}
+.innerCard .innerCardIcon:nth-of-type(2){
+  font-size: 60px;
+}
+
+.innerCard h3{
+  font-size: 1em;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.innerCard button{
+  color: rgb(67, 67, 190);
+  border-radius: 25px;
+  border-color: rgb(67, 67, 190);
+  padding: 7px 15px;
+  border: 1px solid rgb(67, 67, 190);
+  font-weight: 500;
+}
+
+.secondFooter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footerCopirightDiv{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: gray;
+}
+.footerCopirightDiv h3{
+  font-size: 1em;
+  margin: 0 10px 0 0;
+  color: blue
+}
+
+.secondFooter ul{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 1.6rem;
+  padding:0
+}
+
+.secondFooter li {
+  margin: 2px 4px;
+  font-size: 0.8em;
+  color: gray
+}
+
+.footerCopiright2{
+  color:black;
+  font-weight: 400;
+}
+
+/* Fine  CardAndFooter CSS */

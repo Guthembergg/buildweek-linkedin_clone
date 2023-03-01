@@ -59,7 +59,7 @@ const CustomNavbar = () => {
                 id="dropdown-basic"
               >
                 <BsFillPersonFill className="navIcon" />
-                <span className="d-none d-lg-block">Tu</span>
+                <div><span className="d-none d-lg-block">Tu</span></div>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
