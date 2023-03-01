@@ -262,21 +262,22 @@
   font-weight: 600;
   color: rgb(102, 100, 100);
   font-size: 1em;
+  animation: 0.5s linear;
 }
 
 .iconPost span {
   color: rgb(59, 59, 59);
   font-size: 1.1em;
-
 }
 
 .iconPost:hover{
-  animation: iconPostHover 0.5s linear;
+  animation: iconPostHover 0.5s linear;  
   cursor: pointer;
 }
 
 @keyframes iconPostHover {
   100% {  background-color: lightgray;
-
   }
 }
+
+  

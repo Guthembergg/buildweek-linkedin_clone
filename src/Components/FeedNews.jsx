@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 const FeedNews = (props) => {
   
     return(
-        <Card className="mb-3">
-            <section className="d-flex p-3">
+        <Card className="mb-3 p-2">
+            <section className="d-flex p-2">
                 <div>
                     <Image
                     roundedCircle={true}
@@ -21,7 +21,7 @@ const FeedNews = (props) => {
                       }/>
                     </div>
                   <div className="p-2">
-                    <Link className="text-decoration-none" to={`/${props.news?.user._id}`}><h6 className="m-0">{props.news?.user.name} {props.news?.user.surname}</h6></Link>
+                    <Link className="text-decoration-none text-dark" to={`/${props.news?.user._id}`}><h6 className="m-0">{props.news?.user.name} {props.news?.user.surname}</h6></Link>
                     <p className="m-0 text-secondary">{props.news?.user.title}</p>
                     <p className="m-0 text-secondary"><span>{props.news?.createdAt.slice(12,16)} - {props.news?.createdAt.slice(8,10)}/{props.news?.createdAt.slice(5,7)}/{props.news?.createdAt.slice(0,4)}</span></p>
                   </div>

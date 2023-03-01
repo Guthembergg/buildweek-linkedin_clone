@@ -64,7 +64,7 @@ const MainNews = () => {
               </Card.Body>
             </Card>
                 </Col>
-            <Col xs={8} lg={4}>
+            <Col xs={8} lg={5}>
                 {postList && postList
                 .reverse()
                 .filter((_, i) => i < 10)
