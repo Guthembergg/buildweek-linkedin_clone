@@ -88,7 +88,7 @@ const Aside = () => {
             src={Logo}
           />
         </div>
-        <div>EPICODE</div>
+        <div>EPICODE GLOBAL</div>
         <div className="d-flex justify-content-center mt-2">
           <Button href="https://www.epicode.com" target="_blank">
             Segui
