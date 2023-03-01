@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Row, Col, Image, Form, Modal, Button } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Image,
+  Form,
+  Modal,
+  Button,
+  NavDropdown,
+} from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import {
   BsFillCalendar2EventFill,
@@ -7,10 +15,11 @@ import {
   BsImageFill,
 } from "react-icons/bs";
 import { RiArticleFill } from "react-icons/ri";
+import { HiOutlinePencil } from "react-icons/hi";
 
-function NewPostProva() {
+function NewPostProva(props) {
   const [innerData, setInnerData] = useState({
-    text: "",
+    text: props.text,
   });
 
   const token = process.env.REACT_APP_TOKEN;
@@ -26,9 +35,9 @@ function NewPostProva() {
   const fetchNewsPost = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/`,
+        `https://striveschool-api.herokuapp.com/api/posts/${props.id}`,
         {
-          method: "POST",
+          method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
             Accept: "application/json",
@@ -56,39 +65,9 @@ function NewPostProva() {
   return (
     <>
       <>
-        <Card body>
-          <Row>
-            <Col xs={2}>
-              <Image
-                roundedCircle={true}
-                style={{ width: "50px" }}
-                alt=""
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              />
-            </Col>
-            <Col xs={10}>
-              <Form onClick={handleShow}>
-                <Form.Group className="ms-0 m-2">
-                  <Form.Control type="text" placeholder="Avvia un post" />
-                </Form.Group>
-              </Form>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={3}>
-              <BsImageFill /> Foto
-            </Col>
-            <Col xs={3}>
-              <BsFillPlayBtnFill /> Video
-            </Col>
-            <Col xs={3}>
-              <BsFillCalendar2EventFill /> Evento
-            </Col>
-            <Col xs={3}>
-              <RiArticleFill /> Scrivi un aticolo
-            </Col>
-          </Row>
-        </Card>
+        <NavDropdown.Item onClick={handleShow}>
+          <HiOutlinePencil />
+        </NavDropdown.Item>
       </>
 
       <Modal show={show} onHide={handleClose} backdrop="static">
@@ -98,11 +77,12 @@ function NewPostProva() {
         <Modal.Body className="position-relative">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Nuovo post</Form.Label>
+              <Form.Label>Modifica il tuo post</Form.Label>
               <Form.Control
                 aria-selected
                 as="textarea"
                 placeholder="Inserisci qui il tuo post"
+                value={innerData.text}
                 onChange={(e) => handleChange("text", e.target.value)}
               />
               <div className="d-flex justify-content-end">
