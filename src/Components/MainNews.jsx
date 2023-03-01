@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import FeedNews from "./FeedNews";
 import ModalPost from "./ModalPost";
 import { useSelector } from "react-redux";
-
+import CardAndFooter from "./CardAndFooter";
 const MainNews = () => {
   const [postList, setPostList] = useState();
   const token = process.env.REACT_APP_TOKEN;
@@ -210,6 +210,7 @@ const MainNews = () => {
               </div>
             </section>
           </Card.Body>
+          <CardAndFooter />
         </Card>
       </Col>
     </Row>
