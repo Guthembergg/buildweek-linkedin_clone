@@ -16,8 +16,6 @@ const FeedNews = (props) => {
   console.log(myId);
   console.log(props);
   console.log(props.news.user._id);
-
-
   return (
     <Card className="mb-3 p-2">
       <section className="d-flex p-2">
@@ -52,21 +50,21 @@ const FeedNews = (props) => {
           </p>
         </div>
         <div>
-        {myId === props.news.user._id && (
-          <div className="d-flex ">
-            <NavDropdown
-              title={
-                <span>
-                  <HiDotsHorizontal />
-                </span>
-              }
-              id="collasible-nav-dropdown"
-            >
-              <PostPencilModal id={props.news._id} text={props.news.text} />
-              <PostDeleteModal id={props.news._id} />
-            </NavDropdown>
-          </div>
-        )}
+          {myId === props.news.user._id && (
+            <div className="d-flex ">
+              <NavDropdown
+                title={
+                  <span>
+                    <HiDotsHorizontal />
+                  </span>
+                }
+                id="collasible-nav-dropdown"
+              >
+                <PostPencilModal id={props.news._id} text={props.news.text} />
+                <PostDeleteModal id={props.news._id} />
+              </NavDropdown>
+            </div>
+          )}
         </div>
       </section>
       <Card.Body className="border-top">
