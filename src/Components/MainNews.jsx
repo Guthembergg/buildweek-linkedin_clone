@@ -2,7 +2,7 @@ import { Row, Col, Card } from "react-bootstrap";
 import CardProfile from "./CardProfileNews";
 import { BiHash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
-import PostNewsProva from "../prova/PostNewsProva";
+import NewPostProva from "../prova/NewPostProva";
 const MainNews = () => {
   return (
     <Row className="d-flex justify-content-center">
@@ -61,8 +61,7 @@ const MainNews = () => {
         </Card>
       </Col>
       <Col xs={5}>
-        {" "}
-        <PostNewsProva />{" "}
+        <NewPostProva />
       </Col>
       <Col xs={3}> SIDEBAR</Col>
     </Row>
