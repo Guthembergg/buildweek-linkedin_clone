@@ -136,9 +136,6 @@ function ModalSingleExp({ e, me }) {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
           <Button
             variant="secondary"
             onClick={() => {
