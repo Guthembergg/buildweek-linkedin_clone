@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { HiOutlinePencil } from "react-icons/hi";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 function ModalProfile(props) {
   const token = process.env.REACT_APP_TOKEN;
   const dispatch = useDispatch();
@@ -14,7 +14,7 @@ function ModalProfile(props) {
   });
   const [resp, setResp] = useState();
   const [fd, setFd] = useState(new FormData());
-
+  const myProfileId = useSelector((state) => state.myProfile._id);
   const handleChange = (property, value) => {
     setProfileForm({ ...profileForm, [property]: value });
   };
@@ -39,7 +39,6 @@ function ModalProfile(props) {
       );
       if (response.ok) {
         const data = response.json();
-        setResp(data._id);
       } else {
       }
     } catch (err) {}
@@ -47,25 +46,30 @@ function ModalProfile(props) {
 
   //!inizio
 
-  const handleSubmitFile = async (ev) => {
-    ev.preventDefault();
-    let res = await fetch(
-      `https://striveschool-api.herokuapp.com/api/posts/${resp}`,
-      {
-        method: "POST",
-        body: fd,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  const handleSubmitFile = async () => {
+    try {
+      let res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${myProfileId}/picture`,
+        {
+          method: "POST",
+          body: fd,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.ok) {
+        console.log("foto ok");
+      } else {
       }
-    );
+    } catch (err) {}
   };
 
   const handleFile = (ev) => {
     setFd((prev) => {
       //per cambiare i formData, bisogna "appendere" una nuova coppia chiave/valore, usando il metodo .append()
-      prev.delete("post"); //ricordatevi di svuotare il FormData prima :)
-      prev.append("post", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
+      prev.delete("profile"); //ricordatevi di svuotare il FormData prima :)
+      prev.append("profile", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
       return prev;
     });
   };

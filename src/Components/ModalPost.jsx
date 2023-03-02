@@ -20,7 +20,7 @@ function NewPostProva() {
   const [innerData, setInnerData] = useState({
     text: "",
   });
-  const [resp, setResp] = useState();
+  const [resp, setResp] = useState("");
   const [fd, setFd] = useState(new FormData());
   const dispatch = useDispatch();
 
@@ -50,9 +50,10 @@ function NewPostProva() {
       );
       if (response.ok) {
         const data = await response.json();
-        setResp(data._id);
-
-        console.log("News: fetch Post. if ok");
+        const id = data._id;
+        setResp(id);
+        console.log(resp);
+        return id;
       } else {
         console.log("News: fetch Post. errore in if");
       }
@@ -63,18 +64,27 @@ function NewPostProva() {
 
   //!inizio
 
-  const handleSubmitFile = async (ev) => {
-    ev.preventDefault();
-    let res = await fetch(
-      `https://striveschool-api.herokuapp.com/api/posts/${resp}`,
-      {
-        method: "POST",
-        body: fd,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+  const handleSubmitFile = async (resp) => {
+    try {
+      let res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${resp}`,
+        {
+          method: "POST",
+          body: fd,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        console.log("foto post ok");
+      } else {
+        console.log("foto post bad");
       }
-    );
+    } catch (err) {
+      console.log("foto post catch");
+    }
   };
 
   const handleFile = (ev) => {
@@ -88,10 +98,9 @@ function NewPostProva() {
 
   //!fine
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchNewsPost();
-    handleSubmitFile();
+    handleSubmitFile(await fetchNewsPost());
     dispatch({ type: "NEW_POST", payload: innerData });
   };
 
