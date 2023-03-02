@@ -17,7 +17,7 @@ const MainProfile = () => {
   const modalBody = useSelector((state) => state.myExperience);
   const modalBio = useSelector((state) => state.modifiedBio);
   const modalInfo = useSelector((state) => state.modifiedInfo);
-  const profile = useSelector((state)=> state.myProfile)
+  const profile = useSelector((state) => state.myProfile);
 
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
@@ -33,10 +33,9 @@ const MainProfile = () => {
       if (response.ok) {
         const data = await response.json();
         setMe(data);
-        
+
         if (param.id === "me") {
           dispatch({ type: "ADD_MY_PROFILE", payload: data });
-         
         }
       } else {
         console.log("mainPage: Main profile. errore in if");
@@ -88,10 +87,6 @@ const MainProfile = () => {
   useEffect(() => {
     ExperiencesGetFetch(me, "GET");
   }, [me]);
-
-  useEffect(() => {
-    ExperiencesGetFetch(me, "POST", modalBody);
-  }, [modalBody]);
 
   console.log("me", me);
   console.log("experience", experience);
@@ -272,7 +267,7 @@ const MainProfile = () => {
                         <>
                           <Col xs={1}>
                             <div className="m-0 ms-1 disc d-flex justify-content-center align-items-center fs-4 p-0">
-                              <ModalExp />
+                              <ModalExp me={me} />
                             </div>
                           </Col>
                         </>

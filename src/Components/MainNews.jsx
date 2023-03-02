@@ -109,7 +109,7 @@ const MainNews = () => {
             .filter((_, i) => i < 10)
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
-      <Col className="d-none d-lg-block" xl={2}>
+      <Col className="d-none d-xl-block" xl={2}>
         <Card>
           <Card.Body className="position-relative px-0 py-2">
             <h6 className="d-flex justify-content-between mb-2 px-3">

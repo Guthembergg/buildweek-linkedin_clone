@@ -14,6 +14,7 @@ function ModalSingleExp({ e, me }) {
     startDate: e.startDate,
     endDate: e.endDate,
   });
+  const [fd, setFd] = useState(new FormData());
 
   const token = process.env.REACT_APP_TOKEN;
 
@@ -47,7 +48,36 @@ function ModalSingleExp({ e, me }) {
   const handleSubmit = () => {
     dispatch({ type: "ADD_EXP", payload: modalInfo });
   };
+  const handleSubmitFile = async () => {
+    try {
+      let res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${me}/experiences/${e._id}/picture`,
+        {
+          method: "POST",
+          body: fd,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        console.log("foto post ok");
+      } else {
+        console.log("foto post bad");
+      }
+    } catch (err) {
+      console.log("foto post catch");
+    }
+  };
 
+  const handleFile = (ev) => {
+    setFd((prev) => {
+      prev.delete("experience");
+      prev.append("experience", ev.target.files[0]);
+      return prev;
+    });
+  };
   const ModalSingleFetch = async (ourMethod, ourBody) => {
     try {
       const response = await fetch(
@@ -119,6 +149,12 @@ function ModalSingleExp({ e, me }) {
                 placeholder="Area"
               />
             </Form.Group>
+            <Form.Group>
+              <Form.Label>Seleziona immagine da inserire</Form.Label>
+              <Row className="pb-3 px-3">
+                <Form.Control aria-selected type="file" onChange={handleFile} />
+              </Row>
+            </Form.Group>
             <Row>
               <Col xs={6}>
                 <Form.Group className="mb-3">
@@ -151,6 +187,7 @@ function ModalSingleExp({ e, me }) {
             onClick={() => {
               handleClose();
               ModalSingleFetch("PUT", modalInfo);
+              handleSubmitFile();
             }}
           >
             Save Changes

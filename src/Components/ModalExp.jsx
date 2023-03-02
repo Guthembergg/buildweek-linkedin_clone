@@ -3,7 +3,8 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AiOutlinePlus } from "react-icons/ai";
 
-function ModalExp() {
+function ModalExp(props) {
+  const [resp, setResp] = useState("");
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [modalInfo, setModalInfo] = useState();
@@ -35,11 +36,74 @@ function ModalExp() {
     setModalInfo({ ...modalInfo, endDate: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch({ type: "ADD_EXP", payload: modalInfo });
+    handleSubmitFile(await ExperiencesGetFetch());
+  };
+  //!inizio
+  const token = process.env.REACT_APP_TOKEN;
+  const ExperiencesGetFetch = async () => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.me._id}/experiences`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(modalInfo),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        const id = data._id;
+        setResp(id);
+        console.log(resp);
+        return id;
+      } else {
+        console.log("mainPage: Experiences. errore in if");
+      }
+    } catch (err) {
+      console.log("mainPage: Experiences. err in catch");
+    }
+  };
+  const handleSubmitFile = async (expId) => {
+    try {
+      let res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/${props.me._id}/experiences/${expId}/picture`,
+        {
+          method: "POST",
+          body: fd,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        console.log("foto post ok");
+      } else {
+        console.log("foto post bad");
+      }
+    } catch (err) {
+      console.log("foto post catch");
+    }
+  };
+  const [fd, setFd] = useState(new FormData());
+
+  const handleFile = (ev) => {
+    setFd((prev) => {
+      //per cambiare i formData, bisogna "appendere" una nuova coppia chiave/valore, usando il metodo .append()
+      prev.delete("experience"); //ricordatevi di svuotare il FormData prima :)
+      prev.append("experience", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
+      return prev;
+    });
   };
 
+  //!fine
   return (
     <>
       <AiOutlinePlus onClick={handleShow}></AiOutlinePlus>
@@ -84,6 +148,12 @@ function ModalExp() {
                 type="text"
                 placeholder="Area"
               />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Seleziona immagine da inserire</Form.Label>
+              <Row className="pb-3 px-3">
+                <Form.Control aria-selected type="file" onChange={handleFile} />
+              </Row>
             </Form.Group>
             <Row>
               <Col xs={6}>
