@@ -1,5 +1,6 @@
 import { Row, Col, Button, Image } from "react-bootstrap";
 import { BsPersonPlusFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const TokenUtenti = ({ profile }) => {
   return (
@@ -14,10 +15,13 @@ const TokenUtenti = ({ profile }) => {
         </Col>
         <Col xs={9}>
           <div>
-            <h6 className="mb-0">
+          <Link
+            className="text-decoration-none text-dark"
+            to={`/profile/${profile._id}`}
+          ><h6 className="mb-0">
               {profile.name} {profile.surname}
               <span className="text-secondary"> - 2°</span>
-            </h6>
+            </h6></Link>
           </div>
           <div>
             <p>{profile.title}</p>

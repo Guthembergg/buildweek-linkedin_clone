@@ -6,11 +6,15 @@ import { BsInfoSquareFill } from "react-icons/bs";
 import { RxDotFilled } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import FeedNews from "./FeedNews";
-import ModalPost from "./ModalPost"
-
+import ModalPost from "./ModalPost";
+import { useSelector } from "react-redux";
+import CardAndFooter from "./CardAndFooter";
 const MainNews = () => {
   const [postList, setPostList] = useState();
   const token = process.env.REACT_APP_TOKEN;
+  const newPost = useSelector((state) => state.newPost);
+  const modifiedPost = useSelector((state) => state.modifiedPost);
+  const deletedPost = useSelector((state) => state.deletedPost);
 
   const fetchGetPost = async () => {
     try {
@@ -20,7 +24,7 @@ const MainNews = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setPostList(data);
+        setPostList(data.reverse().slice(0, 30));
       } else {
         console.log("News: fetch Post. errore in if");
       }
@@ -32,8 +36,18 @@ const MainNews = () => {
   useEffect(() => {
     fetchGetPost();
   }, []);
+  useEffect(() => {
+    fetchGetPost();
+  }, [newPost]);
+  useEffect(() => {
+    fetchGetPost();
+  }, [modifiedPost]);
+  useEffect(() => {
+    fetchGetPost();
+  }, [deletedPost]);
+
   return (
-    <Row className="d-flex justify-content-center py-3">
+    <Row className="d-flex justify-content-center py-3 m-0 w-100">
       <Col className="d-none d-md-block " md={3} xl={2}>
         <CardProfile />
         <Card className="d-flex mt-3">
@@ -89,10 +103,9 @@ const MainNews = () => {
         </Card>
       </Col>
       <Col xs={10} md={8} lg={6}>
-        <ModalPost/>
+        <ModalPost />
         {postList &&
           postList
-            .reverse()
             .filter((_, i) => i < 10)
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
@@ -197,6 +210,7 @@ const MainNews = () => {
               </div>
             </section>
           </Card.Body>
+          <CardAndFooter />
         </Card>
       </Col>
     </Row>

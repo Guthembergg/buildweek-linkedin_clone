@@ -9,12 +9,13 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const CustomNavbar = () => {
-  const profile = useSelector(state=>state.myProfile)
-
- 
+  const profile = useSelector((state) => state.myProfile);
 
   return (
-    <Row className="w-100 navigation d-flex justify-content-center">
+    <Row
+      className="w-100 navigation d-flex justify-content-center m-0 "
+      style={{ zIndex: "100" }}
+    >
       <Col
         className="leftNav d-flex justify-content-center align-items-center"
         xs={10}
@@ -36,10 +37,12 @@ const CustomNavbar = () => {
         </div>
 
         <ul className="navBarUl d-flex justify-content-center align-items-center">
-          <Link className="text-secondary text-decoration-none" to={"/"}><li>
-            <MdHome className="navIcon" />
-            <span className="d-none d-lg-block">Home</span>
-          </li></Link>
+          <Link className="text-secondary text-decoration-none" to={"/"}>
+            <li>
+              <MdHome className="navIcon" />
+              <span className="d-none d-lg-block">Home</span>
+            </li>
+          </Link>
           <li>
             <BsFillPeopleFill className="navIcon" />
             <span className="d-none d-lg-block">Rete</span>
@@ -64,7 +67,9 @@ const CustomNavbar = () => {
                 id="dropdown-basic"
               >
                 <BsFillPersonFill className="navIcon" />
-                <div><span className="d-none d-lg-block">Tu</span></div>
+                <div>
+                  <span className="d-none d-lg-block">Tu</span>
+                </div>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
@@ -83,19 +88,26 @@ const CustomNavbar = () => {
                       />
                     </Col>
                     <Col xs={9}>
-                      <Row>{profile?.name}{profile?.surname}</Row>
+                      <Row>
+                        {profile?.name}
+                        {profile?.surname}
+                      </Row>
                       <Row>{profile?.title}</Row>
                     </Col>
                   </Row>
                   <Row className="text-center pt-2">
-                  <Link className="text-secondary text-decoration-none" to={"/profile/me"}><Button
-                      variant="outline-primary rounded-pill"
-                      className="fs-6"
+                    <Link
+                      className="text-secondary text-decoration-none"
+                      to={"/profile/me"}
                     >
-                      Visualizza profilo
-                    </Button></Link>
+                      <Button
+                        variant="outline-primary rounded-pill"
+                        className="fs-6"
+                      >
+                        Visualizza profilo
+                      </Button>
+                    </Link>
                   </Row>
-
                 </Dropdown.Item>
                 <Dropdown.Divider />
                 <Dropdown.Item href="#/action-2">
@@ -120,15 +132,15 @@ const CustomNavbar = () => {
             </Dropdown>
           </li>
         </ul>
-        <ul className="navBarUl">
+        <ul className="navBarUl d-none d-md-flex">
           <li>
             <CgMenuGridR className="navIcon" />
             <span className="d-none d-lg-block">
               Lavoro <IoMdArrowDropdown className="arrowGiu" />
             </span>
           </li>
-          <li>
-            <a href="a">Prova Premium</a>
+          <li className="p-0">
+            <a href="a d-none d-lg-flex">Prova Premium</a>
           </li>
         </ul>
       </Col>

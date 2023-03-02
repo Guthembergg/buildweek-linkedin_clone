@@ -16,6 +16,7 @@ import {
 } from "react-icons/bs";
 import { RiArticleFill } from "react-icons/ri";
 import { HiOutlinePencil } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 
 function NewPostProva(props) {
   const [innerData, setInnerData] = useState({
@@ -28,7 +29,7 @@ function NewPostProva(props) {
     setInnerData({ [property]: value });
   };
   const [show, setShow] = useState(false);
-
+  const dispatch = useDispatch();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -60,6 +61,7 @@ function NewPostProva(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchNewsPost();
+    dispatch({ type: "MODIFIED_POST", payload: props.id });
   };
 
   return (
@@ -67,6 +69,7 @@ function NewPostProva(props) {
       <>
         <NavDropdown.Item onClick={handleShow}>
           <HiOutlinePencil />
+          <span className="ps-2">Modifica post</span>
         </NavDropdown.Item>
       </>
 
