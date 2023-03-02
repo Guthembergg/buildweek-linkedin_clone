@@ -109,7 +109,7 @@ function NewPostProva() {
       <>
         <Card body className="mb-3">
           <Row>
-            <Col xs={2}>
+            <Col xs={2} className="text-end">
               <Image
                 roundedCircle={true}
                 style={{ width: "50px", height: "50px" }}
