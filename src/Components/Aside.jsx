@@ -105,7 +105,7 @@ const Aside = () => {
         </div>
         {utenti &&
           utenti
-          .reverse()
+            .reverse()
             .filter((_, i) => i < 5)
             .map((e, i) => <TokenUtenti key={`aziende-${i}`} profile={e} />)}
       </div>
@@ -119,7 +119,7 @@ const Aside = () => {
         </div>
         {utenti &&
           utenti
-          .reverse()
+            .reverse()
             .filter((_, i) => i > 5 && i < 11)
             .map((e, i) => <TokenUtenti key={`utenti-${i}`} profile={e} />)}
       </div>
