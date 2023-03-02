@@ -78,7 +78,7 @@ const CustomNavbar = () => {
                     <Col xs={3}>
                       <Image
                         roundedCircle={true}
-                        style={{ width: "50px" }}
+                        style={{ width: "50px", height: "50px" }}
                         alt=""
                         src={
                           profile?.image

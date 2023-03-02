@@ -3,6 +3,7 @@
   left: 0;
   z-index: 2 !important;
   width: 150px;
+  height: 150px;
 }
 
 .navigation,
@@ -181,9 +182,10 @@
 
 .imageProfileNews {
   top: -60px;
-  left: 50px;
+  left: 33%;
   z-index: 2 !important;
   width: 60px;
+  height: 60px;
 }
 
 .cardProfileText {
