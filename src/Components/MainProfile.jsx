@@ -18,6 +18,8 @@ const MainProfile = () => {
   const modalBio = useSelector((state) => state.modifiedBio);
   const modalInfo = useSelector((state) => state.modifiedInfo);
   const profile = useSelector((state) => state.myProfile);
+  const modalExpMod = useSelector((state) => state.modifiedExperience);
+  const modalExpDel = useSelector((state) => state.deletedExperience);
 
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
@@ -57,6 +59,12 @@ const MainProfile = () => {
   useEffect(() => {
     MainProfile(param);
   }, [modalBody, param]);
+  useEffect(() => {
+    MainProfile(param);
+  }, [modalExpMod, param]);
+  useEffect(() => {
+    MainProfile(param);
+  }, [modalExpDel, param]);
   const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
     try {
       const response = await fetch(

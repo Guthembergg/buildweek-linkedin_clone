@@ -177,6 +177,7 @@ function ModalSingleExp({ e, me }) {
             onClick={() => {
               handleClose();
               ModalSingleFetch("DELETE", modalInfo);
+              dispatch({ type: "DELETED_EXPERIENCE", payload: modalInfo });
             }}
           >
             Delete
@@ -188,6 +189,7 @@ function ModalSingleExp({ e, me }) {
               handleClose();
               ModalSingleFetch("PUT", modalInfo);
               handleSubmitFile();
+              dispatch({ type: "MODIFIED_EXPERIENCE", payload: modalInfo });
             }}
           >
             Save Changes
