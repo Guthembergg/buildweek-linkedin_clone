@@ -127,8 +127,6 @@ function ModalProfile(props) {
                 onChange={(e) => handleChange("title", e.target.value)}
               />
             </Form.Group>
-            <Modal.Title>Posizione Attuale</Modal.Title>
-            <div>DOBBIAMO INSERIRE IL MODALE EXPE</div>
             <Modal.Title>Formazione</Modal.Title>
             <Form.Group className="mb-3">
               <Form.Label>Formazione*</Form.Label>

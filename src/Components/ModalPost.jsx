@@ -140,31 +140,31 @@ function NewPostProva() {
               className="d-flex justify-content-center align-items-center"
             >
               <BsImageFill className="text-primary" />
-              <span className="d-none d-md-block ms-2">Foto</span>
+              <span className="d-none d-md-inline ms-2">Foto</span>
             </Col>
             <Col
               xs={3}
               md={2}
               className="d-flex justify-content-center align-items-center"
             >
-              <BsFillPlayBtnFill className="text-success" />{" "}
-              <span className="d-none d-md-block ms-2">Video</span>
+              <BsFillPlayBtnFill className="text-success" />
+              <span className="d-none d-md-inline ms-2">Video</span>
             </Col>
             <Col
               xs={3}
               md={2}
               className="d-flex justify-content-center align-items-center"
             >
-              <BsFillCalendar2EventFill style={{ color: "brown" }} />{" "}
-              <span className="d-none d-md-block ms-2">Evento</span>
+              <BsFillCalendar2EventFill style={{ color: "brown"}} />
+              <span className="d-none d-md-inline ms-2">Evento</span>
             </Col>
             <Col
               xs={3}
               md={4}
               className="d-flex justify-content-center align-items-center"
             >
-              <RiArticleFill style={{ color: "orange" }} />{" "}
-              <span className="d-none d-md-block ms-2">Scrivi un articolo</span>
+              <RiArticleFill style={{ color: "orange"}} />
+              <span className="d-none d-md-inline ms-2">Scrivi un articolo</span>
             </Col>
           </Row>
         </Card>

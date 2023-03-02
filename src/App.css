@@ -228,7 +228,7 @@
   padding: 2%;
   font-weight: 600;
   color: rgb(102, 100, 100);
-  font-size: 1em;
+  font-size: 0.9em;
   animation: 0.5s linear;
 }
 
@@ -247,6 +247,9 @@
   }
 }
 
+.iconPostModal {
+  font-size: 2em;
+}
   
  
 /* CardAndFooter CSS */

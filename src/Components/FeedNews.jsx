@@ -73,28 +73,28 @@ const FeedNews = (props) => {
         <Image className="w-100" src={props?.news?.image} />
       </Card.Body>
       <section className="d-flex justify-content-around text-tertiary border-top">
-        <div className="iconPost rounded">
+        <div className="iconPost rounded d-flex">
           <span className="me-2">
             <SlLike />
-          </span>{" "}
+          </span>
           <span className="d-none d-md-inline">Consiglia </span>
         </div>
-        <div className="iconPost rounded">
+        <div className="iconPost rounded d-flex">
           <span className="me-2">
             <AiOutlineComment />
-          </span>{" "}
-          <span className="d-none d-md-inline">Commenta</span>{" "}
+          </span>
+          <span className="d-none d-md-inline">Commenta</span>
         </div>
-        <div className="iconPost rounded">
+        <div className="iconPost rounded d-flex">
           <span className="me-2">
             <ImLoop />
-          </span>{" "}
-          <span className="d-none d-md-inline">Diffondi il post</span>{" "}
+          </span>
+          <span className="d-none d-md-inline">Diffondi il post</span>
         </div>
-        <div className="iconPost rounded">
+        <div className="iconPost rounded d-flex">
           <span className="me-2">
             <FiSend />
-          </span>{" "}
+          </span>
           <span className="d-none d-md-inline">Invia</span>
         </div>
       </section>

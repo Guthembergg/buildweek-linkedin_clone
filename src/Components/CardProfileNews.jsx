@@ -3,8 +3,8 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { GrCheckbox } from "react-icons/gr";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useDispatch} from "react-redux";
+import { useParams, Link } from "react-router-dom";
 
 const CardProfile = () => {
   const token = process.env.REACT_APP_TOKEN;
@@ -48,8 +48,11 @@ const CardProfile = () => {
       <Card className="d-flex">
         <Card.Img variant="top" src={imageBackground} />
         <Card.Body className="vinsBackground border-bottom border-tertiary text-center">
-          <Card.Title className="mt-1 position-relative  m-0 fs-6">
-            {me?.name} {me?.surname}
+        <Card.Title className="mt-1 position-relative  m-0 fs-6">
+        <Link
+            className="text-decoration-none text-dark"
+            to={`/profile/${me?._id}`}
+          >{me?.name} {me?.surname}</Link>
             <Image
               className="position-absolute imageProfileNews "
               style={{ zIndex: "10" }}
