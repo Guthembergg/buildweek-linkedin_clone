@@ -3,7 +3,7 @@ import { SlLike } from "react-icons/sl";
 import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
 import { ImLoop } from "react-icons/im";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 const FeedNews = (props) => {
   const myId = useSelector((state) => state.myProfile._id);
+  const navigate = useNavigate()
   console.log(myId);
   console.log(props);
   console.log(props.news.user._id);
