@@ -3,6 +3,7 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 function ModalProfile(props) {
+  const token = process.env.REACT_APP_TOKEN;
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [profileForm, setProfileForm] = useState({
@@ -11,6 +12,8 @@ function ModalProfile(props) {
     title: props.me.title,
     area: props.me.area,
   });
+  const [resp, setResp] = useState();
+  const [fd, setFd] = useState(new FormData());
 
   const handleChange = (property, value) => {
     setProfileForm({ ...profileForm, [property]: value });
@@ -35,14 +38,44 @@ function ModalProfile(props) {
         }
       );
       if (response.ok) {
+        const data = response.json();
+        setResp(data._id);
       } else {
       }
     } catch (err) {}
   };
 
+  //!inizio
+
+  const handleSubmitFile = async (ev) => {
+    ev.preventDefault();
+    let res = await fetch(
+      `https://striveschool-api.herokuapp.com/api/posts/${resp}`,
+      {
+        method: "POST",
+        body: fd,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  };
+
+  const handleFile = (ev) => {
+    setFd((prev) => {
+      //per cambiare i formData, bisogna "appendere" una nuova coppia chiave/valore, usando il metodo .append()
+      prev.delete("post"); //ricordatevi di svuotare il FormData prima :)
+      prev.append("post", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
+      return prev;
+    });
+  };
+
+  //!fine
+
   const handleSubmit = (e) => {
     e.preventDefault();
     PutFetch();
+    handleSubmitFile();
     dispatch({ type: "MODIFIED_BIO", payload: profileForm });
   };
 
@@ -78,6 +111,7 @@ function ModalProfile(props) {
                 value={profileForm.surname}
                 onChange={(e) => handleChange("surname", e.target.value)}
               />
+              <Form.Control aria-selected type="file" onChange={handleFile} />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Sommario*</Form.Label>
