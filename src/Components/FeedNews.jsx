@@ -25,8 +25,8 @@ const FeedNews = (props) => {
             roundedCircle={true}
             style={{ width: "50px", height: "50px" }}
             src={
-              props.news?.image
-                ? props.news.image
+              props.news?.user.image
+                ? props.news.user.image
                 : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
             }
           />
@@ -70,6 +70,7 @@ const FeedNews = (props) => {
       </section>
       <Card.Body className="border-top">
         <p>{props.news.text}</p>
+        <Image className="w-100" src={props?.news?.image} />
       </Card.Body>
       <section className="d-flex justify-content-around text-tertiary border-top">
         <div className="iconPost rounded">

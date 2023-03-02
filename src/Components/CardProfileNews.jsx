@@ -3,7 +3,7 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { GrCheckbox } from "react-icons/gr";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 const CardProfile = () => {
@@ -47,18 +47,22 @@ const CardProfile = () => {
     <section>
       <Card className="d-flex">
         <Card.Img variant="top" src={imageBackground} />
-        <Card.Body className="border-bottom border-tertiary">
-          <Card.Title className="mt-1 position-relative m-0 fs-6">
+        <Card.Body className="vinsBackground border-bottom border-tertiary text-center">
+          <Card.Title className="mt-1 position-relative  m-0 fs-6">
             {me?.name} {me?.surname}
             <Image
               className="position-absolute imageProfileNews "
               style={{ zIndex: "10" }}
               roundedCircle={true}
               alt=""
-              src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              src={
+                me?.image
+                  ? me?.image
+                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+              }
             />
           </Card.Title>
-          <Card.Text>{me?.title}</Card.Text>
+          <Card.Text className="text-secondary">{me?.title}</Card.Text>
         </Card.Body>
         <Card.Body className="cardProfileText border-bottom border-tertiary">
           <p className=" text-secondary mb-0 d-flex justify-content-between">

@@ -15,7 +15,7 @@ function App() {
         <CustomNavbar />
         <Routes>
           <Route path="/" element={<MainNews />}></Route>
-          <Route path="/profile" element={<MainProfile />}></Route>
+          {/*  <Route path="/profile" element={<MainProfile />}></Route> */}
           <Route path="/profile/:id" element={<MainProfile />}></Route>
         </Routes>
         <CustomeFooter />

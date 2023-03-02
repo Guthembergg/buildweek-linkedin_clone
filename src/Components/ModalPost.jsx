@@ -20,6 +20,8 @@ function NewPostProva() {
   const [innerData, setInnerData] = useState({
     text: "",
   });
+  const [resp, setResp] = useState("");
+  const [fd, setFd] = useState(new FormData());
   const dispatch = useDispatch();
 
   const token = process.env.REACT_APP_TOKEN;
@@ -47,8 +49,11 @@ function NewPostProva() {
         }
       );
       if (response.ok) {
-        /* const data = await response.json(); */
-        console.log("News: fetch Post. if ok");
+        const data = await response.json();
+        const id = data._id;
+        setResp(id);
+        console.log(resp);
+        return id;
       } else {
         console.log("News: fetch Post. errore in if");
       }
@@ -57,9 +62,45 @@ function NewPostProva() {
     }
   };
 
-  const handleSubmit = (e) => {
+  //!inizio
+
+  const handleSubmitFile = async (resp) => {
+    try {
+      let res = await fetch(
+        `https://striveschool-api.herokuapp.com/api/posts/${resp}`,
+        {
+          method: "POST",
+          body: fd,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (res.ok) {
+        const data = await res.json();
+        console.log("foto post ok");
+      } else {
+        console.log("foto post bad");
+      }
+    } catch (err) {
+      console.log("foto post catch");
+    }
+  };
+
+  const handleFile = (ev) => {
+    setFd((prev) => {
+      //per cambiare i formData, bisogna "appendere" una nuova coppia chiave/valore, usando il metodo .append()
+      prev.delete("post"); //ricordatevi di svuotare il FormData prima :)
+      prev.append("post", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
+      return prev;
+    });
+  };
+
+  //!fine
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchNewsPost();
+    handleSubmitFile(await fetchNewsPost());
     dispatch({ type: "NEW_POST", payload: innerData });
   };
 
@@ -71,9 +112,13 @@ function NewPostProva() {
             <Col xs={2}>
               <Image
                 roundedCircle={true}
-                style={{ width: "50px" }}
+                style={{ width: "50px", height: "50px" }}
                 alt=""
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                src={
+                  myProfile.image
+                    ? myProfile.image
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
               />
             </Col>
             <Col xs={10}>
@@ -83,7 +128,6 @@ function NewPostProva() {
                     className="rounded-pill"
                     type="text"
                     placeholder="Avvia un post"
-                    disabled
                   />
                 </Form.Group>
               </Form>
@@ -174,6 +218,9 @@ function NewPostProva() {
               </div>
             </Form.Group>
             <Form.Group>
+              <Row className="pb-3 px-3">
+                <Form.Control aria-selected type="file" onChange={handleFile} />
+              </Row>
               <Row>
                 <Col
                   xs={4}
