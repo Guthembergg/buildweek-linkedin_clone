@@ -15,6 +15,9 @@ import { HiDotsHorizontal, HiOutlinePencil } from "react-icons/hi";
 const MainProfile = () => {
   const dispatch = useDispatch();
   const modalBody = useSelector((state) => state.myExperience);
+  const modalBio = useSelector((state) => state.modifiedBio);
+  const modalInfo = useSelector((state) => state.modifiedInfo);
+
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
   let check;
@@ -45,7 +48,15 @@ const MainProfile = () => {
   useEffect(() => {
     MainProfile();
   }, []);
-
+  useEffect(() => {
+    MainProfile();
+  }, [modalBio]);
+  useEffect(() => {
+    MainProfile();
+  }, [modalInfo]);
+  useEffect(() => {
+    MainProfile();
+  }, [modalBody]);
   const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
     try {
       const response = await fetch(
@@ -92,9 +103,13 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
-                <div className="modalPencil d-flex justify-content-center align-items-center">
-                  {check === "me" && <ModalProfile me={me} />}
-                </div>
+                {param.id === "me" && (
+                  <>
+                    <div className="modalPencil d-flex justify-content-center align-items-center">
+                      <ModalProfile me={me} />
+                    </div>
+                  </>
+                )}
 
                 <Card.Title className="mt-5 position-relative m-0">
                   {me?.name} {me?.surname}
