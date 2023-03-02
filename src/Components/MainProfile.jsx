@@ -17,15 +17,14 @@ const MainProfile = () => {
   const modalBody = useSelector((state) => state.myExperience);
   const modalBio = useSelector((state) => state.modifiedBio);
   const modalInfo = useSelector((state) => state.modifiedInfo);
+  const profile = useSelector((state)=> state.myProfile)
 
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
-  let check;
-
   const [me, setMe] = useState();
   const [experience, setExperience] = useState([]);
 
-  const MainProfile = async () => {
+  const MainProfile = async (param) => {
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${param.id}`,
@@ -34,8 +33,10 @@ const MainProfile = () => {
       if (response.ok) {
         const data = await response.json();
         setMe(data);
-        if (check === "me") {
+        
+        if (param.id === "me") {
           dispatch({ type: "ADD_MY_PROFILE", payload: data });
+         
         }
       } else {
         console.log("mainPage: Main profile. errore in if");
@@ -46,17 +47,17 @@ const MainProfile = () => {
   };
 
   useEffect(() => {
-    MainProfile();
-  }, []);
+    MainProfile(param);
+  }, [param]);
   useEffect(() => {
-    MainProfile();
-  }, [modalBio]);
+    MainProfile(param);
+  }, [modalBio, param]);
   useEffect(() => {
-    MainProfile();
-  }, [modalInfo]);
+    MainProfile(param);
+  }, [modalInfo, param]);
   useEffect(() => {
-    MainProfile();
-  }, [modalBody]);
+    MainProfile(param);
+  }, [modalBody, param]);
   const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
     try {
       const response = await fetch(
@@ -106,7 +107,7 @@ const MainProfile = () => {
                 {param.id === "me" && (
                   <>
                     <div className="modalPencil d-flex justify-content-center align-items-center">
-                      <ModalProfile me={me} />
+                      <ModalProfile me={profile} />
                     </div>
                   </>
                 )}
@@ -117,8 +118,8 @@ const MainProfile = () => {
                     roundedCircle={true}
                     alt=""
                     src={
-                      me.image
-                        ? me.image
+                      me?.image
+                        ? me?.image
                         : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                     }
                     className="position-absolute imageProfile "
@@ -302,7 +303,7 @@ const MainProfile = () => {
                             </div>
                           </section>
                         </Col>
-                        {check === "me" && (
+                        {param.id === "me" && (
                           <Col
                             xs={2}
                             className="d-flex align-items-center justify-content-center"

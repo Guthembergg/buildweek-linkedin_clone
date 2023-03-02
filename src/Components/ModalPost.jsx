@@ -112,9 +112,13 @@ function NewPostProva() {
             <Col xs={2}>
               <Image
                 roundedCircle={true}
-                style={{ width: "50px" }}
+                style={{ width: "50px", height: "50px" }}
                 alt=""
-                src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                src={
+                  myProfile.image
+                    ? myProfile.image
+                    : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                }
               />
             </Col>
             <Col xs={10}>
