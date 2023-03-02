@@ -1,8 +1,9 @@
 import { Row, Col, Button, Image } from "react-bootstrap";
 import { BsPersonPlusFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const TokenUtenti = ({ profile }) => {
+  const navigate = useNavigate()
   return (
     <>
       <Row className="p-1">
