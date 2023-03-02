@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
+import { Form, Button, Modal, Row } from "react-bootstrap";
+import { BsImageFill } from "react-icons/bs";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 function ModalProfile(props) {
@@ -67,10 +68,9 @@ function ModalProfile(props) {
 
   const handleFile = (ev) => {
     setFd((prev) => {
-      //per cambiare i formData, bisogna "appendere" una nuova coppia chiave/valore, usando il metodo .append()
-      prev.delete("profile"); //ricordatevi di svuotare il FormData prima :)
-      prev.append("profile", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
-      return prev;
+    
+      prev.delete("profile");
+      prev.append("profile", ev.target.files[0]); 
     });
   };
 
@@ -114,8 +114,14 @@ function ModalProfile(props) {
                 defaultValue={props.me.surname}
                 value={profileForm.surname}
                 onChange={(e) => handleChange("surname", e.target.value)}
-              />
-              <Form.Control aria-selected type="file" onChange={handleFile} />
+              />       
+              
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Seleziona media da inserire</Form.Label>
+              <Row className="pb-3 px-3">
+              <Form.Label><BsImageFill className="fs-2 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
+              </Row>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Sommario*</Form.Label>

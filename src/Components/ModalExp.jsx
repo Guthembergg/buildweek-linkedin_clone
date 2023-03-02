@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AiOutlinePlus } from "react-icons/ai";
+import { BsImageFill } from "react-icons/bs";
 
 function ModalExp(props) {
   const [resp, setResp] = useState("");
@@ -150,9 +151,9 @@ function ModalExp(props) {
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Seleziona immagine da inserire</Form.Label>
+              <Form.Label>Seleziona media da inserire</Form.Label>
               <Row className="pb-3 px-3">
-                <Form.Control aria-selected type="file" onChange={handleFile} />
+              <Form.Label><BsImageFill className="fs-2 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
               </Row>
             </Form.Group>
             <Row>

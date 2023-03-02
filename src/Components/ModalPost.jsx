@@ -133,40 +133,32 @@ function NewPostProva() {
               </Form>
             </Col>
           </Row>
-          <Row className="d-flex justify-content-center align-items-center py-2">
-            <Col
-              xs={3}
-              md={2}
-              className="d-flex justify-content-center align-items-center"
-            >
-              <BsImageFill className="text-primary" />
-              <span className="d-none d-md-inline ms-2">Foto</span>
-            </Col>
-            <Col
-              xs={3}
-              md={2}
-              className="d-flex justify-content-center align-items-center"
-            >
-              <BsFillPlayBtnFill className="text-success" />
-              <span className="d-none d-md-inline ms-2">Video</span>
-            </Col>
-            <Col
-              xs={3}
-              md={2}
-              className="d-flex justify-content-center align-items-center"
-            >
-              <BsFillCalendar2EventFill style={{ color: "brown"}} />
-              <span className="d-none d-md-inline ms-2">Evento</span>
-            </Col>
-            <Col
-              xs={3}
-              md={4}
-              className="d-flex justify-content-center align-items-center"
-            >
-              <RiArticleFill style={{ color: "orange"}} />
-              <span className="d-none d-md-inline ms-2">Scrivi un articolo</span>
-            </Col>
-          </Row>
+          <section className="d-flex justify-content-around text-tertiary border-top">
+        <div className="iconPost rounded d-flex">
+          <span className="me-2">
+            <BsImageFill className="text-primary"/>
+          </span>
+          <span className="d-none d-md-inline">Foto </span>
+        </div>
+        <div className="iconPost rounded d-flex">
+          <span className="me-2">
+            <BsFillPlayBtnFill className="text-success" />
+          </span>
+          <span className="d-none d-md-inline">Video</span>
+        </div>
+        <div className="iconPost rounded d-flex">
+          <span className="me-2">
+            <BsFillCalendar2EventFill style={{ color: "brown"}}/>
+          </span>
+          <span className="d-none d-md-inline">Evento</span>
+        </div>
+        <div className="iconPost rounded d-flex">
+          <span className="me-2">
+            <RiArticleFill style={{ color: "orange"}} />
+          </span>
+          <span className="d-none d-md-inline">Scrivi un articolo</span>
+        </div>
+      </section>
         </Card>
       </>
 
@@ -191,7 +183,7 @@ function NewPostProva() {
                       {myProfile.name} {myProfile.surname}
                     </Row>
                     <Row className="pe-5">
-                      <Button
+                    {/*   <Button
                         variant="outline-secondary"
                         className="rounded-pill"
                         style={{
@@ -200,7 +192,7 @@ function NewPostProva() {
                         }}
                       >
                         mod da agg.
-                      </Button>
+                      </Button> */}
                     </Row>
                   </Col>
                 </Row>
@@ -219,14 +211,15 @@ function NewPostProva() {
             </Form.Group>
             <Form.Group>
               <Row className="pb-3 px-3">
-                <Form.Control aria-selected type="file" onChange={handleFile} />
+                
+                
               </Row>
               <Row>
                 <Col
                   xs={4}
                   className="d-flex justify-content-between align-items-center"
                 >
-                  <BsImageFill style={{ color: "gray" }} className="fs-5" />
+                  <Form.Label><BsImageFill  className="fs-5 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
                   <BsFillPlayBtnFill
                     style={{ color: "gray" }}
                     className="fs-5"
@@ -254,7 +247,7 @@ function NewPostProva() {
                   />
                   <Button
                     className="rounded-pill"
-                    variant="secondary"
+                    variant="success"
                     type="submit"
                     onClick={() => {
                       handleClose();

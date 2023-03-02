@@ -60,7 +60,7 @@ const CustomNavbar = () => {
             <span className="d-none d-lg-block">Notifiche</span>
           </li>
           <li>
-            <Dropdown>
+            <Dropdown >
               <Dropdown.Toggle
                 variant="none"
                 style={{ border: "none", color: "gray" }}
@@ -72,8 +72,8 @@ const CustomNavbar = () => {
                 </div>
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">
+              <Dropdown.Menu >
+                <Dropdown.Item >
                   <Row>
                     <Col xs={3}>
                       <Image

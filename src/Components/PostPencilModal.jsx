@@ -127,7 +127,12 @@ function NewPostProva(props) {
                 <Form.Label>{innerData.text.length}/2600</Form.Label>
               </div>
               <Row className="pb-3 px-3">
-                <Form.Control aria-selected type="file" onChange={handleFile} />
+              <Form.Group>
+              <Form.Label>Modifica media</Form.Label>
+              <Row className="pb-3 px-3">
+              <Form.Label><BsImageFill className="fs-2 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
+              </Row>
+            </Form.Group>
               </Row>
             </Form.Group>
             <Modal.Footer>

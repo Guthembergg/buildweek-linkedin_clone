@@ -45,16 +45,16 @@ const CardProfile = () => {
 
   return (
     <section>
-      <Card className="d-flex">
-        <Card.Img variant="top" src={imageBackground} />
-        <Card.Body className="vinsBackground border-bottom border-tertiary text-center">
-        <Card.Title className="mt-1 position-relative  m-0 fs-6">
+      <Card className="d-flex mb-3">
+        <Card.Img variant="top" src={imageBackground} style={{maxHeight: "100px", minHeight:"60px"}} />
+        <Card.Body className=" position-relative border-bottom border-tertiary text-center">
+        <Card.Title className="mt-1  m-0 fs-6">
         <Link
             className="text-decoration-none text-dark"
             to={`/profile/${me?._id}`}
           >{me?.name} {me?.surname}</Link>
             <Image
-              className="position-absolute imageProfileNews "
+              className="position-absolute imageProfileNews"
               style={{ zIndex: "10" }}
               roundedCircle={true}
               alt=""
@@ -67,7 +67,7 @@ const CardProfile = () => {
           </Card.Title>
           <Card.Text className="text-secondary">{me?.title}</Card.Text>
         </Card.Body>
-        <Card.Body className="cardProfileText border-bottom border-tertiary">
+        <Card.Body className="cardProfileText border-bottom border-tertiary d-none d-md-block">
           <p className=" text-secondary mb-0 d-flex justify-content-between">
             {" "}
             Collegamenti<span className="text-primary">52</span>
@@ -79,7 +79,7 @@ const CardProfile = () => {
             <span className="text-primary">13</span>
           </p>
         </Card.Body>
-        <Card.Body className="cardProfileText border-bottom border-tertiary">
+        <Card.Body className="cardProfileText border-bottom border-tertiary d-none d-md-block">
           <p className=" text-secondary mb-0 d-flex justify-content-between">
             {" "}
             Accedi a strumenti e informazioni in esclusiva.
@@ -94,7 +94,7 @@ const CardProfile = () => {
             </p>
           </div>
         </Card.Body>
-        <Card.Body className="cardProfileText border-bottom border-tertiary py-2">
+        <Card.Body className="cardProfileText border-bottom border-tertiary py-2 d-none d-md-block">
           <p className="mt-0">
             {" "}
             <BsFillBookmarkFill /> I miei elementi

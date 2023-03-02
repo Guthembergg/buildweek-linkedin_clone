@@ -39,7 +39,7 @@ function PostDeleteModal(props) {
   return (
     <>
       <>
-        <NavDropdown.Item onClick={handleShow}>
+        <NavDropdown.Item className="text-danger" onClick={handleShow}>
           <RiDeleteBin6Fill />
           <span className="ps-2">Elimina post</span>
         </NavDropdown.Item>
@@ -54,7 +54,7 @@ function PostDeleteModal(props) {
 
           <Modal.Footer>
             <Button
-              variant="primary"
+              variant="danger"
               type="submit"
               onClick={() => {
                 handleClose();

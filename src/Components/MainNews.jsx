@@ -49,7 +49,7 @@ const MainNews = () => {
   return (
     <Row className="d-flex justify-content-center py-3 m-0 w-100">
       <Col className="d-none d-md-block " md={3} xl={2}>
-        <CardProfile />
+        <CardProfile/>
         <Card className="d-flex mt-3">
           <Card.Body className="position-relative px-0">
             <p className="text-secondary mb-1 px-3"> Recenti</p>
@@ -103,6 +103,7 @@ const MainNews = () => {
         </Card>
       </Col>
       <Col xs={10} md={8} lg={6}>
+        <div className="d-block d-md-none"><CardProfile /></div>
         <ModalPost />
         {postList &&
           postList
