@@ -210,8 +210,8 @@ const MainNews = () => {
               </div>
             </section>
           </Card.Body>
-          <CardAndFooter />
         </Card>
+        <CardAndFooter />
       </Col>
     </Row>
   );

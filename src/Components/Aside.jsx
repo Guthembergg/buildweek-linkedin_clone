@@ -22,7 +22,7 @@ const Aside = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setUtenti(data);
+        setUtenti(data.reverse());
       } else {
         console.log("errore nel else di aside");
       }

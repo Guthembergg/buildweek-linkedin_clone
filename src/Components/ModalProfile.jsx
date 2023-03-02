@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { HiOutlinePencil } from "react-icons/hi";
-
+import { useDispatch } from "react-redux";
 function ModalProfile(props) {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [profileForm, setProfileForm] = useState({
     name: props.me.name,
@@ -42,6 +43,7 @@ function ModalProfile(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     PutFetch();
+    dispatch({ type: "MODIFIED_BIO", payload: profileForm });
   };
 
   return (

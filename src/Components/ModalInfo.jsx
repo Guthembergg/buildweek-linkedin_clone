@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { HiOutlinePencil } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 
 function ModalInfo(props) {
   const [show, setShow] = useState(false);
   const [info, setInfo] = useState({
     bio: props.me.bio,
   });
-
+  const dispatch = useDispatch();
   const handleChange = (property, value) => {
     setInfo({ ...info, [property]: value });
   };
@@ -37,6 +38,7 @@ function ModalInfo(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     PutFetch();
+    dispatch({ type: "MODIFIED_INFO", payload: info });
   };
 
   console.log();

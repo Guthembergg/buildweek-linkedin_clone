@@ -83,6 +83,7 @@ function NewPostProva() {
                     className="rounded-pill"
                     type="text"
                     placeholder="Avvia un post"
+                    disabled
                   />
                 </Form.Group>
               </Form>
@@ -165,6 +166,7 @@ function NewPostProva() {
                 as="textarea"
                 placeholder="Inserisci qui il tuo post"
                 onChange={(e) => handleChange("text", e.target.value)}
+                autoFocus="autofocus"
               />
               <div className="d-flex justify-content-between mt-1">
                 <BsEmojiSmile />

@@ -15,15 +15,12 @@ import { HiDotsHorizontal, HiOutlinePencil } from "react-icons/hi";
 const MainProfile = () => {
   const dispatch = useDispatch();
   const modalBody = useSelector((state) => state.myExperience);
+  const modalBio = useSelector((state) => state.modifiedBio);
+  const modalInfo = useSelector((state) => state.modifiedInfo);
+
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
   let check;
-
-  if (param.id === undefined) {
-    check = "me";
-  } else {
-    check = param.id;
-  }
 
   const [me, setMe] = useState();
   const [experience, setExperience] = useState([]);
@@ -31,7 +28,7 @@ const MainProfile = () => {
   const MainProfile = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${check}`,
+        `https://striveschool-api.herokuapp.com/api/profile/${param.id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.ok) {
@@ -51,7 +48,15 @@ const MainProfile = () => {
   useEffect(() => {
     MainProfile();
   }, []);
-
+  useEffect(() => {
+    MainProfile();
+  }, [modalBio]);
+  useEffect(() => {
+    MainProfile();
+  }, [modalInfo]);
+  useEffect(() => {
+    MainProfile();
+  }, [modalBody]);
   const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
     try {
       const response = await fetch(
@@ -98,12 +103,16 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
-                <div className="modalPencil d-flex justify-content-center align-items-center">
-                  {check === "me" && <ModalProfile me={me} />}
-                </div>
+                {param.id === "me" && (
+                  <>
+                    <div className="modalPencil d-flex justify-content-center align-items-center">
+                      <ModalProfile me={me} />
+                    </div>
+                  </>
+                )}
 
                 <Card.Title className="mt-5 position-relative m-0">
-                  {me.name} {me.surname}
+                  {me?.name} {me?.surname}
                   <Image
                     roundedCircle={true}
                     alt=""
@@ -149,9 +158,11 @@ const MainProfile = () => {
                         inizia
                       </p>
                     </Col>
-                    <Col xs={2} className="p-0">
-                      <HiOutlinePencil></HiOutlinePencil>
-                    </Col>
+                    {param.id === "me" && (
+                      <Col xs={2} className="p-0">
+                        <HiOutlinePencil></HiOutlinePencil>
+                      </Col>
+                    )}
                   </Row>
                 </Card>
                 <Card className="p-2 ms-3">
@@ -167,9 +178,11 @@ const MainProfile = () => {
                         inizia
                       </p>
                     </Col>
-                    <Col xs={2} className="p-0">
-                      <HiOutlinePencil></HiOutlinePencil>
-                    </Col>
+                    {param.id === "me" && (
+                      <Col xs={2} className="p-0">
+                        <HiOutlinePencil></HiOutlinePencil>
+                      </Col>
+                    )}
                   </Row>
                 </Card>
               </div>
@@ -231,11 +244,13 @@ const MainProfile = () => {
                     </Card.Title>
                   </Col>
 
-                  <Col xs={1}>
-                    <div className="disc d-flex justify-content-center align-items-center fs-4 p-0">
-                      <ModalInfo me={me} />
-                    </div>
-                  </Col>
+                  {param.id === "me" && (
+                    <Col xs={1}>
+                      <div className="disc d-flex justify-content-center align-items-center fs-4 p-0">
+                        <ModalInfo me={me} />
+                      </div>
+                    </Col>
+                  )}
                 </Row>
 
                 <p>{me.bio}</p>
@@ -252,7 +267,7 @@ const MainProfile = () => {
                           Esperienza
                         </Card.Title>
                       </Col>
-                      {check === "me" && (
+                      {param.id === "me" && (
                         <>
                           <Col xs={1}>
                             <div className="m-0 ms-1 disc d-flex justify-content-center align-items-center fs-4 p-0">
@@ -271,7 +286,7 @@ const MainProfile = () => {
                               {e.image && (
                                 <Image
                                   style={{ width: "60%" }}
-                                  src={e.image}
+                                  src={e?.image}
                                   alt="FotoExp"
                                 />
                               )}
@@ -280,10 +295,10 @@ const MainProfile = () => {
                               <h6 className="m-0">{e.role}</h6>
                               <p className="m-0">{e.company}</p>
                               <p className="text-secondary m-0">
-                                `{e.startDate.slice(0, 10)} -{" "}
-                                {e.endDate.slice(0, 10)}`
+                                `{e?.startDate?.slice(0, 10)} -{" "}
+                                {e?.endDate?.slice(0, 10)}`
                               </p>
-                              <p className="mt-2">{e.decription}</p>
+                              <p className="mt-2">{e?.decription}</p>
                             </div>
                           </section>
                         </Col>
