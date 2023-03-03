@@ -10,7 +10,7 @@ const TokenUtenti = ({ profile }) => {
         <Col xs={3} className="d-flex justify-content-center align-items-start">
           <Image
             className="rounded-circle"
-            style={{ width: "100%" }}
+            style={{ width: "45px", height:"45px" }}
             src={profile.image}
           ></Image>
         </Col>

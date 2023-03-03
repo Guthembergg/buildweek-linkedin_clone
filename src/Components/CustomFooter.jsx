@@ -11,11 +11,11 @@ const CustomeFooter = () => {
 
         <>
             
-            {location.pathname !== "/news" && <Row className="footer w-100">
-            <h3 className="footerTitle">Linkedin</h3>
-                <Col xs={6} className="footerLeftCol">
-                    <ul>
-                        <Col xs={4}>
+            {location.pathname !== "/" && <Row className="footer w-100 flex-column flex-md-row">
+            <h3 className="footerTitle my-3">Linkedin</h3>
+                <Col md={4} className="footerLeftCol d-none d-md-block">
+                    <ul className="d-flex justify-content-between" >
+                        <Col xs={3} >
                             <li>Informazioni</li>
                             <li>Linee guida della comunity</li>
                             <li>Privacy e condizioni <IoMdArrowDropdown className="arrowGiu"/></li>
@@ -23,14 +23,14 @@ const CustomeFooter = () => {
                             <li>Centro sicurezza</li>
                         </Col >
     
-                        <Col xs={4}>
+                        <Col xs={3}>
                             <li>Accessibilità</li>
                             <li>Carriera</li>
                             <li>Opzioni di annuncio</li>
                             <li>Mobile</li>
                         </Col>
     
-                        <Col xs={4}>
+                        <Col xs={3}>
                             <li>Talent Solutions</li>
                             <li>Soluzioni di marketing</li>
                             <li>Pubblicità</li>
@@ -40,7 +40,7 @@ const CustomeFooter = () => {
                         
                     </ul>
                 </Col>
-                <Col xs={3}>
+                <Col xs={12} md={4}>
                     <Row >
                         <Col xs={2}>
                             <AiFillQuestionCircle className="footerIcon"/>
@@ -60,7 +60,7 @@ const CustomeFooter = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col xs={3}>
+                <Col xs={12} md={4}>
                     <label>Seleziona lingua</label>
                     <select name="language" id="" >
                         <option value="0" selectedvalue="selected"> Italiano - Italiano</option>
