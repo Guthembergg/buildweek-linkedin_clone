@@ -11,8 +11,8 @@ const CustomeFooter = () => {
 
         <>
             
-            {location.pathname !== "/" && <Row className="footer w-100 flex-column flex-md-row">
-            <h3 className="footerTitle my-3">Linkedin</h3>
+            {location.pathname !== "/" && <Row className="footer w-100 d-flex justify-content-center flex-column flex-md-row">
+            <h3 className="footerTitle my-3 text-center">Linkedin</h3>
                 <Col md={4} className="footerLeftCol d-none d-md-block">
                     <ul className="d-flex justify-content-between" >
                         <Col xs={3} >
@@ -40,7 +40,7 @@ const CustomeFooter = () => {
                         
                     </ul>
                 </Col>
-                <Col xs={12} md={4}>
+                <Col xs={10} md={3}>
                     <Row >
                         <Col xs={2}>
                             <AiFillQuestionCircle className="footerIcon"/>
@@ -60,7 +60,7 @@ const CustomeFooter = () => {
                         </Col>
                     </Row>
                 </Col>
-                <Col xs={12} md={4}>
+                <Col xs={10} md={3}>
                     <label>Seleziona lingua</label>
                     <select name="language" id="" >
                         <option value="0" selectedvalue="selected"> Italiano - Italiano</option>
