@@ -49,7 +49,7 @@ const MainNews = () => {
   return (
     <Row className="d-flex justify-content-center py-3 m-0 w-100">
       <Col className="d-none d-md-block " md={3} xl={2}>
-        <CardProfile/>
+        <CardProfile />
         <Card className="d-flex mt-3">
           <Card.Body className="position-relative px-0">
             <p className="text-secondary mb-1 px-3"> Recenti</p>
@@ -103,11 +103,21 @@ const MainNews = () => {
         </Card>
       </Col>
       <Col xs={10} md={8} lg={6}>
-        <div className="d-block d-md-none"><CardProfile /></div>
+        <div className="d-block d-md-none">
+          <CardProfile />
+        </div>
         <ModalPost />
         <div className="d-flex justify-content-center flex-nowrap my-2">
-          <Button className="rounded-pill px-5 py-0 text-center" variant="outline-primary" style={{height:"30px", border:"none"}} onClick={()=> fetchGetPost()}> Aggiorna nuovi post </Button>
-          </div>
+          <Button
+            className="rounded-pill px-5 py-0 text-center"
+            variant="outline-primary"
+            style={{ height: "30px", border: "none" }}
+            onClick={() => fetchGetPost()}
+          >
+            {" "}
+            Aggiorna nuovi post{" "}
+          </Button>
+        </div>
         {postList &&
           postList
             .filter((_, i) => i < 20)
@@ -131,10 +141,11 @@ const MainNews = () => {
               </div>
               <div>
                 <p className="fs-6 m-0">
-                  <strong>A volte basta chiedere</strong>
+                  <strong>Vincenzo Picone denunciato</strong>
                 </p>
                 <p className="text-secondary mb-1 fs-6">
-                  23 anni fa - 3 lettori
+                  Dopo 4 mesi di corso copia le righe di codice usando il tasto
+                  destro del maouse
                 </p>
               </div>
             </section>
@@ -146,10 +157,11 @@ const MainNews = () => {
               </div>
               <div>
                 <p className="fs-6 m-0">
-                  <strong>A volte basta chiedere</strong>
+                  <strong>Il codice rende folli</strong>
                 </p>
                 <p className="text-secondary mb-1 fs-6">
-                  23 anni fa - 3 lettori
+                  De Pascale impazzisce dopo aver visto una height non multipla
+                  di 10
                 </p>
               </div>
             </section>
@@ -161,10 +173,11 @@ const MainNews = () => {
               </div>
               <div>
                 <p className="fs-6 m-0">
-                  <strong>A volte basta chiedere</strong>
+                  <strong>Premio miglior coder</strong>
                 </p>
                 <p className="text-secondary mb-1 fs-6">
-                  23 anni fa - 3 lettori
+                  Guettech conquista per il primo anno il premio "CodeBreak": ha
+                  distrutto un sito cambiando una sola riga di codice.
                 </p>
               </div>
             </section>
@@ -176,40 +189,12 @@ const MainNews = () => {
               </div>
               <div>
                 <p className="fs-6 m-0">
-                  <strong>A volte basta chiedere</strong>
+                  <strong>Le ricerche continuano</strong>
                 </p>
                 <p className="text-secondary mb-1 fs-6">
-                  23 anni fa - 3 lettori
-                </p>
-              </div>
-            </section>
-            <section className="d-flex px-3">
-              <div className="d-flex justify-content-center align-items-start">
-                <p>
-                  <RxDotFilled />
-                </p>
-              </div>
-              <div>
-                <p className="fs-6 m-0">
-                  <strong>A volte basta chiedere</strong>
-                </p>
-                <p className="text-secondary mb-1 fs-6">
-                  23 anni fa - 3 lettori
-                </p>
-              </div>
-            </section>
-            <section className="d-flex px-3">
-              <div className="d-flex justify-content-center align-items-start">
-                <p>
-                  <RxDotFilled />
-                </p>
-              </div>
-              <div>
-                <p className="fs-6 m-0">
-                  <strong>A volte basta chiedere</strong>
-                </p>
-                <p className="text-secondary mb-1 fs-6">
-                  23 anni fa - 3 lettori
+                  Un ragazzo dopo essere uscito di casa due giorni fa non è più
+                  rientrato, la famiglia chiede alle autorità di venire a capo
+                  della faccenda.
                 </p>
               </div>
             </section>
