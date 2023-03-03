@@ -115,7 +115,7 @@ function NewPostProva() {
   return (
     <>
       <>
-        <Card body className="mb-3">
+        <Card body >
           <Row className="d-flex align-items-center">
             <Col xs={2} className="text-end">
               <Image

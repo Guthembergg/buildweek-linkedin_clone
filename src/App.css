@@ -80,6 +80,10 @@
   font-size: 22px;
 }
 
+.reload:hover {
+  cursor: pointer;
+}
+
 .navIcon {
   font-size: 25px;
 }

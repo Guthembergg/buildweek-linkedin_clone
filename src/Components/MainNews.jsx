@@ -1,4 +1,4 @@
-import { Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import CardProfile from "./CardProfileNews";
 import { BiHash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -105,6 +105,9 @@ const MainNews = () => {
       <Col xs={10} md={8} lg={6}>
         <div className="d-block d-md-none"><CardProfile /></div>
         <ModalPost />
+        <div className="d-flex justify-content-center flex-nowrap my-2">
+          <Button className="rounded-pill px-5 py-0 text-center" variant="outline-primary" style={{height:"30px", border:"none"}} onClick={()=> fetchGetPost()}> Aggiorna nuovi post </Button>
+          </div>
         {postList &&
           postList
             .filter((_, i) => i < 20)
