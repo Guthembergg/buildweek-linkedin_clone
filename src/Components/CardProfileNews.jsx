@@ -3,7 +3,7 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { GrCheckbox } from "react-icons/gr";
 import { useState, useEffect } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 
 const CardProfile = () => {
@@ -46,13 +46,19 @@ const CardProfile = () => {
   return (
     <section>
       <Card className="d-flex mb-3">
-        <Card.Img variant="top" src={imageBackground} style={{maxHeight: "100px", minHeight:"60px"}} />
+        <Card.Img
+          variant="top"
+          src={imageBackground}
+          style={{ maxHeight: "100px", minHeight: "60px" }}
+        />
         <Card.Body className=" position-relative border-bottom border-tertiary text-center">
-        <Card.Title className="mt-1  m-0 fs-6">
-        <Link
-            className="text-decoration-none text-dark"
-            to={`/profile/${me?._id}`}
-          >{me?.name} {me?.surname}</Link>
+          <Card.Title className="mt-1  m-0 fs-6">
+            <Link
+              className="text-decoration-none text-dark"
+              to={`/profile/${me?._id}`}
+            >
+              {me?.name} {me?.surname}
+            </Link>
             <Image
               className="position-absolute imageProfileNews"
               style={{ zIndex: "10" }}
@@ -69,7 +75,6 @@ const CardProfile = () => {
         </Card.Body>
         <Card.Body className="cardProfileText border-bottom border-tertiary d-none d-md-block">
           <p className=" text-secondary mb-0 d-flex justify-content-between">
-            {" "}
             Collegamenti<span className="text-primary">52</span>
           </p>
           <p className=" text-dark mt-0"> Espandi la tua rete</p>

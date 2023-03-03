@@ -54,9 +54,9 @@ function ModalProfile(props) {
         {
           method: "POST",
           body: fd,
-          headers: {
+          headers: new Headers({
             Authorization: `Bearer ${token}`,
-          },
+          }),
         }
       );
       if (res.ok) {
@@ -68,18 +68,18 @@ function ModalProfile(props) {
 
   const handleFile = (ev) => {
     setFd((prev) => {
-    
       prev.delete("profile");
-      prev.append("profile", ev.target.files[0]); 
+      prev.append("profile", ev.target.files[0]);
+      return prev;
     });
   };
 
   //!fine
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    PutFetch();
-    handleSubmitFile();
+    await PutFetch();
+    await handleSubmitFile();
     dispatch({ type: "MODIFIED_BIO", payload: profileForm });
   };
 
@@ -101,7 +101,6 @@ function ModalProfile(props) {
               <Form.Control
                 type="text"
                 placeholder="Nome"
-                defaultValue={props.me.name}
                 value={profileForm.name}
                 onChange={(e) => handleChange("name", e.target.value)}
               />
@@ -111,16 +110,22 @@ function ModalProfile(props) {
               <Form.Control
                 type="text"
                 placeholder="Cognome"
-                defaultValue={props.me.surname}
                 value={profileForm.surname}
                 onChange={(e) => handleChange("surname", e.target.value)}
-              />       
-              
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Seleziona media da inserire</Form.Label>
               <Row className="pb-3 px-3">
-              <Form.Label><BsImageFill className="fs-2 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
+                <Form.Label>
+                  <BsImageFill className="fs-2 text-primary" />
+                  <Form.Control
+                    className="d-none"
+                    aria-selected
+                    type="file"
+                    onChange={handleFile}
+                  />
+                </Form.Label>
               </Row>
             </Form.Group>
             <Form.Group className="mb-3">
@@ -128,7 +133,6 @@ function ModalProfile(props) {
               <Form.Control
                 type="text"
                 placeholder="Job"
-                defaultValue={props.me.title}
                 value={profileForm.title}
                 onChange={(e) => handleChange("title", e.target.value)}
               />
@@ -147,7 +151,6 @@ function ModalProfile(props) {
               <Form.Control
                 type="text"
                 placeholder="Job"
-                defaultValue={props.me.area}
                 value={profileForm.area}
                 onChange={(e) => handleChange("area", e.target.value)}
               />

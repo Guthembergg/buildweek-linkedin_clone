@@ -100,7 +100,7 @@ function NewPostProva() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    handleSubmitFile(await fetchNewsPost());
+    await handleSubmitFile(await fetchNewsPost());
     dispatch({ type: "NEW_POST", payload: innerData });
   };
 
@@ -134,31 +134,31 @@ function NewPostProva() {
             </Col>
           </Row>
           <section className="d-flex justify-content-around text-tertiary border-top">
-        <div className="iconPost rounded d-flex">
-          <span className="me-2">
-            <BsImageFill className="text-primary"/>
-          </span>
-          <span className="d-none d-md-inline">Foto </span>
-        </div>
-        <div className="iconPost rounded d-flex">
-          <span className="me-2">
-            <BsFillPlayBtnFill className="text-success" />
-          </span>
-          <span className="d-none d-md-inline">Video</span>
-        </div>
-        <div className="iconPost rounded d-flex">
-          <span className="me-2">
-            <BsFillCalendar2EventFill style={{ color: "brown"}}/>
-          </span>
-          <span className="d-none d-md-inline">Evento</span>
-        </div>
-        <div className="iconPost rounded d-flex">
-          <span className="me-2">
-            <RiArticleFill style={{ color: "orange"}} />
-          </span>
-          <span className="d-none d-md-inline">Scrivi un articolo</span>
-        </div>
-      </section>
+            <div className="iconPost rounded d-flex">
+              <span className="me-2">
+                <BsImageFill className="text-primary" />
+              </span>
+              <span className="d-none d-md-inline">Foto </span>
+            </div>
+            <div className="iconPost rounded d-flex">
+              <span className="me-2">
+                <BsFillPlayBtnFill className="text-success" />
+              </span>
+              <span className="d-none d-md-inline">Video</span>
+            </div>
+            <div className="iconPost rounded d-flex">
+              <span className="me-2">
+                <BsFillCalendar2EventFill style={{ color: "brown" }} />
+              </span>
+              <span className="d-none d-md-inline">Evento</span>
+            </div>
+            <div className="iconPost rounded d-flex">
+              <span className="me-2">
+                <RiArticleFill style={{ color: "orange" }} />
+              </span>
+              <span className="d-none d-md-inline">Scrivi un articolo</span>
+            </div>
+          </section>
         </Card>
       </>
 
@@ -183,7 +183,7 @@ function NewPostProva() {
                       {myProfile.name} {myProfile.surname}
                     </Row>
                     <Row className="pe-5">
-                    {/*   <Button
+                      {/*   <Button
                         variant="outline-secondary"
                         className="rounded-pill"
                         style={{
@@ -210,16 +210,21 @@ function NewPostProva() {
               </div>
             </Form.Group>
             <Form.Group>
-              <Row className="pb-3 px-3">
-                
-                
-              </Row>
+              <Row className="pb-3 px-3"></Row>
               <Row>
                 <Col
                   xs={4}
                   className="d-flex justify-content-between align-items-center"
                 >
-                  <Form.Label><BsImageFill  className="fs-5 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
+                  <Form.Label>
+                    <BsImageFill className="fs-5 text-primary" />
+                    <Form.Control
+                      className="d-none"
+                      aria-selected
+                      type="file"
+                      onChange={handleFile}
+                    />
+                  </Form.Label>
                   <BsFillPlayBtnFill
                     style={{ color: "gray" }}
                     className="fs-5"

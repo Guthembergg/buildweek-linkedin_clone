@@ -130,6 +130,7 @@ function ModalSingleExp({ e, me }) {
                 onChange={handleChangeCompagnia}
                 type="text"
                 placeholder="Compagnia"
+                value={modalInfo.company}
               />
             </Form.Group>
 
@@ -139,6 +140,7 @@ function ModalSingleExp({ e, me }) {
                 onChange={handleChangeImpiego}
                 type="text"
                 placeholder="Descrizione impiego"
+                value={modalInfo.description}
               />
             </Form.Group>
 
@@ -148,25 +150,42 @@ function ModalSingleExp({ e, me }) {
                 onChange={handleChangeArea}
                 type="text"
                 placeholder="Area"
+                value={modalInfo.area}
               />
             </Form.Group>
             <Form.Group>
               <Form.Label>Seleziona media da inserire</Form.Label>
               <Row className="pb-3 px-3">
-              <Form.Label><BsImageFill className="fs-2 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
+                <Form.Label>
+                  <BsImageFill className="fs-2 text-primary" />
+                  <Form.Control
+                    className="d-none"
+                    aria-selected
+                    type="file"
+                    onChange={handleFile}
+                  />
+                </Form.Label>
               </Row>
             </Form.Group>
             <Row>
               <Col xs={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Data inizio</Form.Label>
-                  <Form.Control onChange={handleChangeDataIn} type="date" />
+                  <Form.Control
+                    onChange={handleChangeDataIn}
+                    type="date"
+                    value={modalInfo.startDate}
+                  />
                 </Form.Group>
               </Col>
               <Col xs={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Data fine</Form.Label>
-                  <Form.Control onChange={handleChangeDataOut} type="date" />
+                  <Form.Control
+                    onChange={handleChangeDataOut}
+                    type="date"
+                    value={modalInfo.endDate}
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -186,10 +205,10 @@ function ModalSingleExp({ e, me }) {
           <Button
             variant="primary"
             type="submit"
-            onClick={() => {
+            onClick={async () => {
               handleClose();
               ModalSingleFetch("PUT", modalInfo);
-              handleSubmitFile();
+              await handleSubmitFile();
               dispatch({ type: "MODIFIED_EXPERIENCE", payload: modalInfo });
             }}
           >

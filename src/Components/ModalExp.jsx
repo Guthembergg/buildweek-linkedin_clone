@@ -37,11 +37,6 @@ function ModalExp(props) {
     setModalInfo({ ...modalInfo, endDate: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch({ type: "ADD_EXP", payload: modalInfo });
-    handleSubmitFile(await ExperiencesGetFetch());
-  };
   //!inizio
   const token = process.env.REACT_APP_TOKEN;
   const ExperiencesGetFetch = async () => {
@@ -103,7 +98,11 @@ function ModalExp(props) {
       return prev;
     });
   };
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await handleSubmitFile(await ExperiencesGetFetch());
+    dispatch({ type: "ADD_EXP", payload: modalInfo });
+  };
   //!fine
   return (
     <>
@@ -153,7 +152,15 @@ function ModalExp(props) {
             <Form.Group>
               <Form.Label>Seleziona media da inserire</Form.Label>
               <Row className="pb-3 px-3">
-              <Form.Label><BsImageFill className="fs-2 text-primary"/><Form.Control className="d-none"  aria-selected type="file" onChange={handleFile}/></Form.Label>
+                <Form.Label>
+                  <BsImageFill className="fs-2 text-primary" />
+                  <Form.Control
+                    className="d-none"
+                    aria-selected
+                    type="file"
+                    onChange={handleFile}
+                  />
+                </Form.Label>
               </Row>
             </Form.Group>
             <Row>

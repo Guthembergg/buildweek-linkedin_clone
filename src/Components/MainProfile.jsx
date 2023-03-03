@@ -296,13 +296,14 @@ const MainProfile = () => {
                               )}
                             </div>
                             <div className="col-11">
-                              <h6 className="m-0">{e.role}</h6>
-                              <p className="m-0">{e.company}</p>
-                              <p className="text-secondary m-0">
+                              <h6 className="m-0">{e?.role}</h6>{" "}
+                              <p className="m-0">{e?.area}</p>
+                              <p className="m-0">{e?.company}</p>
+                              <p className="m-0">{e?.description}</p>
+                              <p className="text-secondary mb-3">
                                 `{e?.startDate?.slice(0, 10)} -{" "}
                                 {e?.endDate?.slice(0, 10)}`
                               </p>
-                              <p className="mt-2">{e?.decription}</p>
                             </div>
                           </section>
                         </Col>
