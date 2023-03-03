@@ -11,6 +11,7 @@ import FotoExp from "../assets/FotoCardExp.jpeg";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillEyeFill, BsFillPeopleFill, BsSearch } from "react-icons/bs";
 import { HiDotsHorizontal, HiOutlinePencil } from "react-icons/hi";
+import {GoGraph} from "react-icons/go"
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ const MainProfile = () => {
   const profile = useSelector((state) => state.myProfile);
   const modalExpMod = useSelector((state) => state.modifiedExperience);
   const modalExpDel = useSelector((state) => state.deletedExperience);
+  const randomNumber = (max) => {
+    return Math.floor(Math.random()*max)
+  }
 
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
@@ -195,7 +199,7 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Consigliato per te</Card.Title>
-                <p className="m-0 p-0 d-flex align-items-center ">
+                <p className="m-0 p-0 d-flex align-items-center  text-secondary ">
                   <BsFillEyeFill className="me-2" />
                   Solo per te
                 </p>
@@ -204,31 +208,44 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Body>
                 <Card.Title>Analisi</Card.Title>
-                <p className="m-0 p-0 d-flex align-items-center ">
+                <p className="m-0 p-0 d-flex align-items-center  text-secondary">
                   <BsFillEyeFill className="me-2" />
                   Solo per te
                 </p>
                 <Row>
-                  <Col xs={6}>
+                  <Col xs={10} md={4}>
                     <Row className="p-2">
                       <Col xs={1}>
                         <BsFillPeopleFill></BsFillPeopleFill>
                       </Col>
-                      <Col xs={11}>
-                        <h5>n visualizzazioni del tuo profilo</h5>
+                      <Col xs={11} >
+                        <h6>{randomNumber(50)} visualizzazioni del tuo profilo</h6>
                         <p className="fs-6">
                           Scopri chi ha visto il tuo profilo
                         </p>
                       </Col>
                     </Row>
                   </Col>
-                  <Col xs={6}>
+                  <Col xs={10} md={4}>
                     <Row className="p-2">
                       <Col xs={1}>
+                        <GoGraph></GoGraph>
+                      </Col>
+                      <Col xs={11}>
+                        <h6>{randomNumber(50)} impressioni dei post</h6>
+                        <p className="fs-6">
+                          Vedi quante volte compari nei motori di ricerca
+                        </p>
+                      </Col>
+                    </Row>
+                  </Col>
+                  <Col xs={10} md={4}>
+                    <Row className="p-2">
+                      <Col xs={1} >
                         <BsSearch></BsSearch>
                       </Col>
                       <Col xs={11}>
-                        <h5>n compars* nei motori di ricerca</h5>
+                        <h6>{randomNumber(50)} comparse nei motori di ricerca</h6>
                         <p className="fs-6">
                           Vedi quante volte compari nei motori di ricerca
                         </p>

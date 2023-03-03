@@ -95,6 +95,8 @@ const CustomNavbar = () => {
                       <Row>{profile?.title}</Row>
                     </Col>
                   </Row>
+                  </Dropdown.Item>
+                  <Dropdown.Item>
                   <Row className="text-center pt-2">
                     <Link
                       className="text-secondary text-decoration-none"
@@ -102,7 +104,7 @@ const CustomNavbar = () => {
                     >
                       <Button
                         variant="outline-primary rounded-pill"
-                        className="fs-6"
+                        className="fs-6 w-100"
                       >
                         Visualizza profilo
                       </Button>

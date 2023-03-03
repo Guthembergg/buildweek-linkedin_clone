@@ -107,7 +107,7 @@ const MainNews = () => {
         <ModalPost />
         {postList &&
           postList
-            .filter((_, i) => i < 10)
+            .filter((_, i) => i < 20)
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
       <Col className="d-none d-xl-block" xl={2}>
