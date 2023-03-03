@@ -19,6 +19,7 @@ function ModalProfile(props) {
   const handleChange = (property, value) => {
     setProfileForm({ ...profileForm, [property]: value });
   };
+  const [active, setActive] = useState(false);
 
   console.log(profileForm);
   const handleClose = () => setShow(false);
@@ -72,6 +73,7 @@ function ModalProfile(props) {
       prev.append("profile", ev.target.files[0]);
       return prev;
     });
+    setActive(true);
   };
 
   //!fine
@@ -79,8 +81,11 @@ function ModalProfile(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await PutFetch();
-    await handleSubmitFile();
+    if (active) {
+      await handleSubmitFile();
+    }
     dispatch({ type: "MODIFIED_BIO", payload: profileForm });
+    setActive(false);
   };
 
   return (
@@ -152,7 +157,10 @@ function ModalProfile(props) {
                 type="text"
                 placeholder="Job"
                 value={profileForm.area}
-                onChange={(e) => handleChange("area", e.target.value)}
+                onChange={(e) => {
+                  handleChange("area", e.target.value);
+                  setActive(false);
+                }}
               />
             </Form.Group>
             <Modal.Footer>

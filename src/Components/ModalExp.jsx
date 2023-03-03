@@ -8,33 +8,17 @@ function ModalExp(props) {
   const [resp, setResp] = useState("");
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
-  const [modalInfo, setModalInfo] = useState();
+  const [modalInfo, setModalInfo] = useState({
+    role: "",
+    company: "",
+    description: "",
+    area: "",
+  });
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const handleChangeRuolo = (e) => {
-    setModalInfo({ ...modalInfo, role: e.target.value });
-  };
-
-  const handleChangeCompagnia = (e) => {
-    setModalInfo({ ...modalInfo, company: e.target.value });
-  };
-
-  const handleChangeImpiego = (e) => {
-    setModalInfo({ ...modalInfo, description: e.target.value });
-  };
-
-  const handleChangeArea = (e) => {
-    setModalInfo({ ...modalInfo, area: e.target.value });
-  };
-
-  const handleChangeDataIn = (e) => {
-    setModalInfo({ ...modalInfo, startDate: e.target.value });
-  };
-
-  const handleChangeDataOut = (e) => {
-    setModalInfo({ ...modalInfo, endDate: e.target.value });
+  const handleChange = (property, value) => {
+    setModalInfo({ ...modalInfo, [property]: value });
   };
 
   //!inizio
@@ -116,9 +100,10 @@ function ModalExp(props) {
             <Form.Group className="mb-3">
               <Form.Label>Ruolo</Form.Label>
               <Form.Control
-                onChange={handleChangeRuolo}
+                onChange={(e) => handleChange("role", e.target.value)}
                 type="text"
                 placeholder="Ruolo"
+                value={modalInfo.role}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -126,27 +111,30 @@ function ModalExp(props) {
             <Form.Group className="mb-3">
               <Form.Label>Compagnia</Form.Label>
               <Form.Control
-                onChange={handleChangeCompagnia}
+                onChange={(e) => handleChange("company", e.target.value)}
                 type="text"
                 placeholder="Compagnia"
+                value={modalInfo.company}
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Descrizione impiego</Form.Label>
               <Form.Control
-                onChange={handleChangeImpiego}
+                onChange={(e) => handleChange("description", e.target.value)}
                 type="text"
                 placeholder="Descrizione impiego"
+                value={modalInfo.description}
               />
             </Form.Group>
 
             <Form.Group className="mb-3">
               <Form.Label>Area</Form.Label>
               <Form.Control
-                onChange={handleChangeArea}
+                onChange={(e) => handleChange("area", e.target.value)}
                 type="text"
                 placeholder="Area"
+                value={modalInfo.area}
               />
             </Form.Group>
             <Form.Group>
@@ -167,13 +155,21 @@ function ModalExp(props) {
               <Col xs={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Data inizio</Form.Label>
-                  <Form.Control onChange={handleChangeDataIn} type="date" />
+                  <Form.Control
+                    onChange={(e) => handleChange("startDate", e.target.value)}
+                    type="date"
+                    value={modalInfo.startDate}
+                  />
                 </Form.Group>
               </Col>
               <Col xs={6}>
                 <Form.Group className="mb-3">
                   <Form.Label>Data fine</Form.Label>
-                  <Form.Control onChange={handleChangeDataOut} type="date" />
+                  <Form.Control
+                    onChange={(e) => handleChange("endDate", e.target.value)}
+                    type="date"
+                    value={modalInfo.endDate}
+                  />
                 </Form.Group>
               </Col>
             </Row>

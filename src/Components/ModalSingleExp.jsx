@@ -7,44 +7,23 @@ import { BsImageFill } from "react-icons/bs";
 function ModalSingleExp({ e, me }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+  const [active, setActive] = useState(false);
   const [modalInfo, setModalInfo] = useState({
     role: e.role,
     company: e.company,
     description: e.description,
     area: e.area,
-    startDate: e.startDate,
-    endDate: e.endDate,
+    startDate: "",
+    endDate: "",
   });
   const [fd, setFd] = useState(new FormData());
-
+  const handleChange = (property, value) => {
+    setModalInfo({ ...modalInfo, [property]: value });
+  };
   const token = process.env.REACT_APP_TOKEN;
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const handleChangeRuolo = (e) => {
-    setModalInfo({ ...modalInfo, role: e.target.value });
-  };
-
-  const handleChangeCompagnia = (e) => {
-    setModalInfo({ ...modalInfo, company: e.target.value });
-  };
-
-  const handleChangeImpiego = (e) => {
-    setModalInfo({ ...modalInfo, description: e.target.value });
-  };
-
-  const handleChangeArea = (e) => {
-    setModalInfo({ ...modalInfo, area: e.target.value });
-  };
-
-  const handleChangeDataIn = (e) => {
-    setModalInfo({ ...modalInfo, startDate: e.target.value });
-  };
-
-  const handleChangeDataOut = (e) => {
-    setModalInfo({ ...modalInfo, endDate: e.target.value });
-  };
 
   const handleSubmit = () => {
     dispatch({ type: "ADD_EXP", payload: modalInfo });
@@ -78,6 +57,7 @@ function ModalSingleExp({ e, me }) {
       prev.append("experience", ev.target.files[0]);
       return prev;
     });
+    setActive(true);
   };
   const ModalSingleFetch = async (ourMethod, ourBody) => {
     try {
@@ -116,7 +96,7 @@ function ModalSingleExp({ e, me }) {
             <Form.Group className="mb-3">
               <Form.Label>Ruolo</Form.Label>
               <Form.Control
-                onChange={handleChangeRuolo}
+                onChange={(e) => handleChange("role", e.target.value)}
                 type="text"
                 placeholder="Ruolo"
                 value={modalInfo.role}
@@ -127,7 +107,7 @@ function ModalSingleExp({ e, me }) {
             <Form.Group className="mb-3">
               <Form.Label>Compagnia</Form.Label>
               <Form.Control
-                onChange={handleChangeCompagnia}
+                onChange={(e) => handleChange("company", e.target.value)}
                 type="text"
                 placeholder="Compagnia"
                 value={modalInfo.company}
@@ -137,7 +117,7 @@ function ModalSingleExp({ e, me }) {
             <Form.Group className="mb-3">
               <Form.Label>Descrizione impiego</Form.Label>
               <Form.Control
-                onChange={handleChangeImpiego}
+                onChange={(e) => handleChange("description", e.target.value)}
                 type="text"
                 placeholder="Descrizione impiego"
                 value={modalInfo.description}
@@ -147,7 +127,7 @@ function ModalSingleExp({ e, me }) {
             <Form.Group className="mb-3">
               <Form.Label>Area</Form.Label>
               <Form.Control
-                onChange={handleChangeArea}
+                onChange={(e) => handleChange("area", e.target.value)}
                 type="text"
                 placeholder="Area"
                 value={modalInfo.area}
@@ -172,7 +152,7 @@ function ModalSingleExp({ e, me }) {
                 <Form.Group className="mb-3">
                   <Form.Label>Data inizio</Form.Label>
                   <Form.Control
-                    onChange={handleChangeDataIn}
+                    onChange={(e) => handleChange("startDate", e.target.value)}
                     type="date"
                     value={modalInfo.startDate}
                   />
@@ -182,7 +162,7 @@ function ModalSingleExp({ e, me }) {
                 <Form.Group className="mb-3">
                   <Form.Label>Data fine</Form.Label>
                   <Form.Control
-                    onChange={handleChangeDataOut}
+                    onChange={(e) => handleChange("endDate", e.target.value)}
                     type="date"
                     value={modalInfo.endDate}
                   />
@@ -198,6 +178,7 @@ function ModalSingleExp({ e, me }) {
               handleClose();
               ModalSingleFetch("DELETE", modalInfo);
               dispatch({ type: "DELETED_EXPERIENCE", payload: modalInfo });
+              setActive(false);
             }}
           >
             Delete
@@ -208,8 +189,11 @@ function ModalSingleExp({ e, me }) {
             onClick={async () => {
               handleClose();
               ModalSingleFetch("PUT", modalInfo);
-              await handleSubmitFile();
+              if (active) {
+                await handleSubmitFile();
+              }
               dispatch({ type: "MODIFIED_EXPERIENCE", payload: modalInfo });
+              setActive(false);
             }}
           >
             Save Changes
