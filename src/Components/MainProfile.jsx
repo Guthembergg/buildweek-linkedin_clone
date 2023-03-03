@@ -11,7 +11,7 @@ import FotoExp from "../assets/FotoCardExp.jpeg";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillEyeFill, BsFillPeopleFill, BsSearch } from "react-icons/bs";
 import { HiDotsHorizontal, HiOutlinePencil } from "react-icons/hi";
-import {GoGraph} from "react-icons/go"
+import { GoGraph } from "react-icons/go";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -22,8 +22,8 @@ const MainProfile = () => {
   const modalExpMod = useSelector((state) => state.modifiedExperience);
   const modalExpDel = useSelector((state) => state.deletedExperience);
   const randomNumber = (max) => {
-    return Math.floor(Math.random()*max)
-  }
+    return Math.floor(Math.random() * max);
+  };
 
   const param = useParams();
   const token = process.env.REACT_APP_TOKEN;
@@ -106,7 +106,7 @@ const MainProfile = () => {
   return (
     <>
       {me && (
-        <Row className="w-100 d-flex justify-content-center">
+        <Row className="w-100 d-flex justify-content-center m-0">
           <Col className="p-0 m-0" xs={12} md={8} xl={6}>
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
@@ -322,8 +322,12 @@ const MainProfile = () => {
                               <p className="m-0">{e?.company}</p>
                               <p className="m-0">{e?.description}</p>
                               <p className="text-secondary mb-3">
-                                `dal {e?.startDate?.slice(8, 10)}/{e?.startDate?.slice(5, 7)}/{e?.startDate?.slice(0, 4)} al {""}
-                                {e?.endDate?.slice(8, 10)}/{e?.endDate?.slice(5, 7)}/{e?.endDate?.slice(0, 4)}`
+                                `dal {e?.startDate?.slice(8, 10)}/
+                                {e?.startDate?.slice(5, 7)}/
+                                {e?.startDate?.slice(0, 4)} al {""}
+                                {e?.endDate?.slice(8, 10)}/
+                                {e?.endDate?.slice(5, 7)}/
+                                {e?.endDate?.slice(0, 4)}`
                               </p>
                             </div>
                           </section>
