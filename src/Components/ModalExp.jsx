@@ -5,6 +5,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsImageFill } from "react-icons/bs";
 
 function ModalExp(props) {
+  const [active, setActive] = useState(false);
+
   const [resp, setResp] = useState("");
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -13,6 +15,8 @@ function ModalExp(props) {
     company: "",
     description: "",
     area: "",
+    startDate: "",
+    endDate: "",
   });
 
   const handleClose = () => setShow(false);
@@ -81,11 +85,18 @@ function ModalExp(props) {
       prev.append("experience", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
       return prev;
     });
+    setActive(true);
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmitFile(await ExperiencesGetFetch());
+    if (active) {
+      await handleSubmitFile(await ExperiencesGetFetch());
+    } else {
+      await ExperiencesGetFetch();
+    }
+
     dispatch({ type: "ADD_EXP", payload: modalInfo });
+    setActive(false);
   };
   //!fine
   return (

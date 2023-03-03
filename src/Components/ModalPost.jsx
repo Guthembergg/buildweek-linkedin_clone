@@ -16,6 +16,7 @@ import { AiOutlineClockCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 
 function NewPostProva() {
+  const [active, setActive] = useState(false);
   const myProfile = useSelector((state) => state.myProfile);
   const [innerData, setInnerData] = useState({
     text: "",
@@ -94,14 +95,21 @@ function NewPostProva() {
       prev.append("post", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
       return prev;
     });
+    setActive(true);
   };
 
   //!fine
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleSubmitFile(await fetchNewsPost());
+    if (active) {
+      await handleSubmitFile(await fetchNewsPost());
+    } else {
+      await fetchNewsPost();
+    }
+
     dispatch({ type: "NEW_POST", payload: innerData });
+    setActive(false);
   };
 
   return (
