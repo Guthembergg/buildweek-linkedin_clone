@@ -43,7 +43,7 @@ const CustomNavbar = () => {
               <span className="d-none d-lg-block">Home</span>
             </li>
           </Link>
-          <li>
+          <li className="d-none d-md-block text-center">
             <BsFillPeopleFill className="navIcon" />
             <span className="d-none d-lg-block">Rete</span>
           </li>
@@ -60,7 +60,7 @@ const CustomNavbar = () => {
             <span className="d-none d-lg-block">Notifiche</span>
           </li>
           <li>
-            <Dropdown >
+            <Dropdown>
               <Dropdown.Toggle
                 variant="none"
                 style={{ border: "none", color: "gray" }}
@@ -72,8 +72,8 @@ const CustomNavbar = () => {
                 </div>
               </Dropdown.Toggle>
 
-              <Dropdown.Menu >
-                <Dropdown.Item >
+              <Dropdown.Menu>
+                <Dropdown.Item style={{ whiteSpace: "normal" }}>
                   <Row>
                     <Col xs={3}>
                       <Image
@@ -88,16 +88,20 @@ const CustomNavbar = () => {
                       />
                     </Col>
                     <Col xs={9}>
-                      <Row>
-                        {profile?.name}
-                        {profile?.surname}
-                      </Row>
-                      <Row>{profile?.title}</Row>
+                      <div>
+                        {" "}
+                        <strong>
+                          {profile?.name} {profile?.surname}
+                        </strong>
+                      </div>
+                      <div style={{ width: "200px", textOverflow: "ellipsis" }}>
+                        {profile?.title}
+                      </div>
                     </Col>
                   </Row>
-                  </Dropdown.Item>
-                  <Dropdown.Item>
-                  <Row className="text-center pt-2">
+                </Dropdown.Item>
+                <div>
+                  <Dropdown.Item className="text-center pt-2 px-5">
                     <Link
                       className="text-secondary text-decoration-none"
                       to={"/profile/me"}
@@ -109,8 +113,8 @@ const CustomNavbar = () => {
                         Visualizza profilo
                       </Button>
                     </Link>
-                  </Row>
-                </Dropdown.Item>
+                  </Dropdown.Item>
+                </div>
                 <Dropdown.Divider />
                 <Dropdown.Item href="#/action-2">
                   <p className="fw-bold m-0"> Account</p>

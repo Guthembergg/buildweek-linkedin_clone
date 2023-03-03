@@ -115,9 +115,9 @@ function NewPostProva() {
   return (
     <>
       <>
-        <Card body >
+        <Card body>
           <Row className="d-flex align-items-center">
-            <Col xs={2} className="text-end">
+            <Col md={2} className="text-end d-none d-md-block">
               <Image
                 roundedCircle={true}
                 style={{ width: "50px", height: "50px" }}
@@ -129,7 +129,7 @@ function NewPostProva() {
                 }
               />
             </Col>
-            <Col xs={10}>
+            <Col xs={12} md={10}>
               <Form onClick={handleShow}>
                 <Form.Group className="ms-0 m-2 ">
                   <Form.Control

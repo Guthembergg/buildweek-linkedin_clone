@@ -16,7 +16,8 @@
   border-bottom: 1px solid lightgray;
 }
 
-.navigation, .cardFooter{
+.navigation,
+.cardFooter {
   position: sticky;
   top: 0;
   z-index: 1;
@@ -241,7 +242,7 @@
   cursor: pointer;
 }
 
-.iconPost{
+.iconPost {
   padding: 2%;
   font-weight: 600;
   color: rgb(102, 100, 100);
@@ -254,66 +255,65 @@
   font-size: 1.1em;
 }
 
-.iconPost:hover{
-  animation: iconPostHover 0.5s linear;  
+.iconPost:hover {
+  animation: iconPostHover 0.5s linear;
   cursor: pointer;
 }
 
 @keyframes iconPostHover {
-  100% {  background-color: lightgray;
+  100% {
+    background-color: lightgray;
   }
 }
 
 .iconPostModal {
   font-size: 2em;
 }
-  
- 
+
 /* CardAndFooter CSS */
 
-.annuncio{
+.annuncio {
   display: flex;
-    align-items: center;
-    align-self: flex-end;
+  align-items: center;
+  align-self: flex-end;
 }
-.annuncio h6{
+.annuncio h6 {
   font-size: 0.9em;
-  margin:0 9px 2px 0;
+  margin: 0 9px 2px 0;
   padding: 0;
 }
-.threeDots{
+.threeDots {
   font-size: 20px;
 }
 
-.innerCard{
+.innerCard {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color:gray
-
+  color: gray;
 }
 .innerCard p {
   font-size: 0.8em;
   margin: 15px 0 0 0;
 }
 
-.innerCard .innerCardIcon{
-  margin: 10px 10px
+.innerCard .innerCardIcon {
+  margin: 10px 10px;
 }
-.innerCard .innerCardIcon:nth-of-type(1){
+.innerCard .innerCardIcon:nth-of-type(1) {
   font-size: 70px;
 }
-.innerCard .innerCardIcon:nth-of-type(2){
+.innerCard .innerCardIcon:nth-of-type(2) {
   font-size: 60px;
 }
 
-.innerCard h3{
+.innerCard h3 {
   font-size: 1em;
   font-weight: 400;
   text-align: center;
   margin-bottom: 15px;
 }
-.innerCard button{
+.innerCard button {
   color: rgb(67, 67, 190);
   border-radius: 25px;
   border-color: rgb(67, 67, 190);
@@ -322,44 +322,43 @@
   font-weight: 500;
 }
 
-.secondFooter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.secondFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.footerCopirightDiv{
+.footerCopirightDiv {
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: gray;
 }
-.footerCopirightDiv h3{
+.footerCopirightDiv h3 {
   font-size: 1em;
   margin: 0 10px 0 0;
-  color: blue
+  color: blue;
 }
 
-.secondFooter ul{
+.secondFooter ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin: 1.6rem;
-  padding:0
+  padding: 0;
 }
 
 .secondFooter li {
   margin: 2px 4px;
   font-size: 0.8em;
-  color: gray
+  color: gray;
 }
 
-.footerCopiright2{
-  color:black;
+.footerCopiright2 {
+  color: black;
   font-weight: 400;
 }
-
 
 /* Fine  CardAndFooter CSS */
