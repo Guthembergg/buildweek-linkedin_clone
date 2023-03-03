@@ -214,43 +214,47 @@ const MainProfile = () => {
                 </p>
                 <Row>
                   <Col xs={10} md={4}>
-                    <Row className="p-2">
-                      <Col xs={1}>
+                    <div className="p-2 d-flex flex-nowrap">
+                      <div className="pe-2">
                         <BsFillPeopleFill></BsFillPeopleFill>
-                      </Col>
-                      <Col xs={11} >
-                        <h6>{randomNumber(50)} visualizzazioni del tuo profilo</h6>
+                      </div>
+                      <div>
+                        <h6>
+                          {randomNumber(50)} visualizzazioni del tuo profilo
+                        </h6>
                         <p className="fs-6">
                           Scopri chi ha visto il tuo profilo
                         </p>
-                      </Col>
-                    </Row>
+                      </div>
+                    </div>
                   </Col>
                   <Col xs={10} md={4}>
-                    <Row className="p-2">
-                      <Col xs={1}>
+                    <div className="p-2 d-flex flex-nowrap">
+                      <div className="pe-2">
                         <GoGraph></GoGraph>
-                      </Col>
-                      <Col xs={11}>
+                      </div>
+                      <div>
                         <h6>{randomNumber(50)} impressioni dei post</h6>
                         <p className="fs-6">
                           Vedi quante volte compari nei motori di ricerca
                         </p>
-                      </Col>
-                    </Row>
+                      </div>
+                    </div>
                   </Col>
                   <Col xs={10} md={4}>
-                    <Row className="p-2">
-                      <Col xs={1} >
+                    <div className="p-2 d-flex flex-nowrap">
+                      <div className="pe-2">
                         <BsSearch></BsSearch>
-                      </Col>
-                      <Col xs={11}>
-                        <h6>{randomNumber(50)} comparse nei motori di ricerca</h6>
+                      </div>
+                      <div>
+                        <h6>
+                          {randomNumber(50)} comparse nei motori di ricerca
+                        </h6>
                         <p className="fs-6">
                           Vedi quante volte compari nei motori di ricerca
                         </p>
-                      </Col>
-                    </Row>
+                      </div>
+                    </div>
                   </Col>
                 </Row>
               </Card.Body>
@@ -318,8 +322,8 @@ const MainProfile = () => {
                               <p className="m-0">{e?.company}</p>
                               <p className="m-0">{e?.description}</p>
                               <p className="text-secondary mb-3">
-                                `{e?.startDate?.slice(0, 10)} -{" "}
-                                {e?.endDate?.slice(0, 10)}`
+                                `dal {e?.startDate?.slice(8, 10)}/{e?.startDate?.slice(5, 7)}/{e?.startDate?.slice(0, 4)} al {""}
+                                {e?.endDate?.slice(8, 10)}/{e?.endDate?.slice(5, 7)}/{e?.endDate?.slice(0, 4)}`
                               </p>
                             </div>
                           </section>
