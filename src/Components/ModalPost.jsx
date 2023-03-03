@@ -108,7 +108,7 @@ function NewPostProva() {
     <>
       <>
         <Card body className="mb-3">
-          <Row>
+          <Row className="d-flex align-items-center">
             <Col xs={2} className="text-end">
               <Image
                 roundedCircle={true}
@@ -125,7 +125,7 @@ function NewPostProva() {
               <Form onClick={handleShow}>
                 <Form.Group className="ms-0 m-2 ">
                   <Form.Control
-                    className="rounded-pill"
+                    className="rounded-pill py-3 px-3"
                     type="text"
                     placeholder="Avvia un post"
                   />
@@ -133,30 +133,30 @@ function NewPostProva() {
               </Form>
             </Col>
           </Row>
-          <section className="d-flex justify-content-around text-tertiary border-top">
+          <section className="d-flex justify-content-around text-tertiary">
         <div className="iconPost rounded d-flex">
           <span className="me-2">
-            <BsImageFill className="text-primary"/>
+            <BsImageFill style={{fontSize:"1.4em"}} className="text-primary"/>
           </span>
-          <span className="d-none d-md-inline">Foto </span>
+          <span className="d-none d-md-inline text-secondary">Foto </span>
         </div>
         <div className="iconPost rounded d-flex">
           <span className="me-2">
-            <BsFillPlayBtnFill className="text-success" />
+            <BsFillPlayBtnFill style={{fontSize:"1.4em"}}  className="text-success" />
           </span>
-          <span className="d-none d-md-inline">Video</span>
+          <span className="d-none d-md-inline text-secondary">Video</span>
         </div>
         <div className="iconPost rounded d-flex">
           <span className="me-2">
-            <BsFillCalendar2EventFill style={{ color: "brown"}}/>
+            <BsFillCalendar2EventFill style={{ color: "brown", fontSize:"1.4em"}}/>
           </span>
-          <span className="d-none d-md-inline">Evento</span>
+          <span className="d-none d-md-inline text-secondary">Evento</span>
         </div>
         <div className="iconPost rounded d-flex">
           <span className="me-2">
-            <RiArticleFill style={{ color: "orange"}} />
+            <RiArticleFill style={{ color: "orange", fontSize:"1.4em"}} />
           </span>
-          <span className="d-none d-md-inline">Scrivi un articolo</span>
+          <span className="d-none d-md-inline text-secondary">Scrivi un articolo</span>
         </div>
       </section>
         </Card>

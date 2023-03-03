@@ -1,7 +1,7 @@
 import { Card, Image } from "react-bootstrap";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillBookmarkFill } from "react-icons/bs";
-import { GrCheckbox } from "react-icons/gr";
+import {BiChart} from "react-icons/bi"
 import { useState, useEffect } from "react";
 import { useDispatch} from "react-redux";
 import { useParams, Link } from "react-router-dom";
@@ -51,7 +51,7 @@ const CardProfile = () => {
         <Card.Title className="mt-1  m-0 fs-6">
         <Link
             className="text-decoration-none text-dark"
-            to={`/profile/${me?._id}`}
+            to={`/profile/me`}
           >{me?.name} {me?.surname}</Link>
             <Image
               className="position-absolute imageProfileNews"
@@ -85,12 +85,10 @@ const CardProfile = () => {
             Accedi a strumenti e informazioni in esclusiva.
           </p>
           <div className="d-flex ">
-            <div>
-              <GrCheckbox />
-            </div>
             <p className="cardProfileTextLink text-decoration-underline">
-              {" "}
-              Fatti assumere più velocemente. Prova Premium Gratis.
+              
+              <BiChart className="text-warning fs-5 bg-warning"  /> {" "} 
+              Prova Premium Gratis.
             </p>
           </div>
         </Card.Body>

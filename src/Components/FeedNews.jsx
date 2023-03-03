@@ -3,6 +3,7 @@ import { SlLike } from "react-icons/sl";
 import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
 import { ImLoop } from "react-icons/im";
+import {BiWorld} from "react-icons/bi"
 import { Link, useNavigate } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
@@ -17,13 +18,14 @@ const FeedNews = (props) => {
   console.log(props.news.user._id);
 
   return (
-    <Card className="mb-3 p-2">
-      <section className="d-flex p-2">
-        <div>
+    <Card className="mb-3 px-3 py-1 ">
+      <section className="d-flex justify-content-between p-1">
+        <div className="d-flex">
+        <div className="d-flex align-items-center justify-content-center">
           <Image
-            className=""
+            className="border"
             roundedCircle={true}
-            style={{ width: "50px", height: "50px" }}
+            style={{ width: "60px", height: "60px" }}
             src={
               props.news?.user.image
                 ? props.news.user.image
@@ -40,20 +42,23 @@ const FeedNews = (props) => {
               {props.news?.user.name} {props.news?.user.surname}
             </h6>
           </Link>
-          <p className="m-0 text-secondary">{props.news?.user.title}</p>
-          <p className="m-0 text-secondary">
+          <p className="m-0 text-secondary" style={{fontSize:"0.9em"}}>{props.news?.user.title}</p>
+          <p className="m-0 text-secondary d-flex justify-content-start align-items-center" style={{fontSize:"0.9em"}}>
             <span>
               {props.news?.createdAt.slice(12, 16)} -{" "}
               {props.news?.createdAt.slice(8, 10)}/
               {props.news?.createdAt.slice(5, 7)}/
               {props.news?.createdAt.slice(0, 4)}
             </span>
+            <BiWorld className="ms-1 text-tertiary"/>
           </p>
         </div>
-        <div>
+        </div>
+        <div >
           {myId === props.news.user._id && (
             <div className="d-flex ">
               <NavDropdown
+              className="iconPost rounded-circle p-2"
                 title={
                   <span>
                     <HiDotsHorizontal />
@@ -73,29 +78,29 @@ const FeedNews = (props) => {
         <Image className="w-100" src={props?.news?.image} />
       </Card.Body>
       <section className="d-flex justify-content-around text-tertiary border-top">
-        <div className="iconPost rounded d-flex">
+        <div className="iconPost rounded d-flex align-items-center">
           <span className="me-2">
-            <SlLike />
+            <SlLike style={{fontSize:"1.4em"}} />
           </span>
-          <span className="d-none d-md-inline">Consiglia </span>
+          <span className="d-none d-md-inline text-secondary">Consiglia </span>
         </div>
-        <div className="iconPost rounded d-flex">
+        <div className="iconPost rounded d-flex align-items-center">
           <span className="me-2">
-            <AiOutlineComment />
+            <AiOutlineComment style={{fontSize:"1.4em"}} />
           </span>
-          <span className="d-none d-md-inline">Commenta</span>
+          <span className="d-none d-md-inline text-secondary">Commenta</span>
         </div>
-        <div className="iconPost rounded d-flex">
+        <div className="iconPost rounded d-flex align-items-center">
           <span className="me-2">
-            <ImLoop />
+            <ImLoop style={{fontSize:"1.4em"}} />
           </span>
-          <span className="d-none d-md-inline">Diffondi il post</span>
+          <span className="d-none d-md-inline text-secondary">Diffondi il post</span>
         </div>
-        <div className="iconPost rounded d-flex">
+        <div className="iconPost rounded d-flex align-items-center">
           <span className="me-2">
-            <FiSend />
+            <FiSend style={{fontSize:"1.4em"}}/>
           </span>
-          <span className="d-none d-md-inline">Invia</span>
+          <span className="d-none d-md-inline text-secondary">Invia</span>
         </div>
       </section>
     </Card>
