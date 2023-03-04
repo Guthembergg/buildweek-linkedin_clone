@@ -9,6 +9,7 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
 import { useSelector } from "react-redux";
+import moment from "moment/moment";
 
 const FeedNews = (props) => {
   const myId = useSelector((state) => state.myProfile._id);
@@ -49,12 +50,7 @@ const FeedNews = (props) => {
               className="m-0 text-secondary d-flex justify-content-start align-items-center"
               style={{ fontSize: "0.9em" }}
             >
-              <span>
-                {props.news?.createdAt.slice(12, 16)} -{" "}
-                {props.news?.createdAt.slice(8, 10)}/
-                {props.news?.createdAt.slice(5, 7)}/
-                {props.news?.createdAt.slice(0, 4)}
-              </span>
+              <span>{moment(props.news?.createdAt).fromNow()}</span>
               <BiWorld className="ms-1 text-tertiary" />
             </p>
           </div>
