@@ -72,47 +72,45 @@ const CustomNavbar = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item style={{ whiteSpace: "normal" }}>
-                  <Row>
-                    <Col xs={3}>
-                      <Image
-                        roundedCircle={true}
-                        style={{ width: "50px", height: "50px" }}
-                        alt=""
-                        src={
-                          profile?.image
-                            ? profile?.image
-                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                        }
-                      />
-                    </Col>
-                    <Col xs={9}>
-                      <div>
-                        {" "}
-                        <strong>
-                          {profile?.name} {profile?.surname}
-                        </strong>
-                      </div>
-                      <div style={{ width: "200px", textOverflow: "ellipsis" }}>
-                        {profile?.title}
-                      </div>
-                    </Col>
-                  </Row>
-                </Dropdown.Item>
-                <div>
-                  <Dropdown.Item className="text-center pt-2 px-5">
+                <Row className="px-3 py-1">
+                  <Col xs={3}>
+                    <Image
+                      roundedCircle={true}
+                      style={{ width: "50px", height: "50px" }}
+                      alt=""
+                      src={
+                        profile?.image
+                          ? profile?.image
+                          : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                      }
+                    />
+                  </Col>
+                  <Col xs={9}>
+                    <div>
+                      <strong>
+                        {profile?.name} {profile?.surname}
+                      </strong>
+                    </div>
+                    <div style={{ width: "200px", textOverflow: "ellipsis" }}>
+                      {profile?.title}
+                    </div>
+                  </Col>
+                </Row>
+
+                <div className="d-flex justify-content-center">
+                  <Col xs={9}>
                     <Link
                       className="text-secondary text-decoration-none"
                       to={"/profile/me"}
                     >
                       <Button
-                        variant="outline-primary rounded-pill"
-                        className="fs-6 w-100"
+                        variant="outline-primary rounded-pill btn-sm"
+                        className="fs-6 w-100 "
                       >
                         Visualizza profilo
                       </Button>
                     </Link>
-                  </Dropdown.Item>
+                  </Col>
                 </div>
                 <Dropdown.Divider />
                 <Dropdown.Item href="#/action-2">

@@ -86,7 +86,10 @@ function ModalSingleExp({ e, me }) {
 
   return (
     <>
-      <HiOutlinePencil onClick={handleShow}></HiOutlinePencil>
+      <HiOutlinePencil
+        onClick={handleShow}
+        style={{ cursor: "pointer" }}
+      ></HiOutlinePencil>
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title>Modifica Esperienza</Modal.Title>

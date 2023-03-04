@@ -160,7 +160,7 @@ const MainNews = () => {
                 </p>
                 <p className="text-secondary mb-1 fs-6">
                   Dopo 4 mesi di corso copia le righe di codice usando il tasto
-                  destro del maouse
+                  destro del mouse.
                 </p>
               </div>
             </section>
@@ -176,7 +176,7 @@ const MainNews = () => {
                 </p>
                 <p className="text-secondary mb-1 fs-6">
                   De Pascale impazzisce dopo aver visto una height non multipla
-                  di 10
+                  di 10.
                 </p>
               </div>
             </section>
