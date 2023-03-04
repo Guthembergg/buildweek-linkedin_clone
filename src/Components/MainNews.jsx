@@ -36,6 +36,8 @@ const MainNews = () => {
         setAlert(false);
       } else {
         console.log("News: fetch Post. errore in if");
+        setAlert(true);
+        setSpinner(false);
       }
     } catch (err) {
       console.log("News: fetch Post. err in catch");

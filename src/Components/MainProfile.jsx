@@ -12,6 +12,8 @@ import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { BsFillEyeFill, BsFillPeopleFill, BsSearch } from "react-icons/bs";
 import { HiDotsHorizontal, HiOutlinePencil } from "react-icons/hi";
 import { GoGraph } from "react-icons/go";
+import SpinnerLoad from "./Spinner";
+import AlertErrorCatch from "./Alert";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -21,6 +23,10 @@ const MainProfile = () => {
   const profile = useSelector((state) => state.myProfile);
   const modalExpMod = useSelector((state) => state.modifiedExperience);
   const modalExpDel = useSelector((state) => state.deletedExperience);
+  const [spinner, setSpinner] = useState();
+  const [alert, setAlert] = useState(false);
+  const [spinnerExp, setSpinnerExp] = useState();
+  const [alertExp, setAlertExp] = useState(false);
   const randomNumber = (max) => {
     return Math.floor(Math.random() * max);
   };
@@ -31,6 +37,7 @@ const MainProfile = () => {
   const [experience, setExperience] = useState([]);
 
   const MainProfile = async (param) => {
+    setSpinner(true);
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${param.id}`,
@@ -39,15 +46,20 @@ const MainProfile = () => {
       if (response.ok) {
         const data = await response.json();
         setMe(data);
-
+        setSpinner(false);
+        setAlert(false);
         if (param.id === "me") {
           dispatch({ type: "ADD_MY_PROFILE", payload: data });
         }
       } else {
         console.log("mainPage: Main profile. errore in if");
+        setAlert(true);
+        setSpinner(false);
       }
     } catch (err) {
       console.log("mainPage: Main profile. err in catch");
+      setAlert(true);
+      setSpinner(false);
     }
   };
 
@@ -70,6 +82,7 @@ const MainProfile = () => {
     MainProfile(param);
   }, [modalExpDel, param]);
   const ExperiencesGetFetch = async (me, ourMethod, ourBody) => {
+    setSpinnerExp(true);
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/profile/${me._id}/experiences`,
@@ -87,12 +100,18 @@ const MainProfile = () => {
         const data = await response.json();
         if (ourMethod === "GET") {
           setExperience(data);
+          setSpinnerExp(false);
+          setAlertExp(false);
         }
       } else {
         console.log("mainPage: Experiences. errore in if");
+        setAlertExp(true);
+        setSpinnerExp(false);
       }
     } catch (err) {
       console.log("mainPage: Experiences. err in catch");
+      setAlertExp(true);
+      setSpinnerExp(false);
     }
   };
 
@@ -118,39 +137,45 @@ const MainProfile = () => {
                     </div>
                   </>
                 )}
-
-                <Card.Title className="mt-5 position-relative m-0">
-                  {me?.name} {me?.surname}
-                  <Image
-                    roundedCircle={true}
-                    alt=""
-                    src={
-                      me?.image
-                        ? me?.image
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                    }
-                    className="position-absolute imageProfile "
-                  />
-                </Card.Title>
-                <p className="m-0 p-0">{me.title}</p>
-                <i className="m-0 p-0">{me.area}</i>
-                <div className="mt-2 d-flex flex-wrap-nowrap">
-                  <Button variant="primary rounded-pill">
-                    Disponibile per
-                  </Button>
-                  <Button
-                    className="ms-2"
-                    variant="outline-primary rounded-pill"
-                  >
-                    Aggiungi sezione del profilo
-                  </Button>
-                  <Button
-                    className="ms-2"
-                    variant="outline-secondary rounded-pill"
-                  >
-                    <HiDotsHorizontal></HiDotsHorizontal>
-                  </Button>
-                </div>
+                {alert && !spinner && <AlertErrorCatch />}
+                {spinner && !alert && <SpinnerLoad />}
+                {!spinner && !alert && (
+                  <>
+                    <Card.Title className="mt-5 position-relative m-0">
+                      {me?.name}
+                      {me?.surname}
+                      <Image
+                        roundedCircle={true}
+                        alt=""
+                        src={
+                          me?.image
+                            ? me?.image
+                            : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                        }
+                        className="position-absolute imageProfile "
+                      />
+                    </Card.Title>
+                    <p className="m-0 p-0">{me.title}</p>
+                    <i className="m-0 p-0">{me.area}</i>
+                    <div className="mt-2 d-flex flex-wrap-nowrap">
+                      <Button variant="primary rounded-pill">
+                        Disponibile per
+                      </Button>
+                      <Button
+                        className="ms-2"
+                        variant="outline-primary rounded-pill"
+                      >
+                        Aggiungi sezione del profilo
+                      </Button>
+                      <Button
+                        className="ms-2"
+                        variant="outline-secondary rounded-pill"
+                      >
+                        <HiDotsHorizontal></HiDotsHorizontal>
+                      </Button>
+                    </div>
+                  </>
+                )}
               </Card.Body>
               <div className="d-flex ms-3 pb-3">
                 <Card className="p-2">
@@ -277,8 +302,9 @@ const MainProfile = () => {
                     </Col>
                   )}
                 </Row>
-
-                <p>{me.bio}</p>
+                {alert && !spinner && <AlertErrorCatch />}
+                {spinner && !alert && <SpinnerLoad />}
+                {!spinner && !alert && <p>{me.bio}</p>}
               </Card.Body>
             </Card>
 
@@ -302,48 +328,51 @@ const MainProfile = () => {
                         </>
                       )}
                     </Row>
-
-                    {experience?.map((e, i) => (
-                      <Row key={`exp-${i}`}>
-                        <Col xs={10}>
-                          <section className="d-flex ">
-                            <div className="col-1">
-                              {e.image && (
-                                <Image
-                                  style={{ width: "60%" }}
-                                  src={e?.image}
-                                  alt="FotoExp"
-                                />
-                              )}
-                            </div>
-                            <div className="col-11">
-                              <h6 className="m-0">{e?.role}</h6>{" "}
-                              <p className="m-0">{e?.area}</p>
-                              <p className="m-0">{e?.company}</p>
-                              <p className="m-0">{e?.description}</p>
-                              <p className="text-secondary mb-3">
-                                `dal {e?.startDate?.slice(8, 10)}/
-                                {e?.startDate?.slice(5, 7)}/
-                                {e?.startDate?.slice(0, 4)} al {""}
-                                {e?.endDate?.slice(8, 10)}/
-                                {e?.endDate?.slice(5, 7)}/
-                                {e?.endDate?.slice(0, 4)}`
-                              </p>
-                            </div>
-                          </section>
-                        </Col>
-                        {param.id === "me" && (
-                          <Col
-                            xs={2}
-                            className="d-flex align-items-center justify-content-center"
-                          >
-                            <div className="fs-5">
-                              <ModalSingleExp e={e} me={me} />
-                            </div>
+                    {alertExp && !spinnerExp && <AlertErrorCatch />}
+                    {spinnerExp && !alertExp && <SpinnerLoad />}
+                    {!spinnerExp &&
+                      !alertExp &&
+                      experience?.map((e, i) => (
+                        <Row key={`exp-${i}`}>
+                          <Col xs={10}>
+                            <section className="d-flex ">
+                              <div className="col-1">
+                                {e.image && (
+                                  <Image
+                                    style={{ width: "60%" }}
+                                    src={e?.image}
+                                    alt="FotoExp"
+                                  />
+                                )}
+                              </div>
+                              <div className="col-11">
+                                <h6 className="m-0">{e?.role}</h6>{" "}
+                                <p className="m-0">{e?.area}</p>
+                                <p className="m-0">{e?.company}</p>
+                                <p className="m-0">{e?.description}</p>
+                                <p className="text-secondary mb-3">
+                                  `dal {e?.startDate?.slice(8, 10)}/
+                                  {e?.startDate?.slice(5, 7)}/
+                                  {e?.startDate?.slice(0, 4)} al {""}
+                                  {e?.endDate?.slice(8, 10)}/
+                                  {e?.endDate?.slice(5, 7)}/
+                                  {e?.endDate?.slice(0, 4)}`
+                                </p>
+                              </div>
+                            </section>
                           </Col>
-                        )}
-                      </Row>
-                    ))}
+                          {param.id === "me" && (
+                            <Col
+                              xs={2}
+                              className="d-flex align-items-center justify-content-center"
+                            >
+                              <div className="fs-5">
+                                <ModalSingleExp e={e} me={me} />
+                              </div>
+                            </Col>
+                          )}
+                        </Row>
+                      ))}
                   </Card.Body>
                 </Card>
               </>
@@ -363,13 +392,7 @@ const MainProfile = () => {
                     <h6 className="m-0">Astronauta</h6>
                     <p className="m-0">EPICODE Global · Part-time</p>
                     <p className="text-secondary m-0">2020-2021</p>
-                    <p className="mt-2">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Asperiores magni soluta ducimus perferendis voluptatibus
-                      distinctio? Cumque hic tempora quaerat consequuntur
-                      eveniet sapiente beatae qui molestiae quasi ipsa. Quam,
-                      error doloribus!
-                    </p>
+                    <p className="mt-2"></p>
                   </div>
                 </section>
               </Card.Body>
