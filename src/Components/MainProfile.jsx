@@ -48,9 +48,6 @@ const MainProfile = () => {
         setMe(data);
         setSpinner(false);
         setAlert(false);
-        if (param.id === "me") {
-          dispatch({ type: "ADD_MY_PROFILE", payload: data });
-        }
       } else {
         console.log("mainPage: Main profile. errore in if");
         setAlert(true);
@@ -63,9 +60,6 @@ const MainProfile = () => {
     }
   };
 
-  useEffect(() => {
-    MainProfile(param);
-  }, [param]);
   useEffect(() => {
     MainProfile(param);
   }, [modalBio, param]);
@@ -130,7 +124,7 @@ const MainProfile = () => {
             <Card className="d-flex m-3 position-relative">
               <Card.Img variant="top" src={imageBackground} />
               <Card.Body className="position-relative">
-                {param.id === "me" && (
+                {(param.id === "me" || param.id === profile._id) && (
                   <>
                     <div className="modalPencil d-flex justify-content-center align-items-center">
                       <ModalProfile me={profile} />
@@ -191,7 +185,7 @@ const MainProfile = () => {
                         inizia
                       </p>
                     </Col>
-                    {param.id === "me" && (
+                    {(param.id === "me" || param.id === profile._id) && (
                       <Col xs={2} className="p-0">
                         <HiOutlinePencil></HiOutlinePencil>
                       </Col>
@@ -211,7 +205,7 @@ const MainProfile = () => {
                         inizia
                       </p>
                     </Col>
-                    {param.id === "me" && (
+                    {(param.id === "me" || param.id === profile._id) && (
                       <Col xs={2} className="p-0">
                         <HiOutlinePencil></HiOutlinePencil>
                       </Col>
@@ -221,69 +215,73 @@ const MainProfile = () => {
               </div>
             </Card>
 
-            <Card className="d-flex m-3 position-relative">
-              <Card.Body>
-                <Card.Title>Consigliato per te</Card.Title>
-                <p className="m-0 p-0 d-flex align-items-center  text-secondary ">
-                  <BsFillEyeFill className="me-2" />
-                  Solo per te
-                </p>
-              </Card.Body>
-            </Card>
-            <Card className="d-flex m-3 position-relative">
-              <Card.Body>
-                <Card.Title>Analisi</Card.Title>
-                <p className="m-0 p-0 d-flex align-items-center  text-secondary">
-                  <BsFillEyeFill className="me-2" />
-                  Solo per te
-                </p>
-                <Row>
-                  <Col xs={10} md={4}>
-                    <div className="p-2 d-flex flex-nowrap">
-                      <div className="pe-2">
-                        <BsFillPeopleFill></BsFillPeopleFill>
-                      </div>
-                      <div>
-                        <h6>
-                          {randomNumber(50)} visualizzazioni del tuo profilo
-                        </h6>
-                        <p className="fs-6">
-                          Scopri chi ha visto il tuo profilo
-                        </p>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xs={10} md={4}>
-                    <div className="p-2 d-flex flex-nowrap">
-                      <div className="pe-2">
-                        <GoGraph></GoGraph>
-                      </div>
-                      <div>
-                        <h6>{randomNumber(50)} impressioni dei post</h6>
-                        <p className="fs-6">
-                          Vedi quante volte compari nei motori di ricerca
-                        </p>
-                      </div>
-                    </div>
-                  </Col>
-                  <Col xs={10} md={4}>
-                    <div className="p-2 d-flex flex-nowrap">
-                      <div className="pe-2">
-                        <BsSearch></BsSearch>
-                      </div>
-                      <div>
-                        <h6>
-                          {randomNumber(50)} comparse nei motori di ricerca
-                        </h6>
-                        <p className="fs-6">
-                          Vedi quante volte compari nei motori di ricerca
-                        </p>
-                      </div>
-                    </div>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>
+            {(param.id === "me" || param.id === profile._id) && (
+              <>
+                <Card className="d-flex m-3 position-relative">
+                  <Card.Body>
+                    <Card.Title>Consigliato per te</Card.Title>
+                    <p className="m-0 p-0 d-flex align-items-center  text-secondary ">
+                      <BsFillEyeFill className="me-2" />
+                      Solo per te
+                    </p>
+                  </Card.Body>
+                </Card>
+                <Card className="d-flex m-3 position-relative">
+                  <Card.Body>
+                    <Card.Title>Analisi</Card.Title>
+                    <p className="m-0 p-0 d-flex align-items-center  text-secondary">
+                      <BsFillEyeFill className="me-2" />
+                      Solo per te
+                    </p>
+                    <Row>
+                      <Col xs={10} md={4}>
+                        <div className="p-2 d-flex flex-nowrap">
+                          <div className="pe-2">
+                            <BsFillPeopleFill></BsFillPeopleFill>
+                          </div>
+                          <div>
+                            <h6>
+                              {randomNumber(50)} visualizzazioni del tuo profilo
+                            </h6>
+                            <p className="fs-6">
+                              Scopri chi ha visto il tuo profilo
+                            </p>
+                          </div>
+                        </div>
+                      </Col>
+                      <Col xs={10} md={4}>
+                        <div className="p-2 d-flex flex-nowrap">
+                          <div className="pe-2">
+                            <GoGraph></GoGraph>
+                          </div>
+                          <div>
+                            <h6>{randomNumber(50)} impressioni dei post</h6>
+                            <p className="fs-6">
+                              Vedi quante volte compari nei motori di ricerca
+                            </p>
+                          </div>
+                        </div>
+                      </Col>
+                      <Col xs={10} md={4}>
+                        <div className="p-2 d-flex flex-nowrap">
+                          <div className="pe-2">
+                            <BsSearch></BsSearch>
+                          </div>
+                          <div>
+                            <h6>
+                              {randomNumber(50)} comparse nei motori di ricerca
+                            </h6>
+                            <p className="fs-6">
+                              Vedi quante volte compari nei motori di ricerca
+                            </p>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </>
+            )}
 
             <Card className="d-flex m-3 position-relative">
               <Card.Body className="d-flex flex-column position-relative">
@@ -294,7 +292,7 @@ const MainProfile = () => {
                     </Card.Title>
                   </Col>
 
-                  {param.id === "me" && (
+                  {(param.id === "me" || param.id === profile._id) && (
                     <Col xs={1}>
                       <div className="disc d-flex justify-content-center align-items-center fs-4 p-0">
                         <ModalInfo me={me} />
@@ -318,7 +316,7 @@ const MainProfile = () => {
                           Esperienza
                         </Card.Title>
                       </Col>
-                      {param.id === "me" && (
+                      {(param.id === "me" || param.id === profile._id) && (
                         <>
                           <Col xs={1}>
                             <div className="m-0 ms-1 disc d-flex justify-content-center align-items-center fs-4 p-0">
@@ -361,7 +359,7 @@ const MainProfile = () => {
                               </div>
                             </section>
                           </Col>
-                          {param.id === "me" && (
+                          {(param.id === "me" || param.id === profile._id) && (
                             <Col
                               xs={2}
                               className="d-flex align-items-center justify-content-center"

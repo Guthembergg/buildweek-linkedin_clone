@@ -6,11 +6,34 @@ import { BsFillPeopleFill, BsFillPersonFill } from "react-icons/bs";
 import { CgMenuGridR } from "react-icons/cg";
 import { GoSearch } from "react-icons/go";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const CustomNavbar = () => {
   const profile = useSelector((state) => state.myProfile);
+  const token = process.env.REACT_APP_TOKEN;
+  const dispatch = useDispatch();
 
+  const MainProfile = async () => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/profile/me`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      if (response.ok) {
+        const data = await response.json();
+
+        dispatch({ type: "ADD_MY_PROFILE", payload: data });
+      } else {
+        console.log("mainPage: Main profile. errore in if");
+      }
+    } catch (err) {
+      console.log("mainPage: Main profile. err in catch");
+    }
+  };
+  useEffect(() => {
+    MainProfile();
+  }, []);
   return (
     <Row
       className="w-100 navigation d-flex justify-content-center m-0 "
@@ -97,40 +120,38 @@ const CustomNavbar = () => {
                   </Col>
                 </Row>
 
-                <div className="d-flex justify-content-center">
-                  <Col xs={9}>
-                    <Link
-                      className="text-secondary text-decoration-none"
-                      to={"/profile/me"}
+                <Dropdown.Item>
+                  {" "}
+                  <Link
+                    className="text-secondary text-decoration-none"
+                    to={"/profile/me"}
+                  >
+                    <Button
+                      variant="outline-primary rounded-pill btn-sm"
+                      className="fs-6 w-100 "
                     >
-                      <Button
-                        variant="outline-primary rounded-pill btn-sm"
-                        className="fs-6 w-100 "
-                      >
-                        Visualizza profilo
-                      </Button>
-                    </Link>
-                  </Col>
-                </div>
+                      Visualizza profilo
+                    </Button>
+                  </Link>
+                </Dropdown.Item>
+
                 <Dropdown.Divider />
-                <Dropdown.Item href="#/action-2">
+                <Dropdown.Item>
                   <p className="fw-bold m-0"> Account</p>
                 </Dropdown.Item>
-                <Dropdown.Item href="#/action-3">
-                  Prova Premium gratis
-                </Dropdown.Item>
-                <Dropdown.Item href="#/action-4">Guida</Dropdown.Item>
-                <Dropdown.Item href="#/action-5">Lingua</Dropdown.Item>
+                <Dropdown.Item>Prova Premium gratis</Dropdown.Item>
+                <Dropdown.Item>Guida</Dropdown.Item>
+                <Dropdown.Item>Lingua</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item href="#/action-6">
+                <Dropdown.Item>
                   <p className="fw-bold m-0">Gestisci</p>
                 </Dropdown.Item>
-                <Dropdown.Item href="#/action-7">Post e attività</Dropdown.Item>
-                <Dropdown.Item href="#/action-8">
+                <Dropdown.Item>Post e attività</Dropdown.Item>
+                <Dropdown.Item>
                   Account per la pubblicazione di offerte
                 </Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item href="#/action-9">Esci</Dropdown.Item>
+                <Dropdown.Item>Esci</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </li>

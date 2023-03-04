@@ -10,8 +10,9 @@ import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
-
+import "moment/locale/it";
 const FeedNews = (props) => {
+  moment.locale("it");
   const myId = useSelector((state) => state.myProfile._id);
   const navigate = useNavigate();
   console.log(myId);

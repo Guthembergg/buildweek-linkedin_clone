@@ -7,7 +7,7 @@ import { RxDotFilled } from "react-icons/rx";
 import { useEffect, useState } from "react";
 import FeedNews from "./FeedNews";
 import ModalPost from "./ModalPost";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CardAndFooter from "./CardAndFooter";
 import SpinnerLoad from "./Spinner";
 import AlertErrorCatch from "./Alert";
