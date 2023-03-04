@@ -1,4 +1,4 @@
-import { Row, Col, Card, Button,} from "react-bootstrap";
+import { Row, Col, Card, Button } from "react-bootstrap";
 import CardProfile from "./CardProfileNews";
 import { BiHash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -9,9 +9,8 @@ import FeedNews from "./FeedNews";
 import ModalPost from "./ModalPost";
 import { useSelector } from "react-redux";
 import CardAndFooter from "./CardAndFooter";
-import SpinnerLoad from "./Spinner"
-import AlertErrorCatch from "./Alert"
-
+import SpinnerLoad from "./Spinner";
+import AlertErrorCatch from "./Alert";
 
 const MainNews = () => {
   const [postList, setPostList] = useState();
@@ -19,12 +18,12 @@ const MainNews = () => {
   const newPost = useSelector((state) => state.newPost);
   const modifiedPost = useSelector((state) => state.modifiedPost);
   const deletedPost = useSelector((state) => state.deletedPost);
-  
-  const[spinner, setSpinner] = useState()
-  const[alert, setAlert] = useState (false)
+
+  const [spinner, setSpinner] = useState();
+  const [alert, setAlert] = useState(false);
 
   const fetchGetPost = async () => {
-    setSpinner(true)
+    setSpinner(true);
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/posts/`,
@@ -33,14 +32,15 @@ const MainNews = () => {
       if (response.ok) {
         const data = await response.json();
         setPostList(data.reverse().slice(0, 30));
-        setSpinner(false)
+        setSpinner(false);
+        setAlert(false);
       } else {
         console.log("News: fetch Post. errore in if");
       }
     } catch (err) {
       console.log("News: fetch Post. err in catch");
-      setAlert(true)
-      setSpinner(false)
+      setAlert(true);
+      setSpinner(false);
     }
   };
 
@@ -119,10 +119,18 @@ const MainNews = () => {
         </div>
         <ModalPost />
         <div className="d-flex justify-content-center flex-nowrap my-2">
-          <Button className="rounded-pill px-5 py-0 text-center" variant="outline-primary" style={{height:"30px", border:"none"}} onClick={()=> fetchGetPost()}> Aggiorna nuovi post </Button>
-          </div>
-      {spinner && (<SpinnerLoad/>)}
-      {alert && (<AlertErrorCatch/>)}
+          <Button
+            className="rounded-pill px-5 py-0 text-center"
+            variant="outline-primary"
+            style={{ height: "30px", border: "none" }}
+            onClick={() => fetchGetPost()}
+          >
+            {" "}
+            Aggiorna nuovi post{" "}
+          </Button>
+        </div>
+        {spinner && !alert && <SpinnerLoad />}
+        {alert && !spinner && <AlertErrorCatch />}
         {postList &&
           postList
             .filter((_, i) => i < 20)

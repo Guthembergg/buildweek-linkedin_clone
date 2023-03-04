@@ -67,9 +67,8 @@ const CustomNavbar = () => {
                 id="dropdown-basic"
               >
                 <BsFillPersonFill className="navIcon" />
-                <div>
-                  <span className="d-none d-lg-block">Tu</span>
-                </div>
+                <br></br>
+                <div className="d-none d-lg-inline">Tu</div>
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
@@ -139,14 +138,14 @@ const CustomNavbar = () => {
           </li>
         </ul>
         <ul className="navBarUl d-none d-md-flex">
-          <li>
+          <li className="p-0">
             <CgMenuGridR className="navIcon" />
-            <span className="d-none d-lg-block">
+            <span className="d-none d-lg-flex p-0">
               Lavoro <IoMdArrowDropdown className="arrowGiu" />
             </span>
           </li>
-          <li className="p-0">
-            <a href="a d-none d-lg-flex">Prova Premium</a>
+          <li className="d-none d-xl-flex">
+            <a href="/">Prova Premium</a>
           </li>
         </ul>
       </Col>
