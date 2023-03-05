@@ -8,6 +8,8 @@ function ModalSingleExp({ e, me }) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(false);
+  const [inputClass, setinputClass] = useState("invalid");
+
   const [modalInfo, setModalInfo] = useState({
     role: e.role,
     company: e.company,
@@ -103,6 +105,7 @@ function ModalSingleExp({ e, me }) {
                 type="text"
                 placeholder="Ruolo"
                 value={modalInfo.role}
+                className={modalInfo.role === "" ? inputClass : "none"}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -114,6 +117,7 @@ function ModalSingleExp({ e, me }) {
                 type="text"
                 placeholder="Compagnia"
                 value={modalInfo.company}
+                className={modalInfo.company === "" ? inputClass : "none"}
               />
             </Form.Group>
 
@@ -124,6 +128,7 @@ function ModalSingleExp({ e, me }) {
                 type="text"
                 placeholder="Descrizione impiego"
                 value={modalInfo.description}
+                className={modalInfo.description === "" ? inputClass : "none"}
               />
             </Form.Group>
 
@@ -134,6 +139,7 @@ function ModalSingleExp({ e, me }) {
                 type="text"
                 placeholder="Area"
                 value={modalInfo.area}
+                className={modalInfo.area === "" ? inputClass : "none"}
               />
             </Form.Group>
             <Form.Group>
@@ -158,6 +164,7 @@ function ModalSingleExp({ e, me }) {
                     onChange={(e) => handleChange("startDate", e.target.value)}
                     type="date"
                     value={modalInfo.startDate}
+                    className={modalInfo.startDate === "" ? inputClass : "none"}
                   />
                 </Form.Group>
               </Col>
@@ -168,6 +175,7 @@ function ModalSingleExp({ e, me }) {
                     onChange={(e) => handleChange("endDate", e.target.value)}
                     type="date"
                     value={modalInfo.endDate}
+                    className={modalInfo.endDate === "" ? inputClass : "none"}
                   />
                 </Form.Group>
               </Col>

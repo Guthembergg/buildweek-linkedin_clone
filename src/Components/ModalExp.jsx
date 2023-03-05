@@ -6,7 +6,7 @@ import { BsImageFill } from "react-icons/bs";
 
 function ModalExp(props) {
   const [active, setActive] = useState(false);
-
+  const [inputClass, setinputClass] = useState("invalid");
   const [resp, setResp] = useState("");
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -115,6 +115,7 @@ function ModalExp(props) {
                 type="text"
                 placeholder="Ruolo"
                 value={modalInfo.role}
+                className={modalInfo.role === "" ? inputClass : "none"}
               />
               <Form.Text className="text-muted"></Form.Text>
             </Form.Group>
@@ -126,6 +127,7 @@ function ModalExp(props) {
                 type="text"
                 placeholder="Compagnia"
                 value={modalInfo.company}
+                className={modalInfo.company === "" ? inputClass : "none"}
               />
             </Form.Group>
 
@@ -136,6 +138,7 @@ function ModalExp(props) {
                 type="text"
                 placeholder="Descrizione impiego"
                 value={modalInfo.description}
+                className={modalInfo.description === "" ? inputClass : "none"}
               />
             </Form.Group>
 
@@ -146,6 +149,7 @@ function ModalExp(props) {
                 type="text"
                 placeholder="Area"
                 value={modalInfo.area}
+                className={modalInfo.area === "" ? inputClass : "none"}
               />
             </Form.Group>
             <Form.Group>
@@ -170,6 +174,7 @@ function ModalExp(props) {
                     onChange={(e) => handleChange("startDate", e.target.value)}
                     type="date"
                     value={modalInfo.startDate}
+                    className={modalInfo.startDate === "" ? inputClass : "none"}
                   />
                 </Form.Group>
               </Col>
@@ -180,6 +185,7 @@ function ModalExp(props) {
                     onChange={(e) => handleChange("endDate", e.target.value)}
                     type="date"
                     value={modalInfo.endDate}
+                    className={modalInfo.endDate === "" ? inputClass : "none"}
                   />
                 </Form.Group>
               </Col>

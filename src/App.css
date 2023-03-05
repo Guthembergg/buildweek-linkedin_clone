@@ -366,3 +366,6 @@
   --bs-dropdown-link-active-bg: rgba(213, 213, 213, 0);
   --bs-dropdown-link-active-color: #020202;
 }
+.invalid {
+  border: 1px solid #ff0000;
+}
