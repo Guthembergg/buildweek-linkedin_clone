@@ -41,7 +41,7 @@ const FeedNews = (props) => {
               className="text-decoration-none text-dark"
               to={`/profile/${props.news?.user._id}`}
             >
-              <h6 className="m-0">
+              <h6 className="m-0 fw-bold">
                 {props.news?.user.name} {props.news?.user.surname}
               </h6>
             </Link>

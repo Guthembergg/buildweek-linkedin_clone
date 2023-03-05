@@ -1,4 +1,13 @@
+@font-face {
+  font-family: "Myriad Pro Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("../myriad-pro-cufonfonts-webfont/Myriad Pro Regular"),
+    url("../myriad-pro-cufonfonts-webfont/MYRIADPRO-REGULAR.woff")
+      format("woff");
+}
 * {
+  font-family: "Myriad Pro Regular";
 }
 .imageProfile {
   top: -160px;
