@@ -363,5 +363,6 @@
 
 /* Fine  CardAndFooter CSS */
 .dropdown-menu {
-  --bs-dropdown-link-active-bg: #fbfdff00;
+  --bs-dropdown-link-active-bg: rgba(213, 213, 213, 0);
+  --bs-dropdown-link-active-color: #020202;
 }
