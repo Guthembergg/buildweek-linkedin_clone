@@ -3,6 +3,8 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsImageFill } from "react-icons/bs";
+import moment from "moment/moment";
+import "moment/locale/it";
 
 function ModalExp(props) {
   const [active, setActive] = useState(false);
@@ -185,7 +187,16 @@ function ModalExp(props) {
                     onChange={(e) => handleChange("endDate", e.target.value)}
                     type="date"
                     value={modalInfo.endDate}
-                    className={modalInfo.endDate === "" ? inputClass : "none"}
+                    className={
+                      modalInfo.endDate === ""
+                        ? inputClass
+                        : "none" &&
+                          moment(modalInfo.startDate).diff(
+                            moment(modalInfo.endDate)
+                          ) > 0
+                        ? "bg-warning"
+                        : "none"
+                    }
                   />
                 </Form.Group>
               </Col>
