@@ -12,6 +12,7 @@ function ModalExp(props) {
   const [resp, setResp] = useState("");
   const dispatch = useDispatch();
   const [empty, setEmpty] = useState();
+  const [dateError, setDateError] = useState(false);
 
   const [show, setShow] = useState(false);
   const [modalInfo, setModalInfo] = useState({
@@ -93,30 +94,32 @@ function ModalExp(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      modalInfo.area !== "" &&
-      modalInfo.company !== "" &&
-      modalInfo.role !== "" &&
-      modalInfo.startDate !== "" &&
-      modalInfo.endDate !== "" &&
-      modalInfo.description !== ""
-    ) {
-      if (active) {
-        await handleSubmitFile(await ExperiencesGetFetch());
-      } else {
-        await ExperiencesGetFetch();
+    if (!dateError) {
+      if (
+        modalInfo.area !== "" &&
+        modalInfo.company !== "" &&
+        modalInfo.role !== "" &&
+        modalInfo.startDate !== "" &&
+        modalInfo.endDate !== "" &&
+        modalInfo.description !== ""
+      ) {
+        if (active) {
+          await handleSubmitFile(await ExperiencesGetFetch());
+        } else {
+          await ExperiencesGetFetch();
+        }
+        modalInfo.role = "";
+        modalInfo.company = "";
+        modalInfo.description = "";
+        modalInfo.startDate = "";
+        modalInfo.endDate = "";
+        modalInfo.area = "";
+        let r = (Math.random() + 1).toString(36).substring(7);
+
+        dispatch({ type: "ADD_EXP", payload: r });
+
+        setActive(false);
       }
-      modalInfo.role = "";
-      modalInfo.company = "";
-      modalInfo.description = "";
-      modalInfo.startDate = "";
-      modalInfo.endDate = "";
-      modalInfo.area = "";
-      let r = (Math.random() + 1).toString(36).substring(7);
-
-      dispatch({ type: "ADD_EXP", payload: r });
-
-      setActive(false);
     }
   };
   //!fine
@@ -134,6 +137,12 @@ function ModalExp(props) {
               {empty && (
                 <Alert className="text-center" variant="danger">
                   Uno o più campi lasciati vuoti
+                </Alert>
+              )}{" "}
+              {dateError && (
+                <Alert className="text-center" variant="danger">
+                  la data di fine non può avvanire prima di quella d'inizio
+                  lavoro
                 </Alert>
               )}
               <Form.Label>Ruolo</Form.Label>
@@ -201,7 +210,16 @@ function ModalExp(props) {
                     onChange={(e) => handleChange("startDate", e.target.value)}
                     type="date"
                     value={modalInfo.startDate}
-                    className={modalInfo.startDate === "" ? inputClass : "none"}
+                    className={
+                      modalInfo.endDate === ""
+                        ? inputClass
+                        : "none" &&
+                          moment(modalInfo.startDate).diff(
+                            moment(modalInfo.endDate)
+                          ) > 0
+                        ? "border-danger"
+                        : "border-success"
+                    }
                   />
                 </Form.Group>
               </Col>
@@ -219,8 +237,8 @@ function ModalExp(props) {
                           moment(modalInfo.startDate).diff(
                             moment(modalInfo.endDate)
                           ) > 0
-                        ? "bg-warning"
-                        : "none"
+                        ? "border-danger"
+                        : "border-success"
                     }
                   />
                 </Form.Group>
@@ -241,7 +259,16 @@ function ModalExp(props) {
                   ) {
                     setEmpty(true);
                   } else {
-                    handleClose();
+                    if (
+                      moment(modalInfo.startDate).diff(
+                        moment(modalInfo.endDate)
+                      ) < 0
+                    ) {
+                      handleClose();
+                      setDateError(false);
+                    } else {
+                      setDateError(true);
+                    }
                   }
                 }}
               >

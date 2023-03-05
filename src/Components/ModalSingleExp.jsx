@@ -12,6 +12,8 @@ function ModalSingleExp({ e, me }) {
   const [active, setActive] = useState(false);
   const [inputClass, setinputClass] = useState("invalid");
   const [empty, setEmpty] = useState();
+  const [dateError, setDateError] = useState(false);
+
   const [modalInfo, setModalInfo] = useState({
     role: e.role,
     company: e.company,
@@ -107,6 +109,12 @@ function ModalSingleExp({ e, me }) {
                   Uno o più campi lasciati vuoti
                 </Alert>
               )}
+              {dateError && (
+                <Alert className="text-center" variant="danger">
+                  la data di fine non può avvanire prima di quella d'inizio
+                  lavoro
+                </Alert>
+              )}
               <Form.Label>Ruolo</Form.Label>
               <Form.Control
                 onChange={(e) => handleChange("role", e.target.value)}
@@ -172,7 +180,16 @@ function ModalSingleExp({ e, me }) {
                     onChange={(e) => handleChange("startDate", e.target.value)}
                     type="date"
                     value={modalInfo.startDate}
-                    className={modalInfo.startDate === "" ? inputClass : "none"}
+                    className={
+                      modalInfo.endDate === ""
+                        ? inputClass
+                        : "none" &&
+                          moment(modalInfo.startDate).diff(
+                            moment(modalInfo.endDate)
+                          ) > 0
+                        ? "border-danger"
+                        : "border-success"
+                    }
                   />
                 </Form.Group>
               </Col>
@@ -190,8 +207,8 @@ function ModalSingleExp({ e, me }) {
                           moment(modalInfo.startDate).diff(
                             moment(modalInfo.endDate)
                           ) > 0
-                        ? "bg-warning"
-                        : "none"
+                        ? "border-danger"
+                        : "border-success"
                     }
                   />
                 </Form.Group>
@@ -216,23 +233,32 @@ function ModalSingleExp({ e, me }) {
             type="submit"
             onClick={async () => {
               if (
-                modalInfo.area === "" ||
-                modalInfo.company === "" ||
-                modalInfo.role === "" ||
-                modalInfo.startDate === "" ||
-                modalInfo.endDate === "" ||
-                modalInfo.description === ""
+                moment(modalInfo.startDate).diff(moment(modalInfo.endDate)) < 0
               ) {
-                setEmpty(true);
-              } else {
-                handleClose();
-                ModalSingleFetch("PUT", modalInfo);
-                if (active) {
-                  await handleSubmitFile();
+                if (
+                  modalInfo.area === "" ||
+                  modalInfo.company === "" ||
+                  modalInfo.role === "" ||
+                  modalInfo.startDate === "" ||
+                  modalInfo.endDate === "" ||
+                  modalInfo.description === ""
+                ) {
+                  setEmpty(true);
+                } else {
+                  handleClose();
+                  ModalSingleFetch("PUT", modalInfo);
+                  if (active) {
+                    await handleSubmitFile();
+                  }
+                  let r = (Math.random() + 1).toString(36).substring(7);
+
+                  dispatch({ type: "MODIFIED_EXPERIENCE", payload: r });
+                  setActive(false);
+                  setEmpty(false);
                 }
-                dispatch({ type: "MODIFIED_EXPERIENCE", payload: modalInfo });
-                setActive(false);
-                setEmpty(false);
+                setDateError(false);
+              } else {
+                setDateError(true);
               }
             }}
           >
