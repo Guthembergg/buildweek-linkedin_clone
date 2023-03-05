@@ -53,8 +53,8 @@ const FeedNews = (props) => {
               style={{ fontSize: "0.9em" }}
             >
               <span>
-                {moment(props.news?.createdAt).format("DD") ===
-                moment().format("DD") /* ||
+                {moment(props.news?.createdAt).format("DD MM YY") ===
+                moment().format("DD MM YY") /* ||
                 parseInt(moment().format("DD")) ===
                   parseInt(moment(props.news?.createdAt).format("DD")) + 1 */
                   ? moment(props.news?.createdAt).fromNow()
