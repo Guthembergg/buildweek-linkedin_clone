@@ -126,7 +126,10 @@ const MainProfile = () => {
               <Card.Body className="position-relative">
                 {(param.id === "me" || param.id === profile._id) && (
                   <>
-                    <div className="modalPencil d-flex justify-content-center align-items-center">
+                    <div
+                      className=" d-flex justify-content-center align-items-center"
+                      style={{ height: "50px" }}
+                    >
                       <ModalProfile me={profile} />
                     </div>
                   </>
