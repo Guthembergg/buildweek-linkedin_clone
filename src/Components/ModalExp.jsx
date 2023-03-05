@@ -106,14 +106,16 @@ function ModalExp(props) {
       } else {
         await ExperiencesGetFetch();
       }
-
-      dispatch({ type: "ADD_EXP", payload: modalInfo });
       modalInfo.role = "";
       modalInfo.company = "";
       modalInfo.description = "";
       modalInfo.startDate = "";
       modalInfo.endDate = "";
       modalInfo.area = "";
+      let r = (Math.random() + 1).toString(36).substring(7);
+
+      dispatch({ type: "ADD_EXP", payload: r });
+
       setActive(false);
     }
   };
