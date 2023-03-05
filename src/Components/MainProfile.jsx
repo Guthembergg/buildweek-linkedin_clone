@@ -135,7 +135,7 @@ const MainProfile = () => {
                 {spinner && !alert && <SpinnerLoad />}
                 {!spinner && !alert && (
                   <>
-                    <Card.Title className="mt-5 position-relative m-0">
+                    <Card.Title className="mt-3 position-relative m-0">
                       {me?.name}
                       {me?.surname}
                       <Image
@@ -172,14 +172,14 @@ const MainProfile = () => {
                 )}
               </Card.Body>
               <div className="d-flex ms-3 pb-3">
-                <Card className="p-2">
+                <Card className="p-2 d-flex ">
                   <Row>
                     <Col xs={10}>
-                      <h6 className="m-0">Disponibile a lavorare</h6>
+                      <h6 className="mb-1">Disponibile a lavorare</h6>
                       <p className="m-0 p-0">Ruoli specialista IT</p>
                       <p
                         href="s"
-                        className="fw-semibold"
+                        className="fw-semibold mb-0"
                         style={{ color: "blue" }}
                       >
                         inizia
@@ -195,11 +195,13 @@ const MainProfile = () => {
                 <Card className="p-2 ms-3">
                   <Row>
                     <Col xs={10}>
-                      <h6>Fai sapere che stai facendo selezione</h6>
+                      <h6 className="mb-1">
+                        Fai sapere che stai facendo selezione
+                      </h6>
                       <p className="m-0 p-0">candidati qualificati</p>
                       <p
                         href="s"
-                        className="fw-semibold"
+                        className="fw-semibold mb-0"
                         style={{ color: "blue" }}
                       >
                         inizia
