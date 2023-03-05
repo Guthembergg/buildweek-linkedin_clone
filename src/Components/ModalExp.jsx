@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row, Alert } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsImageFill } from "react-icons/bs";
@@ -11,6 +11,8 @@ function ModalExp(props) {
   const [inputClass, setinputClass] = useState("invalid");
   const [resp, setResp] = useState("");
   const dispatch = useDispatch();
+  const [empty, setEmpty] = useState();
+
   const [show, setShow] = useState(false);
   const [modalInfo, setModalInfo] = useState({
     role: "",
@@ -91,14 +93,29 @@ function ModalExp(props) {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (active) {
-      await handleSubmitFile(await ExperiencesGetFetch());
-    } else {
-      await ExperiencesGetFetch();
-    }
+    if (
+      modalInfo.area !== "" &&
+      modalInfo.company !== "" &&
+      modalInfo.role !== "" &&
+      modalInfo.startDate !== "" &&
+      modalInfo.endDate !== "" &&
+      modalInfo.description !== ""
+    ) {
+      if (active) {
+        await handleSubmitFile(await ExperiencesGetFetch());
+      } else {
+        await ExperiencesGetFetch();
+      }
 
-    dispatch({ type: "ADD_EXP", payload: modalInfo });
-    setActive(false);
+      dispatch({ type: "ADD_EXP", payload: modalInfo });
+      modalInfo.role = "";
+      modalInfo.company = "";
+      modalInfo.description = "";
+      modalInfo.startDate = "";
+      modalInfo.endDate = "";
+      modalInfo.area = "";
+      setActive(false);
+    }
   };
   //!fine
   return (
@@ -111,6 +128,12 @@ function ModalExp(props) {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
+              {" "}
+              {empty && (
+                <Alert className="text-center" variant="danger">
+                  Uno o più campi lasciati vuoti
+                </Alert>
+              )}
               <Form.Label>Ruolo</Form.Label>
               <Form.Control
                 onChange={(e) => handleChange("role", e.target.value)}
@@ -202,7 +225,24 @@ function ModalExp(props) {
               </Col>
             </Row>
             <Modal.Footer>
-              <Button variant="primary" type="submit" onClick={handleClose}>
+              <Button
+                variant="primary"
+                type="submit"
+                onClick={() => {
+                  if (
+                    modalInfo.area === "" ||
+                    modalInfo.company === "" ||
+                    modalInfo.role === "" ||
+                    modalInfo.startDate === "" ||
+                    modalInfo.endDate === "" ||
+                    modalInfo.description === ""
+                  ) {
+                    setEmpty(true);
+                  } else {
+                    handleClose();
+                  }
+                }}
+              >
                 Save Changes
               </Button>
             </Modal.Footer>

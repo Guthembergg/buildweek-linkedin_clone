@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useDispatch } from "react-redux";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Col, Form, Modal, Row, Alert } from "react-bootstrap";
 import { HiOutlinePencil } from "react-icons/hi";
 import { BsImageFill } from "react-icons/bs";
 import moment from "moment/moment";
@@ -11,7 +11,7 @@ function ModalSingleExp({ e, me }) {
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(false);
   const [inputClass, setinputClass] = useState("invalid");
-
+  const [empty, setEmpty] = useState();
   const [modalInfo, setModalInfo] = useState({
     role: e.role,
     company: e.company,
@@ -32,6 +32,7 @@ function ModalSingleExp({ e, me }) {
   const handleSubmit = () => {
     dispatch({ type: "ADD_EXP", payload: modalInfo });
   };
+
   const handleSubmitFile = async () => {
     try {
       let res = await fetch(
@@ -101,6 +102,11 @@ function ModalSingleExp({ e, me }) {
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
+              {empty && (
+                <Alert className="text-center" variant="danger">
+                  Uno o più campi lasciati vuoti
+                </Alert>
+              )}
               <Form.Label>Ruolo</Form.Label>
               <Form.Control
                 onChange={(e) => handleChange("role", e.target.value)}
@@ -209,13 +215,25 @@ function ModalSingleExp({ e, me }) {
             variant="primary"
             type="submit"
             onClick={async () => {
-              handleClose();
-              ModalSingleFetch("PUT", modalInfo);
-              if (active) {
-                await handleSubmitFile();
+              if (
+                modalInfo.area === "" ||
+                modalInfo.company === "" ||
+                modalInfo.role === "" ||
+                modalInfo.startDate === "" ||
+                modalInfo.endDate === "" ||
+                modalInfo.description === ""
+              ) {
+                setEmpty(true);
+              } else {
+                handleClose();
+                ModalSingleFetch("PUT", modalInfo);
+                if (active) {
+                  await handleSubmitFile();
+                }
+                dispatch({ type: "MODIFIED_EXPERIENCE", payload: modalInfo });
+                setActive(false);
+                setEmpty(false);
               }
-              dispatch({ type: "MODIFIED_EXPERIENCE", payload: modalInfo });
-              setActive(false);
             }}
           >
             Save Changes
