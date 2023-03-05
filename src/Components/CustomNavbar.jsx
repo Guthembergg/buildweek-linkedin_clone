@@ -37,27 +37,30 @@ const CustomNavbar = () => {
   return (
     <Row
       className="w-100 navigation d-flex justify-content-center m-0 "
-      style={{ zIndex: "100" }}
+      style={{ zIndex: "100", height: "65px" }}
     >
       <Col
-        className="leftNav d-flex justify-content-center align-items-center"
+        className="leftNav d-flex justify-content-center align-items-center pt-0 "
         xs={10}
       >
-        <div className="searchBar">
-          {/* QUESTO LINK PORTA A MAIN PROFILE PER IL MOMENTO */}
-          <Link to="/">
-            <AiFillLinkedin className="linkedinIcon" />
-          </Link>
-          <Form className="d-flex form d-none d-lg-block">
-            <Form.Control
-              type="search"
-              placeholder="Cerca"
-              className="me-2 formBlue"
-              aria-label="Search"
-            />
-            <GoSearch className="lente" />
-          </Form>
-        </div>
+        <Col lg={6} xs={0}>
+          <div className="searchBar d-flex align-items-center">
+            {/* QUESTO LINK PORTA A MAIN PROFILE PER IL MOMENTO */}
+            <Link to="/">
+              <AiFillLinkedin className="linkedinIcon" href="/" />
+            </Link>
+
+            <Form className="d-flex form d-none d-lg-block">
+              <Form.Control
+                type="search"
+                placeholder="Cerca"
+                className="me-2 formBlue h-100"
+                aria-label="Search"
+              />
+              <GoSearch className="lente" />
+            </Form>
+          </div>
+        </Col>
 
         <ul className="navBarUl d-flex justify-content-center align-items-center">
           <Link className="text-secondary text-decoration-none" to={"/"}>

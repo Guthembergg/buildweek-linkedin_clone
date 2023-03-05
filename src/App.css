@@ -7,7 +7,7 @@
       format("woff");
 }
 * {
-  font-family: "Myriad Pro Regular";
+  font-family: "Myriad Pro Regular" !important;
 }
 .imageProfile {
   top: -160px;
@@ -105,7 +105,7 @@
 }
 .lente {
   position: absolute;
-  top: 15px;
+  top: 14px;
   font-size: 20px;
   left: 17px;
 }
