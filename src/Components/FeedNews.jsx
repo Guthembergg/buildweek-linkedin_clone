@@ -54,12 +54,17 @@ const FeedNews = (props) => {
             >
               <span>
                 {moment(props.news?.createdAt).format("DD") ===
-                  moment().format("DD") ||
+                moment().format("DD") /* ||
                 parseInt(moment().format("DD")) ===
-                  parseInt(moment(props.news?.createdAt).format("DD")) + 1
+                  parseInt(moment(props.news?.createdAt).format("DD")) + 1 */
                   ? moment(props.news?.createdAt).fromNow()
+                  : moment(props.news?.createdAt).format("YYYY") ===
+                    moment().format("YYYY")
+                  ? moment(props.news?.createdAt).format(
+                      "ddd D MMMM [alle] H:mm "
+                    )
                   : moment(props.news?.createdAt).format(
-                      "DD MMMM  YYYY, H:mm "
+                      "ddd d MMMM YYYY [alle] H:mm "
                     )}
               </span>
               <BiWorld className="ms-1 text-tertiary" />
