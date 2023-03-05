@@ -31,7 +31,7 @@ const MainNews = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setPostList(data.reverse().slice(0, 30));
+        setPostList(data.reverse().slice(0, 20));
         setSpinner(false);
         setAlert(false);
       } else {
