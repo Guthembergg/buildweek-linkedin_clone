@@ -13,6 +13,7 @@ import moment from "moment/moment";
 import "moment/locale/it";
 const FeedNews = (props) => {
   moment.locale("it");
+
   const myId = useSelector((state) => state.myProfile._id);
   const navigate = useNavigate();
   console.log(myId);
@@ -51,7 +52,16 @@ const FeedNews = (props) => {
               className="m-0 text-secondary d-flex justify-content-start align-items-center"
               style={{ fontSize: "0.9em" }}
             >
-              <span>{moment(props.news?.createdAt).fromNow()}</span>
+              <span>
+                {moment(props.news?.createdAt).format("DD") ===
+                  moment().format("DD") ||
+                parseInt(moment().format("DD")) ===
+                  parseInt(moment(props.news?.createdAt).format("DD")) + 1
+                  ? moment(props.news?.createdAt).fromNow()
+                  : moment(props.news?.createdAt).format(
+                      "DD MMMM  YYYY, H:mm "
+                    )}
+              </span>
               <BiWorld className="ms-1 text-tertiary" />
             </p>
           </div>
