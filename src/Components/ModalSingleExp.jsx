@@ -161,7 +161,7 @@ function ModalSingleExp({ e, me }) {
             <Form.Group>
               <Form.Label>Seleziona media da inserire</Form.Label>
               <Row className="pb-3 px-3">
-                <Form.Label>
+                <Form.Label style={{ width: "50px" }}>
                   <BsImageFill className="fs-2 text-primary" />
                   <Form.Control
                     className="d-none"
