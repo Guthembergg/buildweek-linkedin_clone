@@ -12,9 +12,11 @@ const CommentDeleteModal = (props) => {
         `https://striveschool-api.herokuapp.com/api/comments/${props.data._id}`,
         {
           method: "DELETE",
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         }
       );
       if (response.ok) {
@@ -29,7 +31,7 @@ const CommentDeleteModal = (props) => {
   };
   return (
     <>
-      <NavDropdown.Item className="text-danger" onClick={DeleteFetch()}>
+      <NavDropdown.Item className="text-danger" onClick={DeleteFetch}>
         <RiDeleteBin6Fill />
         <span className="ps-2">Elimina post</span>
       </NavDropdown.Item>

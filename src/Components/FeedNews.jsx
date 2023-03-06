@@ -30,7 +30,7 @@ const FeedNews = (props) => {
   /*  console.log(myId);
   console.log(props);
   console.log(props.news.user._id); */
-  console.log(comment);
+
   const commentsFetch = async (postId, ourMethod) => {
     setSpinnerComment(true);
     try {
@@ -66,13 +66,7 @@ const FeedNews = (props) => {
   };
   useEffect(() => {
     commentsFetch(props.news._id, "GET");
-  }, [newComment]);
-  useEffect(() => {
-    commentsFetch(props.news._id, "GET");
-  }, [modifiedComment]);
-  useEffect(() => {
-    commentsFetch(props.news._id, "GET");
-  }, [deleteComment]);
+  }, [newComment, modifiedComment, deleteComment]);
 
   return (
     <Card className="mb-3 px-3 py-1 ">
