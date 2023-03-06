@@ -6,10 +6,10 @@ import SingleCommentCard from "./SingleCommentCard";
 const CommentComponent = ({ postId, comment }) => {
   const myProfile = useSelector((state) => state.myProfile);
   const token = process.env.REACT_APP_COMMENT;
-  const [commentBody, setCommentBody] = useState();
+  const [commentBody, setCommentBody] = useState({ comment: "" });
   const dispatch = useDispatch();
   console.log(commentBody);
-  const addCommentsFetch = async (ourMethod, postId) => {
+  const addCommentsFetch = async (ourMethod) => {
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/comments/`,

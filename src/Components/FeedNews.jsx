@@ -63,6 +63,7 @@ const FeedNews = (props) => {
   useEffect(() => {
     commentsFetch(props.news._id, "GET");
   }, [newComment]);
+
   return (
     <Card className="mb-3 px-3 py-1 ">
       <section className="d-flex justify-content-between p-1">
