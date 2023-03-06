@@ -23,7 +23,7 @@ function NewPostProva(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const fetchNewsPost = async () => {
+  const fetchNewsComment = async () => {
     try {
       const response = await fetch(
         `https://striveschool-api.herokuapp.com/api/comments/${props.data._id}`,
@@ -50,7 +50,7 @@ function NewPostProva(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    fetchNewsPost();
+    fetchNewsComment();
 
     dispatch({ type: "MODIFIED_COMMENT", payload: commentBody.comment });
   };

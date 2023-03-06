@@ -17,6 +17,7 @@ import CommentComponent from "./CommentComponent";
 const FeedNews = (props) => {
   const newComment = useSelector((state) => state.comment);
   const modifiedComment = useSelector((state) => state.modified_comment);
+  const deleteComment = useSelector((state) => state.delete_comment);
 
   moment.locale("it");
   const [spinnerComment, setSpinnerComment] = useState();
@@ -69,6 +70,9 @@ const FeedNews = (props) => {
   useEffect(() => {
     commentsFetch(props.news._id, "GET");
   }, [modifiedComment]);
+  useEffect(() => {
+    commentsFetch(props.news._id, "GET");
+  }, [deleteComment]);
 
   return (
     <Card className="mb-3 px-3 py-1 ">

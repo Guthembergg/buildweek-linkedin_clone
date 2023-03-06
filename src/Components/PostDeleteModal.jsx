@@ -50,7 +50,7 @@ function PostDeleteModal(props) {
           <Modal.Title>Sei sicuro di voler cancellare il Post?</Modal.Title>
         </Modal.Header>
         <Modal.Body className="position-relative">
-          <p>I post una volta cancellati non srà possibile recuperarli</p>
+          <p>I post una volta cancellati non sarà possibile recuperarli</p>
 
           <Modal.Footer>
             <Button

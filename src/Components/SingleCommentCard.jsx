@@ -45,7 +45,7 @@ const SingleCommentCard = ({ data, commentId }) => {
                 data={data}
                 comment={data.comment}
               />
-              {/* <PostDeleteModal id={props.news._id} /> */}
+              <CommentDeleteModal data={data} />
             </NavDropdown>
           </div>
         )}
