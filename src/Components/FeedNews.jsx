@@ -4,7 +4,7 @@ import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
 import { ImLoop } from "react-icons/im";
 import { BiWorld } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
@@ -12,18 +12,25 @@ import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { useEffect, useState } from "react";
+import CommentComponent from "./CommentComponent";
+
 const FeedNews = (props) => {
+  const newComment = useSelector((state) => state.comment);
+  const modifiedComment = useSelector((state) => state.modified_comment);
+  const deleteComment = useSelector((state) => state.delete_comment);
+
   moment.locale("it");
   const [spinnerComment, setSpinnerComment] = useState();
   const [comment, setComment] = useState();
   const [alertComment, setAlertComment] = useState();
+  const [selected, setSelected] = useState(false);
   const token = process.env.REACT_APP_COMMENT;
   const myId = useSelector((state) => state.myProfile._id);
-  const navigate = useNavigate();
-  console.log(myId);
+
+  /*  console.log(myId);
   console.log(props);
-  console.log(props.news.user._id);
-  console.log(comment);
+  console.log(props.news.user._id); */
+
   const commentsFetch = async (postId, ourMethod) => {
     setSpinnerComment(true);
     try {
@@ -40,6 +47,7 @@ const FeedNews = (props) => {
       );
       if (response.ok) {
         const data = await response.json();
+
         if (ourMethod === "GET") {
           setComment(data);
           setSpinnerComment(false);
@@ -56,8 +64,10 @@ const FeedNews = (props) => {
       setSpinnerComment(false);
     }
   };
+  useEffect(() => {
+    commentsFetch(props.news._id, "GET");
+  }, [newComment, modifiedComment, deleteComment]);
 
-  useEffect(() => commentsFetch(props.news._id, "GET"), []);
   return (
     <Card className="mb-3 px-3 py-1 ">
       <section className="d-flex justify-content-between p-1">
@@ -139,7 +149,12 @@ const FeedNews = (props) => {
           </span>
           <span className="d-none d-md-inline text-secondary">Consiglia </span>
         </div>
-        <div className="iconPost rounded d-flex align-items-center">
+        <div
+          className="iconPost rounded d-flex align-items-center"
+          onClick={() => {
+            setSelected(!selected);
+          }}
+        >
           <span className="me-2">
             <AiOutlineComment style={{ fontSize: "1.4em" }} />
           </span>
@@ -158,6 +173,9 @@ const FeedNews = (props) => {
           <span className="d-none d-md-inline text-secondary">Invia</span>
         </div>
       </section>
+      {selected && (
+        <CommentComponent postId={props.news._id} comment={comment} />
+      )}
     </Card>
   );
 };

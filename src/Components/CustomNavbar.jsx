@@ -12,20 +12,21 @@ import { useEffect, useState } from "react";
 const CustomNavbar = () => {
   const profile = useSelector((state) => state.myProfile);
   const token = process.env.REACT_APP_TOKEN;
-  const dispatch = useDispatch();
-  const [query, setQuery] = useState()
-  const navigate = useNavigate()
+  const token2 = process.env.REACT_APP_COMMENT;
 
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setQuery(e)    
-  }
+    setQuery(e);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({type: "SEARCH_QUERY", payload: query});
+    dispatch({ type: "SEARCH_QUERY", payload: query });
     navigate("/jobs");
-  }
+  };
 
   const MainProfile = async () => {
     try {
@@ -44,10 +45,42 @@ const CustomNavbar = () => {
       console.log("mainPage: Main profile. err in catch");
     }
   };
+
+  const addCommentsFetch = async () => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/comments/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            comment: "test",
+            rate: 3,
+            elementId: "0316438960",
+          }),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: "COMMENT_ID", payload: data });
+        console.log(data);
+      } else {
+        console.log("mainPage: comments. errore in if");
+      }
+    } catch (err) {
+      console.log("mainPage: comments. err in catch");
+    }
+  };
   useEffect(() => {
     MainProfile();
   }, []);
-  
+  useEffect(() => {
+    addCommentsFetch();
+  }, []);
   return (
     <Row
       className="w-100 navigation d-flex justify-content-center m-0 "
@@ -64,13 +97,16 @@ const CustomNavbar = () => {
               <AiFillLinkedin className="linkedinIcon" href="/" />
             </Link>
 
-            <Form className="d-flex form d-none d-lg-block" onSubmit={(e)=> handleSubmit(e)}>
+            <Form
+              className="d-flex form d-none d-lg-block"
+              onSubmit={(e) => handleSubmit(e)}
+            >
               <Form.Control
                 type="search"
                 placeholder="Cerca"
                 className="me-2 formBlue h-100"
                 aria-label="Search"
-                onChange={(e)=>handleChange(e.target.value)}
+                onChange={(e) => handleChange(e.target.value)}
               />
               <GoSearch className="lente" />
             </Form>
@@ -88,10 +124,12 @@ const CustomNavbar = () => {
             <BsFillPeopleFill className="navIcon" />
             <span className="d-none d-lg-block">Rete</span>
           </li>
-          <Link className="text-decoration-none text-secondary" to={"/jobs"}><li className="d-none d-md-block text-center">
-            <MdWork className="navIcon" />
-            <span className="d-none d-lg-block">Lavoro</span>
-          </li></Link>
+          <Link className="text-decoration-none text-secondary" to={"/jobs"}>
+            <li className="d-none d-md-block text-center">
+              <MdWork className="navIcon" />
+              <span className="d-none d-lg-block">Lavoro</span>
+            </li>
+          </Link>
           <li className="d-none d-md-block text-center ">
             <AiFillMessage className="navIcon" />
             <span className="d-none d-lg-block">Messaggistica</span>

@@ -1,20 +1,7 @@
 import { useState } from "react";
-import {
-  Row,
-  Col,
-  Image,
-  Form,
-  Modal,
-  Button,
-  NavDropdown,
-} from "react-bootstrap";
-import Card from "react-bootstrap/Card";
-import {
-  BsFillCalendar2EventFill,
-  BsFillPlayBtnFill,
-  BsImageFill,
-} from "react-icons/bs";
-import { RiArticleFill } from "react-icons/ri";
+import { Row, Form, Modal, Button, NavDropdown } from "react-bootstrap";
+
+import { BsImageFill } from "react-icons/bs";
 import { HiOutlinePencil } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 

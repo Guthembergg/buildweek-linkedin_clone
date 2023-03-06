@@ -9,6 +9,10 @@ const initialState = {
   deletedExperience: "",
   modifiedExperience: "",
   query: "",
+  comment: {},
+  modified_comment: "",
+  delete_comment: "",
+  commentId: {},
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -35,6 +39,14 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, query: action.payload };
     case "CLEAR_SEARCH":
       return { ...state, query: action.payload };
+    case "COMMENT":
+      return { ...state, comment: action.payload };
+    case "MODIFIED_COMMENT":
+      return { ...state, modified_comment: action.payload };
+    case "DELETE_COMMENT":
+      return { ...state, delete_comment: action.payload };
+    case "COMMENT_ID":
+      return { ...state, commentId: action.payload };
     default:
       return state;
   }
