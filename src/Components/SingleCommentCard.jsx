@@ -10,7 +10,6 @@ const SingleCommentCard = ({ data, commentId }) => {
 
   return (
     <>
-      {console.log(data)}
       <Card className="d-flex flex-row mb-2" style={{ border: "none" }}>
         <div className="ms-3">
           <Image
