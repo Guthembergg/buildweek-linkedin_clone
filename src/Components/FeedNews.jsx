@@ -12,17 +12,20 @@ import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { useEffect, useState } from "react";
+import CardComment from "./CardComment";
+
 const FeedNews = (props) => {
   moment.locale("it");
   const [spinnerComment, setSpinnerComment] = useState();
   const [comment, setComment] = useState();
   const [alertComment, setAlertComment] = useState();
+  const [selected, setSelected] = useState(false);
   const token = process.env.REACT_APP_COMMENT;
   const myId = useSelector((state) => state.myProfile._id);
   const navigate = useNavigate();
-  console.log(myId);
+  /*  console.log(myId);
   console.log(props);
-  console.log(props.news.user._id);
+  console.log(props.news.user._id); */
   console.log(comment);
   const commentsFetch = async (postId, ourMethod) => {
     setSpinnerComment(true);
@@ -57,7 +60,6 @@ const FeedNews = (props) => {
     }
   };
 
-  useEffect(() => commentsFetch(props.news._id, "GET"), []);
   return (
     <Card className="mb-3 px-3 py-1 ">
       <section className="d-flex justify-content-between p-1">
@@ -139,7 +141,13 @@ const FeedNews = (props) => {
           </span>
           <span className="d-none d-md-inline text-secondary">Consiglia </span>
         </div>
-        <div className="iconPost rounded d-flex align-items-center">
+        <div
+          className="iconPost rounded d-flex align-items-center"
+          onClick={() => {
+            setSelected(!selected);
+            commentsFetch(props.news._id, "GET");
+          }}
+        >
           <span className="me-2">
             <AiOutlineComment style={{ fontSize: "1.4em" }} />
           </span>
@@ -158,6 +166,7 @@ const FeedNews = (props) => {
           <span className="d-none d-md-inline text-secondary">Invia</span>
         </div>
       </section>
+      {selected && <CardComment />}
     </Card>
   );
 };
