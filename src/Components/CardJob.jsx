@@ -7,7 +7,6 @@ import "moment/locale/it";
 
 const JobCard = (props) => {
     moment.locale("it");
-    console.log(props)
     return (
         <Card.Body className="d-flex justify-content-between border-bottom">
             <div className="col-11">
@@ -30,8 +29,7 @@ const JobCard = (props) => {
             <div className="d-flex align-items-center text-align col-1">
                 <div className="bookmarkJob p-3 rounded-circle" >
                 <BsBookmark style={{fontSize: "1.6em"}}/>
-                </div>
-                
+                </div>                
             </div>
             
         </Card.Body>        

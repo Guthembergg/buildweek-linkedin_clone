@@ -20,7 +20,7 @@ const JobsPage = () => {
 
     const handleClick = () => {
         dispatch ({type: "CLEAR_SEARCH", payload: ""});
-        fetchJob()        
+        setSearchSection(false)      
     }
     const fetchJob = async () => {
         setSearchSection(false)
@@ -86,7 +86,7 @@ const JobsPage = () => {
                 </Card>
                 <Button className="rounded-pill p-3 my-3 d-none d-lg-block fw-bolder" variant="outline-primary"><span><BsPencilSquare/></span> Pubblica offerta gratuita</Button>
             </Col>
-            <Col  xs={10} md={8} lg={6}>
+            <Col  xs={10} md={10} lg={6}>
                 {searchSection && (
                 <Card className="p-2">
                     <section className="p-3 d-flex justify-content-between">

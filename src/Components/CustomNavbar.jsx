@@ -13,11 +13,10 @@ const CustomNavbar = () => {
   const profile = useSelector((state) => state.myProfile);
   const token = process.env.REACT_APP_TOKEN;
   const token2 = process.env.REACT_APP_COMMENT;
-
   const dispatch = useDispatch();
   const [query, setQuery] = useState();
   const navigate = useNavigate();
-
+  
   const handleChange = (e) => {
     setQuery(e);
   };
