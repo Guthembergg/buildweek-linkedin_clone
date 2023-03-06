@@ -35,7 +35,7 @@ const CommentComponent = ({ postId, comment }) => {
 
   const handleSumbmit = (e) => {
     e.preventDefault();
-    addCommentsFetch("POST", postId);
+    addCommentsFetch("POST");
     dispatch({ type: "COMMENT", payload: commentBody });
     setCommentBody({ comment: "" });
   };
@@ -79,7 +79,11 @@ const CommentComponent = ({ postId, comment }) => {
         <Card.Body>
           {comment &&
             comment.map((e, i) => (
-              <SingleCommentCard key={`comments-${i}`} data={e} />
+              <SingleCommentCard
+                key={`comments-${i}`}
+                data={e}
+                commentId={e._id}
+              />
             ))}
         </Card.Body>
       </Card>

@@ -9,6 +9,8 @@ const initialState = {
   deletedExperience: "",
   modifiedExperience: "",
   comment: {},
+  modified_comment: "",
+  commentId: {},
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -33,6 +35,10 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, modifiedExperience: action.payload };
     case "COMMENT":
       return { ...state, comment: action.payload };
+    case "MODIFIED_COMMENT":
+      return { ...state, modified_comment: action.payload };
+    case "COMMENT_ID":
+      return { ...state, commentId: action.payload };
     default:
       return state;
   }

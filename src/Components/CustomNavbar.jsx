@@ -12,6 +12,8 @@ import { useEffect } from "react";
 const CustomNavbar = () => {
   const profile = useSelector((state) => state.myProfile);
   const token = process.env.REACT_APP_TOKEN;
+  const token2 = process.env.REACT_APP_COMMENT;
+
   const dispatch = useDispatch();
 
   const MainProfile = async () => {
@@ -31,8 +33,41 @@ const CustomNavbar = () => {
       console.log("mainPage: Main profile. err in catch");
     }
   };
+
+  const addCommentsFetch = async () => {
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/comments/`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token2}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            comment: "test",
+            rate: 3,
+            elementId: "0316438960",
+          }),
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        dispatch({ type: "COMMENT_ID", payload: data });
+        console.log(data);
+      } else {
+        console.log("mainPage: comments. errore in if");
+      }
+    } catch (err) {
+      console.log("mainPage: comments. err in catch");
+    }
+  };
   useEffect(() => {
     MainProfile();
+  }, []);
+  useEffect(() => {
+    addCommentsFetch();
   }, []);
   return (
     <Row

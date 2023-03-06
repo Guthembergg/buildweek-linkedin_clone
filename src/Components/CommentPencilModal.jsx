@@ -11,7 +11,11 @@ function NewPostProva(props) {
   const token = process.env.REACT_APP_COMMENT;
 
   const handleChange = (value) => {
-    setCommentBody({ comment: value, elementId: props.id, rate: 3 });
+    setCommentBody({
+      comment: value,
+      rate: "3",
+      elementId: props.id,
+    });
   };
 
   const [show, setShow] = useState(false);
@@ -22,7 +26,7 @@ function NewPostProva(props) {
   const fetchNewsPost = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/comments/`,
+        `https://striveschool-api.herokuapp.com/api/comments/${props.data._id}`,
         {
           method: "PUT",
           headers: {
@@ -48,7 +52,7 @@ function NewPostProva(props) {
     e.preventDefault();
     fetchNewsPost();
 
-    dispatch({ type: "MODIFIED_POST", payload: props.id });
+    dispatch({ type: "MODIFIED_COMMENT", payload: commentBody.comment });
   };
 
   return (
