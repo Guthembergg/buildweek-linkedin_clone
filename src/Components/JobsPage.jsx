@@ -16,25 +16,12 @@ const JobsPage = () => {
     const [alert, setAlert] = useState();
     const [searchSection, setSearchSection] = useState(false)
     const dispatch = useDispatch()
-/*     const [query, setQuery] = useState (); */
     const query = useSelector ((state)=> state.query)
 
     const handleClick = () => {
         dispatch ({type: "CLEAR_SEARCH", payload: ""});
         fetchJob()        
     }
-
-
-
-/* 
-    const handleChange = (query) => {
-        setQuery(query)
-    }
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        searchJob(query)
-    } */
-
     const fetchJob = async () => {
         setSearchSection(false)
         setSpinner(true)
@@ -44,14 +31,11 @@ const JobsPage = () => {
                 const job = await response.json()
                 setJobList(job.data.reverse().slice(0,20))
                 setSpinner(false);
-                setAlert(false);
-                
+                setAlert(false);                
             } else {
                 setAlert(true);
                setSpinner(false);
-
-            }
-            
+            }            
         } catch(error) {
             console.log(error)
             setAlert(true);
@@ -60,6 +44,7 @@ const JobsPage = () => {
     } 
 
     const searchJob = async (query) => {
+        setSearchSection(false)
         setSpinner(true)
         try {
             const response = await fetch (`https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`)
@@ -79,10 +64,12 @@ const JobsPage = () => {
             setSpinner(false);
         }
     } 
+    useEffect(()=>{
+        fetchJob();      
+    },[])
 
     useEffect(()=>{
-        fetchJob();
-        searchJob(query)      
+        searchJob(query)
     },[query])
 
     return (
@@ -104,7 +91,7 @@ const JobsPage = () => {
                 <Card className="p-2">
                     <section className="p-3 d-flex justify-content-between">
                     <Card.Title><strong>Risultati della tua ricerca</strong></Card.Title>
-                    <Button variant="outline-primary" onClick={(e)=>handleClick(e.target)}>Cancella la ricerca</Button>
+                    <Button variant="outline-primary" onClick={(e)=>handleClick(e)}>Cancella la ricerca</Button>
                     </section>
                     {jobListQuery && jobListQuery.map((jobQuery, i) => (<CardJob key={`job-${i}`} singleJob={jobQuery} />))}
                 </Card>)}
@@ -119,8 +106,7 @@ const JobsPage = () => {
                 </Card>
             </Col>
             <Col className="d-none d-xl-block" xl={2}></Col>
-        </Row>
-        
+        </Row>        
     )
 }
 
