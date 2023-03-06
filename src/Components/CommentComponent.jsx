@@ -70,7 +70,7 @@ const CommentComponent = ({ postId, comment }) => {
                   className="rounded-pill py-3 px-3"
                   type="text"
                   placeholder="Aggiungi un commento..."
-                  value={commentBody.comment}
+                  value={commentBody?.comment}
                 />
               </Form.Group>
             </Form>
