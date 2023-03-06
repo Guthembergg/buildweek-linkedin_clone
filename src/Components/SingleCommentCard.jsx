@@ -36,7 +36,7 @@ const SingleCommentCard = ({ data }) => {
             }
             id="collasible-nav-dropdown"
           >
-            <CommentPencilModal id={data._id} text={data.comment} />
+            <CommentPencilModal id={data.elementId} text={data.comment} />
             {/* <PostDeleteModal id={props.news._id} /> */}
           </NavDropdown>
         </div>

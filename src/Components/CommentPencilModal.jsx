@@ -6,15 +6,14 @@ import { HiOutlinePencil } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 
 function NewPostProva(props) {
-  const [innerData, setInnerData] = useState({
-    text: props.text,
-  });
-  const [fd, setFd] = useState(new FormData());
+  const [commentBody, setCommentBody] = useState({ comment: "" });
+
   const token = process.env.REACT_APP_COMMENT;
 
-  const handleChange = (property, value) => {
-    setInnerData({ [property]: value });
+  const handleChange = (value) => {
+    setCommentBody({ comment: value, elementId: props.id, rate: 3 });
   };
+
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
   const handleClose = () => setShow(false);
@@ -23,7 +22,7 @@ function NewPostProva(props) {
   const fetchNewsPost = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/comments/${props.id}`,
+        `https://striveschool-api.herokuapp.com/api/comments/`,
         {
           method: "PUT",
           headers: {
@@ -31,7 +30,7 @@ function NewPostProva(props) {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(innerData),
+          body: JSON.stringify(commentBody),
         }
       );
       if (response.ok) {
@@ -44,45 +43,11 @@ function NewPostProva(props) {
       console.log("News: fetch Post. err in catch");
     }
   };
-  //!inizio
 
-  const handleSubmitFile = async () => {
-    try {
-      let res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/comments/${props.id}`,
-        {
-          method: "POST",
-          body: fd,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        console.log("foto post ok");
-      } else {
-        console.log("foto post bad");
-      }
-    } catch (err) {
-      console.log("foto post catch");
-    }
-  };
-
-  const handleFile = (ev) => {
-    setFd((prev) => {
-      //per cambiare i formData, bisogna "appendere" una nuova coppia chiave/valore, usando il metodo .append()
-      prev.delete("post"); //ricordatevi di svuotare il FormData prima :)
-      prev.append("post", ev.target.files[0]); //L'API richiede un "nome" diverso per ogni rotta, per caricare un'immagine ad un post, nel form data andra' inserito un valore con nome "post"
-      return prev;
-    });
-  };
-
-  //!fine
   const handleSubmit = async (e) => {
     e.preventDefault();
     fetchNewsPost();
-    await handleSubmitFile();
+
     dispatch({ type: "MODIFIED_POST", payload: props.id });
   };
 
@@ -107,11 +72,11 @@ function NewPostProva(props) {
                 aria-selected
                 as="textarea"
                 placeholder="Inserisci qui il tuo post"
-                value={innerData.text}
-                onChange={(e) => handleChange("text", e.target.value)}
+                value={commentBody.comment}
+                onChange={(e) => handleChange(e.target.value)}
               />
               <div className="d-flex justify-content-end">
-                <Form.Label>{innerData.text.length}/2600</Form.Label>
+                <Form.Label>{commentBody.comment.length}/2600</Form.Label>
               </div>
             </Form.Group>
             <Modal.Footer>
