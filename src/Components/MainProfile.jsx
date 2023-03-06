@@ -15,6 +15,8 @@ import { GoGraph } from "react-icons/go";
 import SpinnerLoad from "./Spinner";
 import AlertErrorCatch from "./Alert";
 import CustomeFooter from "./CustomFooter";
+import moment from "moment";
+import "moment/locale/it";
 
 const MainProfile = () => {
   const dispatch = useDispatch();
@@ -357,12 +359,17 @@ const MainProfile = () => {
                                   <p className="m-0">{e?.company}</p>
                                   <p className="m-0">{e?.description}</p>
                                   <p className="text-secondary mb-3">
-                                    `dal {e?.startDate?.slice(8, 10)}/
+                                    dal {e?.startDate?.slice(8, 10)}/
                                     {e?.startDate?.slice(5, 7)}/
                                     {e?.startDate?.slice(0, 4)} al {""}
                                     {e?.endDate?.slice(8, 10)}/
                                     {e?.endDate?.slice(5, 7)}/
-                                    {e?.endDate?.slice(0, 4)}`
+                                    {e?.endDate?.slice(0, 4)} - {"  "}(
+                                    {moment(e.endDate).from(
+                                      moment(e.startDate),
+                                      true
+                                    )}
+                                    )
                                   </p>
                                 </div>
                               </section>
