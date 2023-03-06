@@ -37,7 +37,7 @@ const CommentComponent = ({ postId, comment }) => {
     e.preventDefault();
     addCommentsFetch("POST", postId);
     dispatch({ type: "COMMENT", payload: commentBody });
-    commentBody.comment = "";
+    setCommentBody({ comment: "" });
   };
 
   const handleChange = (value) => {
@@ -62,7 +62,7 @@ const CommentComponent = ({ postId, comment }) => {
           </Col>
           <Col xs={12} md={10}>
             <Form onSubmit={handleSumbmit}>
-              <Form.Group className="ms-0 m-2 ">
+              <Form.Group className="ms-0 m-2">
                 <Form.Control
                   onChange={(e) => {
                     handleChange(e.target.value);
@@ -79,11 +79,7 @@ const CommentComponent = ({ postId, comment }) => {
         <Card.Body>
           {comment &&
             comment.map((e, i) => (
-              <SingleCommentCard
-                key={`comments-${i}`}
-                name={e?.author}
-                comment={e?.comment}
-              />
+              <SingleCommentCard key={`comments-${i}`} data={e} />
             ))}
         </Card.Body>
       </Card>

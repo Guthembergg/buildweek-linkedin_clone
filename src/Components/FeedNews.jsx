@@ -4,7 +4,7 @@ import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
 import { ImLoop } from "react-icons/im";
 import { BiWorld } from "react-icons/bi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
@@ -23,7 +23,7 @@ const FeedNews = (props) => {
   const [selected, setSelected] = useState(false);
   const token = process.env.REACT_APP_COMMENT;
   const myId = useSelector((state) => state.myProfile._id);
-  const navigate = useNavigate();
+
   /*  console.log(myId);
   console.log(props);
   console.log(props.news.user._id); */

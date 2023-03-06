@@ -97,12 +97,12 @@ function NewPostProva(props) {
 
       <Modal show={show} onHide={handleClose} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>Modifica informazioni</Modal.Title>
+          <Modal.Title>Modifica commento</Modal.Title>
         </Modal.Header>
         <Modal.Body className="position-relative">
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
-              <Form.Label>Modifica il tuo post</Form.Label>
+              <Form.Label>Modifica il tuo commento</Form.Label>
               <Form.Control
                 aria-selected
                 as="textarea"
@@ -113,22 +113,6 @@ function NewPostProva(props) {
               <div className="d-flex justify-content-end">
                 <Form.Label>{innerData.text.length}/2600</Form.Label>
               </div>
-              <Row className="pb-3 px-3">
-                <Form.Group>
-                  <Form.Label>Modifica media</Form.Label>
-                  <Row className="pb-3 px-3">
-                    <Form.Label>
-                      <BsImageFill className="fs-2 text-primary" />
-                      <Form.Control
-                        className="d-none"
-                        aria-selected
-                        type="file"
-                        onChange={handleFile}
-                      />
-                    </Form.Label>
-                  </Row>
-                </Form.Group>
-              </Row>
             </Form.Group>
             <Modal.Footer>
               <Button

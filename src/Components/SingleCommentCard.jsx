@@ -1,9 +1,14 @@
-import { Card, Image } from "react-bootstrap";
+import { Card, Image, NavDropdown } from "react-bootstrap";
+import { HiDotsHorizontal } from "react-icons/hi";
+import CommentPencilModal from "./CommentPencilModal";
+import CommentDeleteModal from "./CommentDeleteModal";
+import { useSelector } from "react-redux";
 
-const SingleCommentCard = ({ name, comment }) => {
+const SingleCommentCard = ({ data }) => {
+  const myId = useSelector((state) => state.myProfile._id);
   return (
     <>
-      <Card className="d-flex flex-row" style={{ border: "none" }}>
+      <Card className="d-flex flex-row mb-2" style={{ border: "none" }}>
         <div className="ms-3">
           <Image
             roundedCircle={true}
@@ -18,8 +23,22 @@ const SingleCommentCard = ({ name, comment }) => {
           className="ms-2 w-100 rounded"
           style={{ backgroundColor: "#F3F2EF" }}
         >
-          <div className="fw-bold">{name}</div>
-          <div>{comment}</div>
+          <div className="fw-bold">{data.author}</div>
+          <div>{data.comment}</div>
+        </div>
+        <div>
+          <NavDropdown
+            className="iconPost rounded-circle p-2"
+            title={
+              <span>
+                <HiDotsHorizontal />
+              </span>
+            }
+            id="collasible-nav-dropdown"
+          >
+            <CommentPencilModal id={data._id} text={data.comment} />
+            {/* <PostDeleteModal id={props.news._id} /> */}
+          </NavDropdown>
         </div>
       </Card>
     </>
