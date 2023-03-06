@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Row, Form, Modal, Button, NavDropdown } from "react-bootstrap";
 
-import { BsImageFill } from "react-icons/bs";
+import { Form, Modal, Button, NavDropdown } from "react-bootstrap";
+
 import { HiOutlinePencil } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 
@@ -10,7 +10,7 @@ function NewPostProva(props) {
     text: props.text,
   });
   const [fd, setFd] = useState(new FormData());
-  const token = process.env.REACT_APP_TOKEN;
+  const token = process.env.REACT_APP_COMMENT;
 
   const handleChange = (property, value) => {
     setInnerData({ [property]: value });
@@ -23,7 +23,7 @@ function NewPostProva(props) {
   const fetchNewsPost = async () => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/${props.id}`,
+        `https://striveschool-api.herokuapp.com/api/comments/${props.id}`,
         {
           method: "PUT",
           headers: {
@@ -49,7 +49,7 @@ function NewPostProva(props) {
   const handleSubmitFile = async () => {
     try {
       let res = await fetch(
-        `https://striveschool-api.herokuapp.com/api/posts/${props.id}`,
+        `https://striveschool-api.herokuapp.com/api/comments/${props.id}`,
         {
           method: "POST",
           body: fd,
