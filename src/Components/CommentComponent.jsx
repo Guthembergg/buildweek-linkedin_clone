@@ -1,16 +1,18 @@
 import { useState } from "react";
 import { Card, Col, Row, Image, Form } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SingleCommentCard from "./SingleCommentCard";
 
 const CommentComponent = ({ postId, comment }) => {
   const myProfile = useSelector((state) => state.myProfile);
   const token = process.env.REACT_APP_COMMENT;
   const [commentBody, setCommentBody] = useState();
-  const addCommentsFetch = async (ourMethod) => {
+  const dispatch = useDispatch();
+  console.log(commentBody);
+  const addCommentsFetch = async (ourMethod, postId) => {
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/comments/${postId}`,
+        `https://striveschool-api.herokuapp.com/api/comments/`,
         {
           method: ourMethod,
           headers: {
@@ -18,13 +20,11 @@ const CommentComponent = ({ postId, comment }) => {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          Body: JSON.stringify(commentBody),
+          body: JSON.stringify(commentBody),
         }
       );
       if (response.ok) {
         const data = await response.json();
-        if (ourMethod === "GET") {
-        }
       } else {
         console.log("mainPage: comments. errore in if");
       }
@@ -35,11 +35,13 @@ const CommentComponent = ({ postId, comment }) => {
 
   const handleSumbmit = (e) => {
     e.preventDefault();
-    addCommentsFetch("POST");
+    addCommentsFetch("POST", postId);
+    dispatch({ type: "COMMENT", payload: commentBody });
+    commentBody.comment = "";
   };
 
   const handleChange = (value) => {
-    setCommentBody({ comment: value, elementId: postId });
+    setCommentBody({ comment: value, elementId: postId, rate: 3 });
   };
 
   return (
@@ -68,6 +70,7 @@ const CommentComponent = ({ postId, comment }) => {
                   className="rounded-pill py-3 px-3"
                   type="text"
                   placeholder="Aggiungi un commento..."
+                  value={commentBody.comment}
                 />
               </Form.Group>
             </Form>
@@ -75,8 +78,12 @@ const CommentComponent = ({ postId, comment }) => {
         </Row>
         <Card.Body>
           {comment &&
-            comment.map((e) => (
-              <SingleCommentCard name={e?.author} comment={e?.comment} />
+            comment.map((e, i) => (
+              <SingleCommentCard
+                key={`comments-${i}`}
+                name={e?.author}
+                comment={e?.comment}
+              />
             ))}
         </Card.Body>
       </Card>

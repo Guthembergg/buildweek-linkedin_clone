@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import CommentComponent from "./CommentComponent";
 
 const FeedNews = (props) => {
+  const newComment = useSelector((state) => state.comment);
   moment.locale("it");
   const [spinnerComment, setSpinnerComment] = useState();
   const [comment, setComment] = useState();
@@ -59,7 +60,9 @@ const FeedNews = (props) => {
       setSpinnerComment(false);
     }
   };
-
+  useEffect(() => {
+    commentsFetch(props.news._id, "GET");
+  }, [newComment]);
   return (
     <Card className="mb-3 px-3 py-1 ">
       <section className="d-flex justify-content-between p-1">
@@ -145,7 +148,6 @@ const FeedNews = (props) => {
           className="iconPost rounded d-flex align-items-center"
           onClick={() => {
             setSelected(!selected);
-            commentsFetch(props.news._id, "GET");
           }}
         >
           <span className="me-2">
