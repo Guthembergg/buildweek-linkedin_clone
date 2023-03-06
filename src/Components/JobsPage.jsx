@@ -3,7 +3,7 @@ import {BsFillBookmarkFill, BsFillBellFill, BsFillPlayBtnFill, BsPencilSquare} f
 import {BiTask} from "react-icons/bi";
 import {MdSettings} from "react-icons/md";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
 import Spinner from "./Spinner";
 import CardJob from "./CardJob";
@@ -14,8 +14,15 @@ const JobsPage = () => {
     const [jobListQuery, setJobListQuery] = useState()
     const [spinner, setSpinner] = useState();
     const [alert, setAlert] = useState();
+    const [searchSection, setSearchSection] = useState(false)
+    const dispatch = useDispatch()
 /*     const [query, setQuery] = useState (); */
     const query = useSelector ((state)=> state.query)
+
+    const handleClick = () => {
+        dispatch ({type: "CLEAR_SEARCH", payload: ""});
+        fetchJob()        
+    }
 
 
 
@@ -29,6 +36,7 @@ const JobsPage = () => {
     } */
 
     const fetchJob = async () => {
+        setSearchSection(false)
         setSpinner(true)
         try {
             const response = await fetch ("https://strive-benchmark.herokuapp.com/api/jobs")
@@ -59,7 +67,8 @@ const JobsPage = () => {
                 const jobQuery = await response.json()
                 setJobListQuery(jobQuery.data.reverse().slice(0,5))
                 setSpinner(false);
-                setAlert(false);                
+                setAlert(false);
+                setSearchSection(true)                
             } else {
                 setAlert(true);
                setSpinner(false);
@@ -91,16 +100,14 @@ const JobsPage = () => {
                 <Button className="rounded-pill p-3 my-3 d-none d-lg-block fw-bolder" variant="outline-primary"><span><BsPencilSquare/></span> Pubblica offerta gratuita</Button>
             </Col>
             <Col  xs={10} md={8} lg={6}>
+                {searchSection && (
                 <Card className="p-2">
-                    <section className="p-3">
+                    <section className="p-3 d-flex justify-content-between">
                     <Card.Title><strong>Risultati della tua ricerca</strong></Card.Title>
+                    <Button variant="outline-primary" onClick={(e)=>handleClick(e.target)}>Cancella la ricerca</Button>
                     </section>
-                   
-           {/*      <Form onSubmit={handleSubmit}>
-                        <Form.Control type="text" placeholder="Cerca il lavoro dei tuoi sogni" onChange={(e)=> handleChange(e.target.value)}></Form.Control>
-                    </Form> */}
                     {jobListQuery && jobListQuery.map((jobQuery, i) => (<CardJob key={`job-${i}`} singleJob={jobQuery} />))}
-                </Card>
+                </Card>)}
                 <Card className="p-2">                
                     <section className="p-3">
                     <Card.Title><strong>Consigliato per te</strong></Card.Title>
