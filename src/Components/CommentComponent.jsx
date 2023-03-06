@@ -33,10 +33,10 @@ const CommentComponent = ({ postId, comment }) => {
     }
   };
 
-  const handleSumbmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     addCommentsFetch("POST");
-    dispatch({ type: "COMMENT", payload: commentBody });
+    dispatch({ type: "COMMENT", payload: commentBody.elementId });
     setCommentBody({ comment: "" });
   };
 
@@ -61,7 +61,7 @@ const CommentComponent = ({ postId, comment }) => {
             />
           </Col>
           <Col xs={12} md={10}>
-            <Form onSubmit={handleSumbmit}>
+            <Form onSubmit={handleSubmit}>
               <Form.Group className="ms-0 m-2">
                 <Form.Control
                   onChange={(e) => {

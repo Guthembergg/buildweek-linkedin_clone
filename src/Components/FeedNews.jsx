@@ -47,7 +47,7 @@ const FeedNews = (props) => {
       );
       if (response.ok) {
         const data = await response.json();
-
+        console.log("fetch di", postId);
         if (ourMethod === "GET") {
           setComment(data);
           setSpinnerComment(false);
@@ -64,9 +64,6 @@ const FeedNews = (props) => {
       setSpinnerComment(false);
     }
   };
-  useEffect(() => {
-    commentsFetch(props.news._id, "GET");
-  }, [newComment, modifiedComment, deleteComment]);
 
   return (
     <Card className="mb-3 px-3 py-1 ">
@@ -152,6 +149,7 @@ const FeedNews = (props) => {
         <div
           className="iconPost rounded d-flex align-items-center"
           onClick={() => {
+            commentsFetch(props.news._id, "GET");
             setSelected(!selected);
           }}
         >
