@@ -73,10 +73,10 @@ const CustomNavbar = () => {
             <BsFillPeopleFill className="navIcon" />
             <span className="d-none d-lg-block">Rete</span>
           </li>
-          <li className="d-none d-md-block text-center">
+          <Link to={"/jobs"}><li className="d-none d-md-block text-center">
             <MdWork className="navIcon" />
             <span className="d-none d-lg-block">Lavoro</span>
-          </li>
+          </li></Link>
           <li className="d-none d-md-block text-center ">
             <AiFillMessage className="navIcon" />
             <span className="d-none d-lg-block">Messaggistica</span>
