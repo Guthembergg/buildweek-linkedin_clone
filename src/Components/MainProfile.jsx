@@ -141,8 +141,7 @@ const MainProfile = () => {
                   {!spinner && !alert && (
                     <>
                       <Card.Title className="mt-3 position-relative m-0">
-                        {me?.name}
-                        {me?.surname}
+                        {me?.name} {me?.surname}
                         <Image
                           roundedCircle={true}
                           alt=""
