@@ -1,48 +1,113 @@
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button, Form } from "react-bootstrap";
 import {BsFillBookmarkFill, BsFillBellFill, BsFillPlayBtnFill, BsPencilSquare} from "react-icons/bs";
 import {BiTask} from "react-icons/bi";
 import {MdSettings} from "react-icons/md";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Alert from "./Alert";
+import Spinner from "./Spinner";
 import CardJob from "./CardJob";
 
 const JobsPage = () => {
 
     const [jobList, setJobList] = useState()
+    const [jobListQuery, setJobListQuery] = useState()
+    const [spinner, setSpinner] = useState();
+    const [alert, setAlert] = useState();
+/*     const [query, setQuery] = useState (); */
+    const query = useSelector ((state)=> state.query)
 
+
+
+/* 
+    const handleChange = (query) => {
+        setQuery(query)
+    }
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        searchJob(query)
+    } */
 
     const fetchJob = async () => {
+        setSpinner(true)
         try {
             const response = await fetch ("https://strive-benchmark.herokuapp.com/api/jobs")
             if (response.ok) {
                 const job = await response.json()
                 setJobList(job.data.reverse().slice(0,20))
-                console.log(jobList)
+                setSpinner(false);
+                setAlert(false);
+                
+            } else {
+                setAlert(true);
+               setSpinner(false);
+
             }
             
         } catch(error) {
             console.log(error)
+            setAlert(true);
+            setSpinner(false);
+        }
+    } 
+
+    const searchJob = async (query) => {
+        setSpinner(true)
+        try {
+            const response = await fetch (`https://strive-benchmark.herokuapp.com/api/jobs?search=${query}`)
+            if (response.ok) {
+                const jobQuery = await response.json()
+                setJobListQuery(jobQuery.data.reverse().slice(0,5))
+                setSpinner(false);
+                setAlert(false);                
+            } else {
+                setAlert(true);
+               setSpinner(false);
+            }            
+        } catch(error) {
+            console.log(error)
+            setAlert(true);
+            setSpinner(false);
         }
     } 
 
     useEffect(()=>{
-        fetchJob()
-    },[])
+        fetchJob();
+        searchJob(query)      
+    },[query])
+
     return (
         <Row  className="d-flex flex-column flex-lg-row justify-content-center py-3 m-0 w-100">
             <Col  md={10} xl={2}>
-                <Card>
+                <Card className="mb-3">
                     <Card.Body>
-                        <div className="my-2 text-secondary"><span><BsFillBookmarkFill/></span><span className="ms-2">Le mie offerte di lavoro</span></div>
-                        <div className="my-2 text-secondary"><span><BsFillBellFill/></span><span className="ms-2">Avvisi offerte di lavoro</span></div>
-                        <div className="my-2 text-secondary"><span><BiTask/></span><span className="ms-2">Valutazione delle competenze</span></div>
-                        <div className="my-2 text-secondary"><span><BsFillPlayBtnFill/></span><span className="ms-2"> Indicazioni per chi cerca lavoro</span></div>
-                        <div className="my-2 text-secondary"><span><MdSettings/></span><span className="ms-2">Impostazioni candidatura</span></div>
+                        <div className="my-2 text-secondary fw-bold"><span><BsFillBookmarkFill/></span><span className="ms-2">Le mie offerte di lavoro</span></div>
+                        <div className="my-2 text-secondary fw-bold"><span><BsFillBellFill/></span><span className="ms-2">Avvisi offerte di lavoro</span></div>
+                        <div className="my-2 text-secondary fw-bold"><span><BiTask/></span><span className="ms-2">Valutazione delle competenze</span></div>
+                        <div className="my-2 text-secondary fw-bold"><span><BsFillPlayBtnFill/></span><span className="ms-2"> Indicazioni per chi cerca lavoro</span></div>
+                        <div className="my-2 text-secondary fw-bold"><span><MdSettings/></span><span className="ms-2">Impostazioni candidatura</span></div>
                     </Card.Body>
                 </Card>
-                <Button className="rounded-pill p-3 my-3 d-none d-lg-block" variant="outline-primary"><span><BsPencilSquare/></span> Pubblica offerta gratuita</Button>
+                <Button className="rounded-pill p-3 my-3 d-none d-lg-block fw-bolder" variant="outline-primary"><span><BsPencilSquare/></span> Pubblica offerta gratuita</Button>
             </Col>
             <Col  xs={10} md={8} lg={6}>
-                <Card>
+                <Card className="p-2">
+                    <section className="p-3">
+                    <Card.Title><strong>Risultati della tua ricerca</strong></Card.Title>
+                    </section>
+                   
+           {/*      <Form onSubmit={handleSubmit}>
+                        <Form.Control type="text" placeholder="Cerca il lavoro dei tuoi sogni" onChange={(e)=> handleChange(e.target.value)}></Form.Control>
+                    </Form> */}
+                    {jobListQuery && jobListQuery.map((jobQuery, i) => (<CardJob key={`job-${i}`} singleJob={jobQuery} />))}
+                </Card>
+                <Card className="p-2">                
+                    <section className="p-3">
+                    <Card.Title><strong>Consigliato per te</strong></Card.Title>
+                    <Card.Text className="text-secondary">Sulla base del tuo profilo e della tua cronologia delle ricerche</Card.Text>
+                    </section>
+                    {spinner && <Spinner/>}
+                    {alert && <Alert/>}
                     {jobList && jobList.map((job, i) => (<CardJob key={`job-${i}`} singleJob={job} />))}                    
                 </Card>
             </Col>

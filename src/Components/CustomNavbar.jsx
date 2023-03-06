@@ -5,14 +5,27 @@ import { MdHome, MdWork, MdNotifications } from "react-icons/md";
 import { BsFillPeopleFill, BsFillPersonFill } from "react-icons/bs";
 import { CgMenuGridR } from "react-icons/cg";
 import { GoSearch } from "react-icons/go";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const CustomNavbar = () => {
   const profile = useSelector((state) => state.myProfile);
   const token = process.env.REACT_APP_TOKEN;
   const dispatch = useDispatch();
+  const [query, setQuery] = useState()
+  const navigate = useNavigate()
+
+
+  const handleChange = (e) => {
+    setQuery(e)    
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({type: "SEARCH_QUERY", payload: query});
+    navigate("/jobs");
+  }
 
   const MainProfile = async () => {
     try {
@@ -34,6 +47,7 @@ const CustomNavbar = () => {
   useEffect(() => {
     MainProfile();
   }, []);
+  
   return (
     <Row
       className="w-100 navigation d-flex justify-content-center m-0 "
@@ -50,12 +64,13 @@ const CustomNavbar = () => {
               <AiFillLinkedin className="linkedinIcon" href="/" />
             </Link>
 
-            <Form className="d-flex form d-none d-lg-block">
+            <Form className="d-flex form d-none d-lg-block" onSubmit={(e)=> handleSubmit(e)}>
               <Form.Control
                 type="search"
                 placeholder="Cerca"
                 className="me-2 formBlue h-100"
                 aria-label="Search"
+                onChange={(e)=>handleChange(e.target.value)}
               />
               <GoSearch className="lente" />
             </Form>

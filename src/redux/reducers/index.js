@@ -8,6 +8,7 @@ const initialState = {
   modifiedInfo: {},
   deletedExperience: "",
   modifiedExperience: "",
+  query: "",
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -30,6 +31,8 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, deletedExperience: action.payload };
     case "MODIFIED_EXPERIENCE":
       return { ...state, modifiedExperience: action.payload };
+    case "SEARCH_QUERY":
+      return { ...state, query: action.payload };
     default:
       return state;
   }

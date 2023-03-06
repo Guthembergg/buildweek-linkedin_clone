@@ -380,3 +380,10 @@
 .invalid {
   border: 1px solid #ff0000;
 }
+
+/* Job Page */
+
+.bookmarkJob:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
