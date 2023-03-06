@@ -12,7 +12,7 @@ import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { useEffect, useState } from "react";
-import CardComment from "./CardComment";
+import CommentComponent from "./CommentComponent";
 
 const FeedNews = (props) => {
   moment.locale("it");
@@ -166,7 +166,9 @@ const FeedNews = (props) => {
           <span className="d-none d-md-inline text-secondary">Invia</span>
         </div>
       </section>
-      {selected && <CardComment />}
+      {selected && (
+        <CommentComponent postId={props.news._id} comment={comment} />
+      )}
     </Card>
   );
 };
