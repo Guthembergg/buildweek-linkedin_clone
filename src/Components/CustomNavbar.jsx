@@ -73,7 +73,7 @@ const CustomNavbar = () => {
             <BsFillPeopleFill className="navIcon" />
             <span className="d-none d-lg-block">Rete</span>
           </li>
-          <Link to={"/jobs"}><li className="d-none d-md-block text-center">
+          <Link className="text-decoration-none text-secondary" to={"/jobs"}><li className="d-none d-md-block text-center">
             <MdWork className="navIcon" />
             <span className="d-none d-lg-block">Lavoro</span>
           </li></Link>

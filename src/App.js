@@ -18,7 +18,7 @@ function App() {
           <Route path="/" element={<MainNews />}></Route>
           {/*  <Route path="/profile" element={<MainProfile />}></Route> */}
           <Route path="/profile/:id" element={<MainProfile />}></Route>
-          <Route path="/jobd" element={<JobPage />} />
+          <Route path="/jobs" element={<JobPage />} />
         </Routes>
         <CustomeFooter />
       </BrowserRouter>
