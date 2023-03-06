@@ -11,15 +11,53 @@ import PostDeleteModal from "./PostDeleteModal";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
+import { useEffect, useState } from "react";
 const FeedNews = (props) => {
   moment.locale("it");
-
+  const [spinnerComment, setSpinnerComment] = useState();
+  const [comment, setComment] = useState();
+  const [alertComment, setAlertComment] = useState();
+  const token = process.env.REACT_APP_COMMENT;
   const myId = useSelector((state) => state.myProfile._id);
   const navigate = useNavigate();
   console.log(myId);
   console.log(props);
   console.log(props.news.user._id);
+  console.log(comment);
+  const commentsFetch = async (postId, ourMethod) => {
+    setSpinnerComment(true);
+    try {
+      const response = await fetch(
+        `https://striveschool-api.herokuapp.com/api/comments/${postId}`,
+        {
+          method: ourMethod,
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        if (ourMethod === "GET") {
+          setComment(data);
+          setSpinnerComment(false);
+          setAlertComment(false);
+        }
+      } else {
+        console.log("mainPage: comments. errore in if");
+        setAlertComment(true);
+        setSpinnerComment(false);
+      }
+    } catch (err) {
+      console.log("mainPage: comments. err in catch");
+      setAlertComment(true);
+      setSpinnerComment(false);
+    }
+  };
 
+  useEffect(() => commentsFetch(props.news._id, "GET"), []);
   return (
     <Card className="mb-3 px-3 py-1 ">
       <section className="d-flex justify-content-between p-1">
