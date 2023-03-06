@@ -16,7 +16,7 @@ const CustomNavbar = () => {
   const dispatch = useDispatch();
   const [query, setQuery] = useState();
   const navigate = useNavigate();
-  
+
   const handleChange = (e) => {
     setQuery(e);
   };
@@ -124,7 +124,7 @@ const CustomNavbar = () => {
             <span className="d-none d-lg-block">Rete</span>
           </li>
           <Link className="text-decoration-none text-secondary" to={"/jobs"}>
-            <li className="d-none d-md-block text-center">
+            <li className="text-center">
               <MdWork className="navIcon" />
               <span className="d-none d-lg-block">Lavoro</span>
             </li>
@@ -133,7 +133,7 @@ const CustomNavbar = () => {
             <AiFillMessage className="navIcon" />
             <span className="d-none d-lg-block">Messaggistica</span>
           </li>
-          <li>
+          <li className="d-none d-md-block text-center ">
             <MdNotifications className="navIcon" />
             <span className="d-none d-lg-block">Notifiche</span>
           </li>

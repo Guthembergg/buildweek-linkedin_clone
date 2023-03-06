@@ -5,7 +5,6 @@ import MainNews from "./Components/MainNews";
 import MainProfile from "./Components/MainProfile";
 import JobPage from "./Components/JobsPage";
 import CustomNavbar from "./Components/CustomNavbar";
-import CustomeFooter from "./Components/CustomFooter";
 
 // import Aside from "./Components/Aside";
 
@@ -20,7 +19,6 @@ function App() {
           <Route path="/profile/:id" element={<MainProfile />}></Route>
           <Route path="/jobs" element={<JobPage />} />
         </Routes>
-        <CustomeFooter />
       </BrowserRouter>
     </>
   );

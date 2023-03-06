@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "./Alert";
 import Spinner from "./Spinner";
 import CardJob from "./CardJob";
+import CardAndFooter from "./CardAndFooter";
 
 const JobsPage = () => {
   const [jobList, setJobList] = useState();
@@ -21,7 +22,7 @@ const JobsPage = () => {
   const [searchSection, setSearchSection] = useState(false);
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query);
-   
+
   const handleClick = () => {
     dispatch({ type: "CLEAR_SEARCH", payload: "" });
     setSearchSection(false);
@@ -85,8 +86,8 @@ const JobsPage = () => {
   }, [query]);
 
   return (
-    <Row className="d-flex flex-column flex-lg-row justify-content-center py-3 m-0 w-100">
-      <Col md={10} xl={2}>
+    <Row className="d-flex flex-column justify-content-center align-items-center flex-lg-row align-items-xl-start  py-3 m-0 w-100">
+      <Col xs={10} md={10} xl={2}>
         <Card className="mb-3">
           <Card.Body>
             <div className="my-2 text-secondary fw-bold">
@@ -131,7 +132,7 @@ const JobsPage = () => {
           Pubblica offerta gratuita
         </Button>
       </Col>
-      <Col xs={10} md={8} lg={6}>
+      <Col xs={10} md={10} xl={6}>
         {searchSection && (
           <Card className="p-2">
             <section className="p-3 d-flex justify-content-between">
@@ -165,10 +166,11 @@ const JobsPage = () => {
             ))}
         </Card>
       </Col>
-      <Col className="d-none d-xl-block" xl={2}></Col>
+      <Col className="d-none d-xl-block" xl={2}>
+        <CardAndFooter />
+      </Col>
     </Row>
   );
 };
 
-
-export default JobsPage
+export default JobsPage;
