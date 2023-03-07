@@ -15,6 +15,8 @@ const CustomNavbar = () => {
   const favourites = useSelector((state) => state.favourites);
   const token = process.env.REACT_APP_TOKEN;
   const token2 = process.env.REACT_APP_COMMENT;
+  const followArray = useSelector((state) => state.seguiti);
+
   const dispatch = useDispatch();
   const [query, setQuery] = useState();
   const navigate = useNavigate();
@@ -39,7 +41,9 @@ const CustomNavbar = () => {
         const data = await response.json();
 
         dispatch({ type: "ADD_MY_PROFILE", payload: data });
-        dispatch({ type: "FOLLOW", payload: data._id });
+        if (!followArray.includes(data._id)) {
+          dispatch({ type: "FOLLOW", payload: data._id });
+        }
       } else {
         console.log("mainPage: Main profile. errore in if");
       }
