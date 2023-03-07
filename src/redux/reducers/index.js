@@ -59,8 +59,7 @@ const MainReducer = (state = initialState, action) => {
       return {
         ...state,
         favourites: [
-          ...state.favourites,
-          state.favourites.filter((i) => i !== action.payload),
+          ...state.favourites.filter((e, i) => e !== action.payload),
         ],
       };
     default:

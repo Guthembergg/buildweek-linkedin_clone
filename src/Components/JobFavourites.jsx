@@ -43,7 +43,7 @@ const JobFav = () => {
                 <span
                   onClick={() =>
                     dispatch(
-                      { type: "REMOVE_TO_FAV", payload: e[i] },
+                      { type: "REMOVE_TO_FAV", payload: e },
                       console.log(favourites)
                     )
                   }
