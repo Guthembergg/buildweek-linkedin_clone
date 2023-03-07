@@ -1,4 +1,4 @@
-import { Row, Col, Card, Button } from "react-bootstrap";
+import { Row, Col, Card, Button, Pagination } from "react-bootstrap";
 import CardProfile from "./CardProfileNews";
 import { BiHash } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
@@ -13,17 +13,36 @@ import SpinnerLoad from "./Spinner";
 import AlertErrorCatch from "./Alert";
 
 const MainNews = () => {
-  const [postList, setPostList] = useState();
-  const [numberedPost, setNumberedPost] = useState(postList);
+  const [postList, setPostList] = useState([]);
+  const [numberedPost, setNumberedPost] = useState([]);
   const token = process.env.REACT_APP_TOKEN;
   const newPost = useSelector((state) => state.newPost);
   const modifiedPost = useSelector((state) => state.modifiedPost);
   const deletedPost = useSelector((state) => state.deletedPost);
   const followArray = useSelector((state) => state.seguiti);
+  const numeroPerPagina = 10;
+  let numeroPagine = Math.round(
+    postList.filter((e) => followArray.includes(e?.user?._id)).length /
+      numeroPerPagina
+  );
 
+  let items = [];
+  for (let number = 1; number <= numeroPagine; number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        onClick={() =>
+          numbered((number - 1) * numeroPerPagina, number * numeroPerPagina)
+        }
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
+  let numeroAumento = 2;
   const [spinner, setSpinner] = useState();
   const [alert, setAlert] = useState(false);
-
+  const [elementi, setElementi] = useState();
   const fetchGetPost = async () => {
     setSpinner(true);
     try {
@@ -33,8 +52,11 @@ const MainNews = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setPostList(data.reverse().slice(0, 30));
-        setNumberedPost(postList.slice(0, 2));
+        setPostList(data.reverse().slice(0, 50));
+        if (!numberedPost) {
+          setNumberedPost(data.slice(0, 10));
+        }
+
         setSpinner(false);
         setAlert(false);
       } else {
@@ -137,34 +159,23 @@ const MainNews = () => {
             {" "}
             Aggiorna nuovi post{" "}
           </Button>
+        </div>{" "}
+        <div className="d-flex justify-content-center">
+          <Pagination
+            component="div"
+            count={4}
+            color="primary"
+            page={numberedPost}
+          >
+            {items}
+          </Pagination>
         </div>
         {spinner && !alert && <SpinnerLoad />}
         {alert && !spinner && <AlertErrorCatch />}
         {numberedPost &&
           numberedPost
-            .filter((e) => followArray.includes(e.user._id))
-            .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
-        <div className="d-flex justify-content-center justify-content-around">
-          <Button
-            className="rounded-pill px-5 py-0 text-center"
-            variant="outline-primary"
-            style={{ height: "30px", border: "none" }}
-            onClick={() => numbered(2, 4)}
-          >
-            {" "}
-            Vedi i post precedenti{" "}
-          </Button>
-          <Button
-            className="rounded-pill px-5 py-0 text-center"
-            variant="outline-primary"
-            style={{ height: "30px", border: "none" }}
-            onClick={() => numbered(4, 6)}
-          >
-            {" "}
-            Carica altri post{" "}
-          </Button>
-        </div>
-        {/*  */}
+            ?.filter((e) => followArray.includes(e?.user?._id))
+            ?.map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
 
       <Col className="d-none d-xl-block p-0" xl={2}>
