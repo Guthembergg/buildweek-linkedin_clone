@@ -64,9 +64,14 @@ const MainNews = () => {
       if (response.ok) {
         const data = await response.json();
         setPostList(data.reverse().slice(0, 50));
-        if (i === 0) {
-          setNumberedPost(data.slice(0, numeroPerPagina));
+        if (currentPage === 1) {
+          setNumberedPost(
+            data
+              ?.filter((e) => followArray.includes(e?.user?._id))
+              .slice(0, numeroPerPagina)
+          );
         }
+
         i++;
         setSpinner(false);
         setAlert(false);
@@ -84,7 +89,7 @@ const MainNews = () => {
 
   const numbered = (a, b) => {
     setNumberedPost(
-      postList.filter((e) => followArray.includes(e?.user?._id)).slice(a, b)
+      postList?.filter((e) => followArray.includes(e?.user?._id)).slice(a, b)
     );
   };
 
@@ -179,7 +184,7 @@ const MainNews = () => {
         {spinner && !alert && <SpinnerLoad />}
         {alert && !spinner && <AlertErrorCatch />}
         {numberedPost &&
-          numberedPost?.map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
+          numberedPost.map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
 
       <Col className="d-none d-xl-block p-0" xl={2}>
