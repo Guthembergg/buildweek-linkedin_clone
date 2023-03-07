@@ -13,6 +13,7 @@ import SpinnerLoad from "./Spinner";
 import AlertErrorCatch from "./Alert";
 
 const MainNews = () => {
+  let i = 0;
   const [postList, setPostList] = useState([]);
   const [numberedPost, setNumberedPost] = useState([]);
   const token = process.env.REACT_APP_TOKEN;
@@ -53,9 +54,10 @@ const MainNews = () => {
       if (response.ok) {
         const data = await response.json();
         setPostList(data.reverse().slice(0, 50));
-        if (!numberedPost) {
+        if (i === 0) {
           setNumberedPost(data.slice(0, 10));
         }
+        i++;
 
         setSpinner(false);
         setAlert(false);
