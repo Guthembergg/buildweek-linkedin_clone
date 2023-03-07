@@ -86,9 +86,9 @@ const JobsPage = () => {
   }, [query]);
 
   return (
-    <Row className="d-flex flex-column justify-content-center align-items-center flex-lg-row align-items-xl-start  py-3 m-0 w-100">
-      <Col xs={10} md={10} xl={2}>
-        <Card className="mb-3">
+    <Row className="d-flex flex-column justify-content-center align-items-center flex-lg-row align-items-xl-start  py-3 m-0 w-100 ">
+      <Col xs={10} md={10} xl={2} className="p-0">
+        <Card className="mb-3 p-0">
           <Card.Body>
             <div className="my-2 text-secondary fw-bold">
               <span>
@@ -134,7 +134,7 @@ const JobsPage = () => {
       </Col>
       <Col xs={10} md={10} xl={6}>
         {searchSection && (
-          <Card className="p-2">
+          <Card className="p-2 mb-3">
             <section className="p-3 d-flex justify-content-between">
               <Card.Title>
                 <strong>Risultati della tua ricerca</strong>
@@ -166,7 +166,7 @@ const JobsPage = () => {
             ))}
         </Card>
       </Col>
-      <Col className="d-none d-xl-block" xl={2}>
+      <Col className="d-none d-xl-block p-0" xl={2}>
         <CardAndFooter />
       </Col>
     </Row>

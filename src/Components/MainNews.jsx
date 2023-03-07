@@ -61,7 +61,7 @@ const MainNews = () => {
 
   return (
     <Row className="d-flex justify-content-center py-3 m-0 w-100">
-      <Col className="d-none d-md-block " md={3} xl={2}>
+      <Col className="d-none d-md-block p-0" md={3} xl={2}>
         <CardProfile />
         <Card className="d-flex mt-3">
           <Card.Body className="position-relative px-0">
@@ -138,8 +138,8 @@ const MainNews = () => {
             .filter((_, i) => i < 20)
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
-      <Col className="d-none d-xl-block" xl={2}>
-        <Card>
+      <Col className="d-none d-xl-block p-0" xl={2}>
+        <Card className="mb-3">
           <Card.Body className="position-relative px-0 py-2">
             <h6 className="d-flex justify-content-between mb-2 px-3">
               {" "}
