@@ -48,7 +48,12 @@ const JobCard = (props) => {
       <div className="d-flex align-items-center text-align col-1">
         <div className="bookmarkJob p-3 rounded-circle">
           {myJobs?.includes(props.singleJob) ? (
-            <BsFillBookmarkFill style={{ fontSize: "1.6em" }} />
+            <BsFillBookmarkFill
+              style={{ fontSize: "1.6em" }}
+              onClick={() =>
+                dispatch({ type: "REMOVE_TO_FAV", payload: props.singleJob })
+              }
+            />
           ) : (
             <BsBookmark
               style={{ fontSize: "1.6em" }}
