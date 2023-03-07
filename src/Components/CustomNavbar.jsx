@@ -39,7 +39,7 @@ const CustomNavbar = () => {
         const data = await response.json();
 
         dispatch({ type: "ADD_MY_PROFILE", payload: data });
-        dispatch({ type: "FOLLOW", payload: data._id });
+        dispatch({ type: "FOLLOW", payload: data._ID });
       } else {
         console.log("mainPage: Main profile. errore in if");
       }
