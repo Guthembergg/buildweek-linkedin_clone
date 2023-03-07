@@ -13,6 +13,7 @@ import SpinnerLoad from "./Spinner";
 import AlertErrorCatch from "./Alert";
 
 const MainNews = () => {
+  let i = 0;
   const [postList, setPostList] = useState([]);
   const [numberedPost, setNumberedPost] = useState([]);
   const token = process.env.REACT_APP_TOKEN;
@@ -27,14 +28,23 @@ const MainNews = () => {
       numeroPerPagina
   );
 
+  let currentPage;
+  let myActive = 1;
+  let active = 1;
   let items = [];
+  const handleClick = (a) => {
+    numbered((a - 1) * numeroPerPagina, a * numeroPerPagina);
+    currentPage = a;
+  };
+
   for (let number = 1; number <= numeroPagine; number++) {
     items.push(
       <Pagination.Item
         key={number}
-        onClick={() =>
-          numbered((number - 1) * numeroPerPagina, number * numeroPerPagina)
-        }
+        onClick={() => {
+          handleClick(number);
+        }}
+        className={currentPage === number ? select : "none"}
       >
         {number}
       </Pagination.Item>
@@ -73,7 +83,9 @@ const MainNews = () => {
   };
 
   const numbered = (a, b) => {
-    setNumberedPost(postList.slice(a, b));
+    setNumberedPost(
+      postList.filter((e) => followArray.includes(e?.user?._id)).slice(a, b)
+    );
   };
 
   useEffect(() => {
@@ -167,9 +179,7 @@ const MainNews = () => {
         {spinner && !alert && <SpinnerLoad />}
         {alert && !spinner && <AlertErrorCatch />}
         {numberedPost &&
-          numberedPost
-            ?.filter((e) => followArray.includes(e?.user?._id))
-            ?.map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
+          numberedPost?.map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
 
       <Col className="d-none d-xl-block p-0" xl={2}>
