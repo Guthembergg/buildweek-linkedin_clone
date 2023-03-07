@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import { Card, Col, Image } from "react-bootstrap";
+import { Button, Card, Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
+import { ImCross } from "react-icons/im";
+import { useDispatch } from "react-redux";
 
 const CardRete = ({ id }) => {
   const [singleProfile, setSingleProfile] = useState();
   const token = process.env.REACT_APP_TOKEN;
+  const dispatch = useDispatch();
 
   const fetchFollowProfile = async () => {
     try {
@@ -56,6 +59,15 @@ const CardRete = ({ id }) => {
           >
             {singleProfile?.title}
           </Card.Text>
+          <Button
+            variant="outline-danger"
+            /*  onClick={dispatch({
+              type: "REMOVE_TO_FOLLOW",
+              payload: singleProfile?._id,
+            })} */
+          >
+            <ImCross /> Smetti di seguire{" "}
+          </Button>
         </Card.Body>
       </Card>
     </Col>
