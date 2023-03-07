@@ -1,13 +1,14 @@
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { BsBookmark } from "react-icons/bs";
+import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { SlLocationPin } from "react-icons/sl";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { addToFav } from "../redux/actions";
 
 const JobCard = (props) => {
+  const myJobs = useSelector((state) => state.favourites);
   moment.locale("it");
   const dispatch = useDispatch();
   return (
@@ -45,11 +46,15 @@ const JobCard = (props) => {
         </h6>
       </div>
       <div className="d-flex align-items-center text-align col-1">
-        <div
-          className="bookmarkJob p-3 rounded-circle"
-          onClick={() => dispatch(addToFav(props.singleJob))}
-        >
-          <BsBookmark style={{ fontSize: "1.6em" }} />
+        <div className="bookmarkJob p-3 rounded-circle">
+          {myJobs?.includes(props.singleJob) ? (
+            <BsFillBookmarkFill
+              style={{ fontSize: "1.6em" }}
+              onClick={() => dispatch(addToFav(props.singleJob))}
+            />
+          ) : (
+            <BsBookmark style={{ fontSize: "1.6em" }} />
+          )}
         </div>
       </div>
     </Card.Body>
