@@ -17,6 +17,7 @@ const initialState = {
   commentId: {},
   seguiti: [],
   favourites: [],
+  likes: [],
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -68,6 +69,16 @@ const MainReducer = (state = initialState, action) => {
       return {
         ...state,
         seguiti: [...state.seguiti.filter((e) => e !== action.payload)],
+      };
+    case "LIKE":
+      return {
+        ...state,
+        likes: [...state.likes, action.payload],
+      };
+    case "REMOVE_LIKE":
+      return {
+        ...state,
+        likes: [...state.likes.filter((e) => e !== action.payload)],
       };
     default:
       return state;
