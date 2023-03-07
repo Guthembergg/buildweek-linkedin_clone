@@ -1,4 +1,4 @@
-import { Button, Card, Image, NavDropdown } from "react-bootstrap";
+import { Button, Card, Col, Image, NavDropdown, Row } from "react-bootstrap";
 import { SlLike } from "react-icons/sl";
 import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
@@ -73,58 +73,68 @@ const FeedNews = (props) => {
   };
   return (
     <Card className="mb-3 px-3 py-1 ">
-      <section className="d-flex justify-content-between p-1">
-        <div className="d-flex">
-          <div className="d-flex align-items-center justify-content-center">
-            <Image
-              className="border"
-              roundedCircle={true}
-              style={{ width: "60px", height: "60px" }}
-              src={
-                props.news?.user.image
-                  ? props.news.user.image
-                  : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-              }
-            />
-          </div>
-          <div className="p-2">
-            <Link
-              className="text-decoration-none text-dark"
-              to={`/profile/${props.news?.user._id}`}
-            >
-              <h6 className="m-0 fw-bold">
-                {props.news?.user.name} {props.news?.user.surname}
-              </h6>
-            </Link>
-            <p className="m-0 text-secondary" style={{ fontSize: "0.9em" }}>
-              {props.news?.user.title}
-            </p>
-            <Button onClick={() => followClick(props.news?.user._id)}>
-              follow
-            </Button>
-            <p
-              className="m-0 text-secondary d-flex justify-content-start align-items-center"
-              style={{ fontSize: "0.9em" }}
-            >
-              <span>
-                {moment(props.news?.createdAt).format("DD MM YY") ===
-                moment().format("DD MM YY") /* ||
+      <section className=" p-1">
+        <Row>
+          <Col xs={10}>
+            {" "}
+            <div className="d-flex">
+              <div className="d-flex align-items-center justify-content-center">
+                <Image
+                  className="border"
+                  roundedCircle={true}
+                  style={{ width: "60px", height: "60px" }}
+                  src={
+                    props.news?.user.image
+                      ? props.news.user.image
+                      : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                  }
+                />
+              </div>
+              <div className="p-2">
+                <Link
+                  className="text-decoration-none text-dark"
+                  to={`/profile/${props.news?.user._id}`}
+                >
+                  <h6 className="m-0 fw-bold">
+                    {props.news?.user.name} {props.news?.user.surname}
+                  </h6>
+                </Link>
+                <p className="m-0 text-secondary" style={{ fontSize: "0.9em" }}>
+                  {props.news?.user.title}
+                </p>
+                <p
+                  className="m-0 text-secondary d-flex justify-content-start align-items-center"
+                  style={{ fontSize: "0.9em" }}
+                >
+                  <span>
+                    {moment(props.news?.createdAt).format("DD MM YY") ===
+                    moment().format("DD MM YY") /* ||
                 parseInt(moment().format("DD")) ===
                   parseInt(moment(props.news?.createdAt).format("DD")) + 1 */
-                  ? moment(props.news?.createdAt).fromNow()
-                  : moment(props.news?.createdAt).format("YYYY") ===
-                    moment().format("YYYY")
-                  ? moment(props.news?.createdAt).format(
-                      "ddd D MMMM [alle] H:mm "
-                    )
-                  : moment(props.news?.createdAt).format(
-                      "ddd d MMMM YYYY [alle] H:mm "
-                    )}
-              </span>
-              <BiWorld className="ms-1 text-tertiary" />
-            </p>
-          </div>
-        </div>
+                      ? moment(props.news?.createdAt).fromNow()
+                      : moment(props.news?.createdAt).format("YYYY") ===
+                        moment().format("YYYY")
+                      ? moment(props.news?.createdAt).format(
+                          "ddd D MMMM [alle] H:mm "
+                        )
+                      : moment(props.news?.createdAt).format(
+                          "ddd d MMMM YYYY [alle] H:mm "
+                        )}
+                  </span>
+                  <BiWorld className="ms-1 text-tertiary" />
+                </p>
+              </div>
+            </div>
+          </Col>
+          {!followArray.includes(props.news?.user._id) && (
+            <Col xs={2}>
+              <Button onClick={() => followClick(props.news?.user._id)}>
+                follow
+              </Button>
+            </Col>
+          )}
+        </Row>
+
         <div>
           {myId === props.news.user._id && (
             <div className="d-flex ">
