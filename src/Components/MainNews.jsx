@@ -22,7 +22,7 @@ const MainNews = () => {
   const deletedPost = useSelector((state) => state.deletedPost);
   const followArray = useSelector((state) => state.seguiti);
   const numeroPerPagina = 5;
-  let i = 0;
+
   let numeroPagine = Math.round(
     postList.filter((e) => followArray.includes(e?.user?._id)).length /
       numeroPerPagina
@@ -44,7 +44,7 @@ const MainNews = () => {
         onClick={() => {
           handleClick(number);
         }}
-        className={currentPage === number ? select : "none"}
+        className={currentPage === number ? "select" : "none"}
       >
         {number}
       </Pagination.Item>
