@@ -13,6 +13,7 @@ import Alert from "./Alert";
 import Spinner from "./Spinner";
 import CardJob from "./CardJob";
 import CardAndFooter from "./CardAndFooter";
+import JobFav from "./JobFavourites";
 
 const JobsPage = () => {
   const [jobList, setJobList] = useState();
@@ -22,6 +23,7 @@ const JobsPage = () => {
   const [searchSection, setSearchSection] = useState(false);
   const dispatch = useDispatch();
   const query = useSelector((state) => state.query);
+  const favourites = useSelector((state) => state.favourites);
 
   const handleClick = () => {
     dispatch({ type: "CLEAR_SEARCH", payload: "" });
@@ -132,7 +134,7 @@ const JobsPage = () => {
           Pubblica offerta gratuita
         </Button>
       </Col>
-      <Col xs={10} md={10} xl={6}>
+      <Col xs={10} md={10} xl={5}>
         {searchSection && (
           <Card className="p-2 mb-3">
             <section className="p-3 d-flex justify-content-between">
@@ -166,7 +168,8 @@ const JobsPage = () => {
             ))}
         </Card>
       </Col>
-      <Col className="d-none d-xl-block p-0" xl={2}>
+      <Col className="d-none d-xl-block p-0" xl={3}>
+        {favourites !== 0 && <JobFav />}
         <CardAndFooter />
       </Col>
     </Row>

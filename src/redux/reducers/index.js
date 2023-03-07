@@ -14,6 +14,7 @@ const initialState = {
   delete_comment: "",
   commentId: {},
   seguiti: [],
+  favourites: [],
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -50,6 +51,18 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, commentId: action.payload };
     case "FOLLOW":
       return { ...state, seguiti: [...state.seguiti, action.payload] };
+    case "ADD_TO_FAV":
+      return { ...state, favourites: [...state.favourites, action.payload] };
+    case "CLEAR_FAV":
+      return { ...state, favourites: [] };
+    case "REMOVE_TO_FAV":
+      return {
+        ...state,
+        favourites: [
+          ...state.favourites,
+          state.favourites.filter((i) => i !== action.payload),
+        ],
+      };
     default:
       return state;
   }

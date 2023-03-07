@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 const CustomNavbar = () => {
   const profile = useSelector((state) => state.myProfile);
   const follow = useSelector((state) => state.seguiti);
+  const favourites = useSelector((state) => state.favourites);
   const token = process.env.REACT_APP_TOKEN;
   const token2 = process.env.REACT_APP_COMMENT;
   const dispatch = useDispatch();
@@ -130,6 +131,10 @@ const CustomNavbar = () => {
           </li>
           <Link className="text-decoration-none text-secondary" to={"/jobs"}>
             <li className="text-center">
+              {" "}
+              <span className="position-absolute top-10 start-90 translate-middle badge rounded-pill bg-danger">
+                {favourites.length}
+              </span>
               <MdWork className="navIcon" />
               <span className="d-none d-lg-block">Lavoro</span>
             </li>
