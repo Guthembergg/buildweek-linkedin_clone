@@ -118,7 +118,7 @@ const Aside = () => {
         </div>
         {utenti &&
           utenti
-            .filter((_, i) => i > 5 && i < 11)
+            .filter((_, i) => i > 5 && i < 30)
             .map((e, i) => <TokenUtenti key={`utenti-${i}`} profile={e} />)}
       </div>
     </div>

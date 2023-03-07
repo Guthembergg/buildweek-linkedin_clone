@@ -18,6 +18,7 @@ const MainNews = () => {
   const newPost = useSelector((state) => state.newPost);
   const modifiedPost = useSelector((state) => state.modifiedPost);
   const deletedPost = useSelector((state) => state.deletedPost);
+  const followArray = useSelector((state) => state.seguiti);
 
   const [spinner, setSpinner] = useState();
   const [alert, setAlert] = useState(false);
@@ -31,7 +32,7 @@ const MainNews = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setPostList(data.reverse().slice(0, 20));
+        setPostList(data.reverse().slice(0, 30));
         setSpinner(false);
         setAlert(false);
       } else {
@@ -135,7 +136,7 @@ const MainNews = () => {
         {alert && !spinner && <AlertErrorCatch />}
         {postList &&
           postList
-            .filter((_, i) => i < 20)
+            .filter((e) => followArray.includes(e.user._id))
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
       </Col>
       <Col className="d-none d-xl-block p-0" xl={2}>

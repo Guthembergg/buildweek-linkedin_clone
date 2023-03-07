@@ -13,6 +13,7 @@ const initialState = {
   modified_comment: "",
   delete_comment: "",
   commentId: {},
+  seguiti: [],
 };
 
 const MainReducer = (state = initialState, action) => {
@@ -47,6 +48,8 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, delete_comment: action.payload };
     case "COMMENT_ID":
       return { ...state, commentId: action.payload };
+    case "FOLLOW":
+      return { ...state, seguiti: [...state.seguiti, action.payload] };
     default:
       return state;
   }
