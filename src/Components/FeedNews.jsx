@@ -13,11 +13,12 @@ import moment from "moment/moment";
 import "moment/locale/it";
 import { useEffect, useState } from "react";
 import CommentComponent from "./CommentComponent";
-
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 const FeedNews = (props) => {
   const newComment = useSelector((state) => state.comment);
   const modifiedComment = useSelector((state) => state.modified_comment);
   const followArray = useSelector((state) => state.seguiti);
+  const likesArray = useSelector((state) => state.likes);
 
   const deleteComment = useSelector((state) => state.delete_comment);
   const dispatch = useDispatch();
@@ -160,10 +161,27 @@ const FeedNews = (props) => {
       </Card.Body>
       <section className="d-flex justify-content-around text-tertiary border-top">
         <div className="iconPost rounded d-flex align-items-center">
-          <span className="me-2">
-            <SlLike style={{ fontSize: "1.4em" }} />
-          </span>
-          <span className="d-none d-md-inline text-secondary">Consiglia </span>
+          {likesArray?.includes(props.news._id) ? (
+            <span
+              onClick={() => {
+                dispatch({ type: "REMOVE_LIKE", payload: props.news._id });
+              }}
+              className="me-2"
+            >
+              <AiFillLike style={{ fontSize: "1.4em" }} />
+              <span className="ms-2"> Consiglia</span>
+            </span>
+          ) : (
+            <span
+              className="me-2"
+              onClick={() => {
+                dispatch({ type: "LIKE", payload: props.news._id });
+              }}
+            >
+              <AiOutlineLike style={{ fontSize: "1.4em" }} />
+              <span className="ms-2"> Consiglia</span>
+            </span>
+          )}
         </div>
         <div
           className="iconPost rounded d-flex align-items-center"
