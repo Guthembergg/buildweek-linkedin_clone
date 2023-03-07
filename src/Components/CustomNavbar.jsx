@@ -121,14 +121,16 @@ const CustomNavbar = () => {
               <span className="d-none d-lg-block">Home</span>
             </li>
           </Link>
-          <li className="d-none d-md-block text-center position-relative">
-            {" "}
-            <span className="position-absolute top-10 start-90 translate-middle badge rounded-pill bg-danger">
-              {follow.length}
-            </span>
-            <BsFillPeopleFill className="navIcon" />
-            <span className="d-none d-lg-block">Rete</span>
-          </li>
+          <Link className="text-decoration-none text-secondary" to={"/rete"}>
+            <li className="d-none d-md-block text-center position-relative">
+              {" "}
+              <span className="position-absolute top-10 start-90 translate-middle badge rounded-pill bg-danger">
+                {follow.length}
+              </span>
+              <BsFillPeopleFill className="navIcon" />
+              <span className="d-none d-lg-block">Rete</span>
+            </li>
+          </Link>
           <Link className="text-decoration-none text-secondary" to={"/jobs"}>
             <li className="text-center">
               {" "}
