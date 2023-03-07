@@ -123,7 +123,7 @@ const CustomNavbar = () => {
             </li>
           </Link>
           <Link className="text-decoration-none text-secondary" to={"/rete"}>
-            <li className="d-none d-md-block text-center position-relative">
+            <li className="text-center position-relative">
               {" "}
               <span className="position-absolute top-10 start-90 translate-middle badge rounded-pill bg-danger">
                 {follow.length}
