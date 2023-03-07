@@ -48,12 +48,12 @@ const JobCard = (props) => {
       <div className="d-flex align-items-center text-align col-1">
         <div className="bookmarkJob p-3 rounded-circle">
           {myJobs?.includes(props.singleJob) ? (
-            <BsFillBookmarkFill
+            <BsFillBookmarkFill style={{ fontSize: "1.6em" }} />
+          ) : (
+            <BsBookmark
               style={{ fontSize: "1.6em" }}
               onClick={() => dispatch(addToFav(props.singleJob))}
             />
-          ) : (
-            <BsBookmark style={{ fontSize: "1.6em" }} />
           )}
         </div>
       </div>
