@@ -64,7 +64,7 @@ const MainNews = () => {
       if (response.ok) {
         const data = await response.json();
         setPostList(data.reverse().slice(0, 50));
-        if (currentPage === 1) {
+        if (currentPage === 1 || !currentPage) {
           setNumberedPost(
             data
               ?.filter((e) => followArray.includes(e?.user?._id))
