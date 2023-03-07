@@ -14,6 +14,7 @@ import AlertErrorCatch from "./Alert";
 
 const MainNews = () => {
   const [postList, setPostList] = useState();
+  const [numberedPost, setNumberedPost] = useState(postList);
   const token = process.env.REACT_APP_TOKEN;
   const newPost = useSelector((state) => state.newPost);
   const modifiedPost = useSelector((state) => state.modifiedPost);
@@ -33,6 +34,7 @@ const MainNews = () => {
       if (response.ok) {
         const data = await response.json();
         setPostList(data.reverse().slice(0, 30));
+        setNumberedPost(postList.slice(0, 2));
         setSpinner(false);
         setAlert(false);
       } else {
@@ -45,6 +47,10 @@ const MainNews = () => {
       setAlert(true);
       setSpinner(false);
     }
+  };
+
+  const numbered = (a, b) => {
+    setNumberedPost(postList.slice(a, b));
   };
 
   useEffect(() => {
@@ -134,11 +140,33 @@ const MainNews = () => {
         </div>
         {spinner && !alert && <SpinnerLoad />}
         {alert && !spinner && <AlertErrorCatch />}
-        {postList &&
-          postList
+        {numberedPost &&
+          numberedPost
             .filter((e) => followArray.includes(e.user._id))
             .map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
+        <div className="d-flex justify-content-center justify-content-around">
+          <Button
+            className="rounded-pill px-5 py-0 text-center"
+            variant="outline-primary"
+            style={{ height: "30px", border: "none" }}
+            onClick={() => numbered(2, 4)}
+          >
+            {" "}
+            Vedi i post precedenti{" "}
+          </Button>
+          <Button
+            className="rounded-pill px-5 py-0 text-center"
+            variant="outline-primary"
+            style={{ height: "30px", border: "none" }}
+            onClick={() => numbered(4, 6)}
+          >
+            {" "}
+            Carica altri post{" "}
+          </Button>
+        </div>
+        {/*  */}
       </Col>
+
       <Col className="d-none d-xl-block p-0" xl={2}>
         <Card className="mb-3">
           <Card.Body className="position-relative px-0 py-2">
