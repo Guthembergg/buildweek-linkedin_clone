@@ -387,3 +387,6 @@
   background-color: lightgray;
   cursor: pointer;
 }
+.select {
+  background-color: #ff0000 !important;
+}
