@@ -1,4 +1,4 @@
-import { Card, Image, NavDropdown } from "react-bootstrap";
+import { Button, Card, Image, NavDropdown } from "react-bootstrap";
 import { SlLike } from "react-icons/sl";
 import { AiOutlineComment } from "react-icons/ai";
 import { FiSend } from "react-icons/fi";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { HiDotsHorizontal } from "react-icons/hi";
 import PostPencilModal from "./PostPencilModal";
 import PostDeleteModal from "./PostDeleteModal";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { useEffect, useState } from "react";
@@ -17,8 +17,10 @@ import CommentComponent from "./CommentComponent";
 const FeedNews = (props) => {
   const newComment = useSelector((state) => state.comment);
   const modifiedComment = useSelector((state) => state.modified_comment);
-  const deleteComment = useSelector((state) => state.delete_comment);
+  const followArray = useSelector((state) => state.seguiti);
 
+  const deleteComment = useSelector((state) => state.delete_comment);
+  const dispatch = useDispatch();
   moment.locale("it");
   const [spinnerComment, setSpinnerComment] = useState();
   const [comment, setComment] = useState();
@@ -64,7 +66,11 @@ const FeedNews = (props) => {
       setSpinnerComment(false);
     }
   };
-
+  const followClick = (value) => {
+    if (!followArray.includes(value)) {
+      dispatch({ type: "FOLLOW", payload: value });
+    }
+  };
   return (
     <Card className="mb-3 px-3 py-1 ">
       <section className="d-flex justify-content-between p-1">
@@ -93,6 +99,9 @@ const FeedNews = (props) => {
             <p className="m-0 text-secondary" style={{ fontSize: "0.9em" }}>
               {props.news?.user.title}
             </p>
+            <Button onClick={() => followClick(props.news?.user._id)}>
+              follow
+            </Button>
             <p
               className="m-0 text-secondary d-flex justify-content-start align-items-center"
               style={{ fontSize: "0.9em" }}
