@@ -64,11 +64,11 @@ const MainReducer = (state = initialState, action) => {
           ...state.favourites.filter((e, i) => e !== action.payload),
         ],
       };
-    /*  case "REMOVE_TO_FOLLOW":
+    case "REMOVE_TO_FOLLOW":
       return {
         ...state,
-        seguiti: [...state.seguiti.filter((e, i) => e !== action.payload)],
-      }; */
+        seguiti: [...state.seguiti.filter((e) => e !== action.payload)],
+      };
     default:
       return state;
   }

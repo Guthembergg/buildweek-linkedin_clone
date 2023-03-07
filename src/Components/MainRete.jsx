@@ -13,7 +13,7 @@ const MainRete = () => {
         <CardProfile />
       </Col>
       <Col xs={10} md={8} lg={6}>
-        <Row className="d-flex justify-content-between">
+        <Row className="d-flex justify-content-evenly">
           {" "}
           {follow &&
             follow.map((e, i) => <CardProfileRete key={`follow${i}`} id={e} />)}

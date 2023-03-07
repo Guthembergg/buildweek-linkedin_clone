@@ -42,10 +42,7 @@ const JobFav = () => {
                 </span>
                 <span
                   onClick={() =>
-                    dispatch(
-                      { type: "REMOVE_TO_FAV", payload: e },
-                      console.log(favourites)
-                    )
+                    dispatch({ type: "REMOVE_TO_FAV", payload: e })
                   }
                 >
                   <BsTrashFill style={{ color: "red" }} />
