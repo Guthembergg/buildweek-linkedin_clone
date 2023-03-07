@@ -50,10 +50,15 @@ const JobCard = (props) => {
           {myJobs?.includes(props.singleJob) ? (
             <BsFillBookmarkFill
               style={{ fontSize: "1.6em" }}
-              onClick={() => dispatch(addToFav(props.singleJob))}
+              onClick={() =>
+                dispatch({ type: "REMOVE_TO_FAV", payload: props.singleJob })
+              }
             />
           ) : (
-            <BsBookmark style={{ fontSize: "1.6em" }} />
+            <BsBookmark
+              style={{ fontSize: "1.6em" }}
+              onClick={() => dispatch(addToFav(props.singleJob))}
+            />
           )}
         </div>
       </div>
