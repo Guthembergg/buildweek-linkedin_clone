@@ -1,3 +1,5 @@
+import { ADD_TO_FAV } from "../actions";
+
 const initialState = {
   myProfile: [],
   myExperience: {},
@@ -51,7 +53,7 @@ const MainReducer = (state = initialState, action) => {
       return { ...state, commentId: action.payload };
     case "FOLLOW":
       return { ...state, seguiti: [...state.seguiti, action.payload] };
-    case "ADD_TO_FAV":
+    case ADD_TO_FAV:
       return { ...state, favourites: [...state.favourites, action.payload] };
     case "CLEAR_FAV":
       return { ...state, favourites: [] };

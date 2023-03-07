@@ -5,6 +5,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { useDispatch } from "react-redux";
 import moment from "moment/moment";
 import "moment/locale/it";
+import { addToFav } from "../redux/actions";
 
 const JobCard = (props) => {
   moment.locale("it");
@@ -46,9 +47,7 @@ const JobCard = (props) => {
       <div className="d-flex align-items-center text-align col-1">
         <div
           className="bookmarkJob p-3 rounded-circle"
-          onClick={() =>
-            dispatch({ type: "ADD_TO_FAV", payload: props.singleJob })
-          }
+          onClick={() => dispatch(addToFav(props.singleJob))}
         >
           <BsBookmark style={{ fontSize: "1.6em" }} />
         </div>
