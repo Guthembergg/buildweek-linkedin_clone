@@ -20,7 +20,8 @@ const MainNews = () => {
   const modifiedPost = useSelector((state) => state.modifiedPost);
   const deletedPost = useSelector((state) => state.deletedPost);
   const followArray = useSelector((state) => state.seguiti);
-  const numeroPerPagina = 10;
+  const numeroPerPagina = 5;
+  let i = 0;
   let numeroPagine = Math.round(
     postList.filter((e) => followArray.includes(e?.user?._id)).length /
       numeroPerPagina
@@ -53,10 +54,10 @@ const MainNews = () => {
       if (response.ok) {
         const data = await response.json();
         setPostList(data.reverse().slice(0, 50));
-        if (!numberedPost) {
-          setNumberedPost(data.slice(0, 10));
+        if (i === 0) {
+          setNumberedPost(data.slice(0, numeroPerPagina));
         }
-
+        i++;
         setSpinner(false);
         setAlert(false);
       } else {
@@ -161,14 +162,7 @@ const MainNews = () => {
           </Button>
         </div>{" "}
         <div className="d-flex justify-content-center">
-          <Pagination
-            component="div"
-            count={4}
-            color="primary"
-            page={numberedPost}
-          >
-            {items}
-          </Pagination>
+          <Pagination color="primary">{items}</Pagination>
         </div>
         {spinner && !alert && <SpinnerLoad />}
         {alert && !spinner && <AlertErrorCatch />}
