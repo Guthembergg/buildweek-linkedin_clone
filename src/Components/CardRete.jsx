@@ -19,18 +19,17 @@ const CardRete = ({ id }) => {
       if (response.ok) {
         const data = await response.json();
         setSingleProfile(data);
-        console.log(data);
       }
     } catch (error) {}
   };
 
   useEffect(() => {
     fetchFollowProfile();
-  }, []);
+  }, [id]);
 
   return (
     <Col xs={6} md={3}>
-      <Card className="d-flex mb-3">
+      <Card className="mb-3" style={{ height: "16rem" }}>
         <Card.Img
           variant="top"
           src={imageBackground}
@@ -53,18 +52,17 @@ const CardRete = ({ id }) => {
               }
             />
           </Card.Title>
-          <Card.Text
-            style={{ height: "2rem" }}
-            className="text-secondary text-truncate"
-          >
+          <Card.Text className="text-secondary text-truncate">
             {singleProfile?.title}
           </Card.Text>
           <Button
             variant="outline-danger"
-            /*  onClick={dispatch({
-              type: "REMOVE_TO_FOLLOW",
-              payload: singleProfile?._id,
-            })} */
+            onClick={() =>
+              dispatch({
+                type: "REMOVE_TO_FOLLOW",
+                payload: singleProfile._id,
+              })
+            }
           >
             <ImCross /> Smetti di seguire{" "}
           </Button>
