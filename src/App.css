@@ -265,7 +265,10 @@
   color: rgb(59, 59, 59);
   font-size: 1.1em;
 }
-
+.iconPost:hover {
+  animation: iconPostHover 1s ease-out;
+  cursor: pointer;
+}
 .iconPost a:hover {
   border-radius: 50px;
 
