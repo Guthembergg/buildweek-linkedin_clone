@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import imageBackground from "../assets/linkedin_immagine_sfondo.jpg";
 import { ImCross } from "react-icons/im";
 import { useDispatch } from "react-redux";
+import { RiCloseCircleFill } from "react-icons/ri";
 
 const CardRete = ({ id }) => {
   const [singleProfile, setSingleProfile] = useState();
@@ -29,7 +30,16 @@ const CardRete = ({ id }) => {
 
   return (
     <Col xs={6} md={3}>
-      <Card className="mb-3" style={{ height: "16rem" }}>
+      <Card className="mb-3 position-relative" style={{ height: "16rem" }}>
+        <RiCloseCircleFill
+          className="closeIcon position-absolute fs-3"
+          onClick={() =>
+            dispatch({
+              type: "REMOVE_TO_FOLLOW",
+              payload: singleProfile._id,
+            })
+          }
+        />
         <Card.Img
           variant="top"
           src={imageBackground}
@@ -38,7 +48,7 @@ const CardRete = ({ id }) => {
         <Card.Body className=" position-relative border-bottom border-tertiary text-center">
           <Card.Title className="mt-1  m-0 fs-6">
             <Link className="text-decoration-none text-dark" to={`/profile/me`}>
-              {singleProfile?.name} {singleProfile?.surname}
+              {singleProfile?.name} <br /> {singleProfile?.surname}
             </Link>
             <Image
               className="position-absolute imageProfileNews"
@@ -55,17 +65,6 @@ const CardRete = ({ id }) => {
           <Card.Text className="text-secondary text-truncate">
             {singleProfile?.title}
           </Card.Text>
-          <Button
-            variant="outline-danger"
-            onClick={() =>
-              dispatch({
-                type: "REMOVE_TO_FOLLOW",
-                payload: singleProfile._id,
-              })
-            }
-          >
-            <ImCross /> Smetti di seguire{" "}
-          </Button>
         </Card.Body>
       </Card>
     </Col>
