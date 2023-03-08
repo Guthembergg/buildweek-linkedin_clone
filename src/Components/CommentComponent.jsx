@@ -47,8 +47,8 @@ const CommentComponent = ({ postId, comment }) => {
   return (
     <>
       <Card style={{ border: "none" }}>
-        <Row className="d-flex align-items-center">
-          <Col md={2} className="text-end d-none d-md-block">
+        <Row className="d-flex justify-content-center align-items-center">
+          <Col md={1} className="text-end d-none d-md-block">
             <Image
               roundedCircle={true}
               style={{ width: "35px", height: "35px" }}
@@ -60,14 +60,14 @@ const CommentComponent = ({ postId, comment }) => {
               }
             />
           </Col>
-          <Col xs={12} md={10}>
+          <Col xs={12} md={11}>
             <Form onSubmit={handleSubmit}>
-              <Form.Group className="ms-0 m-2">
+              <Form.Group className="ms-0 m-2 ">
                 <Form.Control
                   onChange={(e) => {
                     handleChange(e.target.value);
                   }}
-                  className="rounded-pill py-3 px-3"
+                  className="rounded-pill py-2 px-3"
                   type="text"
                   placeholder="Aggiungi un commento..."
                   value={commentBody?.comment}
@@ -76,7 +76,7 @@ const CommentComponent = ({ postId, comment }) => {
             </Form>
           </Col>
         </Row>
-        <Card.Body>
+        <Card.Body className="py-3">
           {comment &&
             comment.map((e, i) => (
               <SingleCommentCard

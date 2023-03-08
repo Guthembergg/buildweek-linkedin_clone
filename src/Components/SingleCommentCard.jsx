@@ -22,11 +22,11 @@ const SingleCommentCard = ({ data, commentId }) => {
           />
         </div>
         <div
-          className="ms-2 w-100 rounded"
+          className="ms-2 px-3 py-2 w-100 rounded"
           style={{ backgroundColor: "#F3F2EF" }}
         >
           <div className="fw-bold">{data.author}</div>
-          <div>{data.comment}</div>
+          <div className="text-secondary">{data.comment}</div>
         </div>
         {myAuthor === data.author && (
           <div>
