@@ -52,12 +52,7 @@ const JobCard = (props) => {
               return e._id;
             })
             .includes(props?.singleJob._id) ? (
-            <BsFillBookmarkFill
-              style={{ fontSize: "1.6em" }}
-              onClick={() =>
-                dispatch({ type: "REMOVE_TO_FAV", payload: props.singleJob })
-              }
-            />
+            <BsFillBookmarkFill style={{ fontSize: "1.6em" }} />
           ) : (
             <BsBookmark
               style={{ fontSize: "1.6em" }}

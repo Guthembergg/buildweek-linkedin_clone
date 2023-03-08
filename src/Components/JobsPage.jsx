@@ -163,9 +163,9 @@ const JobsPage = () => {
           {spinner && <Spinner />}
           {alert && <Alert />}
           {jobList &&
-            jobList.map((job, i) => (
-              <CardJob key={`job-${i}`} singleJob={job} />
-            ))}
+            jobList
+              .filter((e) => !favourites.includes(e))
+              .map((job, i) => <CardJob key={`job-${i}`} singleJob={job} />)}
         </Card>
       </Col>
       <Col className="d-none d-xl-block p-0" xl={3}>
