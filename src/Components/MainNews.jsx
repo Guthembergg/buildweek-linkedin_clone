@@ -13,7 +13,6 @@ import SpinnerLoad from "./Spinner";
 import AlertErrorCatch from "./Alert";
 
 const MainNews = () => {
-  let i = 0;
   const [postList, setPostList] = useState([]);
   const [numberedPost, setNumberedPost] = useState([]);
   const token = process.env.REACT_APP_TOKEN;
@@ -23,7 +22,7 @@ const MainNews = () => {
   const modifiedPost = useSelector((state) => state.modifiedPost);
   const deletedPost = useSelector((state) => state.deletedPost);
   const followArray = useSelector((state) => state.seguiti);
-
+  const [currentPage, setCurrentPage] = useState(314);
   const numeroPerPagina = 5;
 
   let numeroPagine = Math.round(
@@ -31,13 +30,13 @@ const MainNews = () => {
       numeroPerPagina
   );
 
-  let currentPage;
   let myActive = 1;
   let active = 1;
   let items = [];
   const handleClick = (a) => {
     numbered((a - 1) * numeroPerPagina, a * numeroPerPagina);
-    currentPage = a;
+    setCurrentPage(a);
+    window.scrollTo(0, 0);
   };
 
   for (let number = 1; number <= numeroPagine; number++) {
@@ -47,13 +46,13 @@ const MainNews = () => {
         onClick={() => {
           handleClick(number);
         }}
-        className={currentPage === number ? "select" : "none"}
+        active={currentPage === number ? true : false}
       >
         {number}
       </Pagination.Item>
     );
   }
-  let numeroAumento = 2;
+
   const [spinner, setSpinner] = useState();
   const [alert, setAlert] = useState(false);
   const [elementi, setElementi] = useState();
@@ -65,9 +64,11 @@ const MainNews = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.ok) {
-        const data = await response.json();
-        setPostList(data.reverse().slice(0, 50));
-        if (currentPage === 1 || !currentPage) {
+        console.log(currentPage);
+        if (currentPage === 1 || currentPage === 314) {
+          setCurrentPage(1);
+          const data = await response.json();
+          setPostList(data.reverse().slice(0, 50));
           setNumberedPost(
             data
               ?.filter((e) => followArray.includes(e?.user?._id))
@@ -75,7 +76,6 @@ const MainNews = () => {
           );
         }
 
-        i++;
         setSpinner(false);
         setAlert(false);
       } else {
@@ -182,13 +182,13 @@ const MainNews = () => {
             Aggiorna nuovi post{" "}
           </Button>
         </div>{" "}
-        <div className="d-flex justify-content-center">
-          <Pagination color="primary">{items}</Pagination>
-        </div>
         {spinner && !alert && <SpinnerLoad />}
         {alert && !spinner && <AlertErrorCatch />}
         {numberedPost &&
           numberedPost.map((e, i) => <FeedNews key={`news-${i}`} news={e} />)}
+        <div className="d-flex justify-content-center">
+          <Pagination color="primary">{items}</Pagination>
+        </div>
       </Col>
 
       <Col className="d-none d-xl-block p-0" xl={2}>
