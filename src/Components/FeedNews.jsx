@@ -76,7 +76,7 @@ const FeedNews = (props) => {
     <Card className="mb-3 px-3 py-1 ">
       <section className=" p-1">
         <Row>
-          <Col xs={10}>
+          <Col xs={8}>
             {" "}
             <div className="d-flex">
               <div className="d-flex align-items-center justify-content-center">
@@ -127,33 +127,33 @@ const FeedNews = (props) => {
               </div>
             </div>
           </Col>
-          {!followArray.includes(props.news?.user._id) && (
-            <Col xs={2}>
+          {/* questa roba non serve più visto che vediamo solo i post di chi seguiamo... */}
+          <Col xs={2}>
+            {!followArray.includes(props.news?.user._id) && (
               <Button onClick={() => followClick(props.news?.user._id)}>
                 follow
               </Button>
-            </Col>
-          )}
+            )}
+          </Col>
+          <Col xs={2} className="d-flex justify-content-end">
+            {myId === props.news.user._id && (
+              <div className="d-flex ">
+                <NavDropdown
+                  className="iconPost rounded-circle p-2"
+                  title={
+                    <span>
+                      <HiDotsHorizontal />
+                    </span>
+                  }
+                  id="collasible-nav-dropdown"
+                >
+                  <PostPencilModal id={props.news._id} text={props.news.text} />
+                  <PostDeleteModal id={props.news._id} />
+                </NavDropdown>
+              </div>
+            )}
+          </Col>
         </Row>
-
-        <div>
-          {myId === props.news.user._id && (
-            <div className="d-flex ">
-              <NavDropdown
-                className="iconPost rounded-circle p-2"
-                title={
-                  <span>
-                    <HiDotsHorizontal />
-                  </span>
-                }
-                id="collasible-nav-dropdown"
-              >
-                <PostPencilModal id={props.news._id} text={props.news.text} />
-                <PostDeleteModal id={props.news._id} />
-              </NavDropdown>
-            </div>
-          )}
-        </div>
       </section>
       <Card.Body className="border-top">
         <p>{props.news.text}</p>

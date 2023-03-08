@@ -162,6 +162,7 @@ const MainNews = () => {
           </Card.Body>
         </Card>
       </Col>
+
       <Col xs={10} md={8} lg={6}>
         <div className="d-block d-md-none">
           <CardProfile />
