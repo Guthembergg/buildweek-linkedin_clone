@@ -266,7 +266,9 @@
   font-size: 1.1em;
 }
 
-.iconPost:hover {
+.iconPost a:hover {
+  border-radius: 50px;
+
   animation: iconPostHover 0.5s linear;
   cursor: pointer;
 }
