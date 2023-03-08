@@ -142,7 +142,7 @@ const MainProfile = () => {
                   {spinner && !alert && <SpinnerLoad />}
                   {!spinner && !alert && (
                     <>
-                      <Card.Title className="mt-3 position-relative m-0">
+                      <Card.Title className="mt-3 position-relative m-0 fw-bold">
                         {me?.name} {me?.surname}
                         <Image
                           roundedCircle={true}
@@ -180,8 +180,10 @@ const MainProfile = () => {
                 <div className="d-flex ms-3 pb-3">
                   <Card className="p-2 d-flex ">
                     <Row>
-                      <Col xs={10}>
-                        <h6 className="mb-1">Disponibile a lavorare</h6>
+                      <Col>
+                        <h6 className="mb-1 fw-semibold">
+                          Disponibile a lavorare
+                        </h6>
                         <p className="m-0 p-0">Ruoli specialista IT</p>
                         <p
                           href="s"
@@ -200,8 +202,8 @@ const MainProfile = () => {
                   </Card>
                   <Card className="p-2 ms-3">
                     <Row>
-                      <Col xs={10}>
-                        <h6 className="mb-1">
+                      <Col>
+                        <h6 className="mb-1 fw-semibold">
                           Fai sapere che stai facendo selezione
                         </h6>
                         <p className="m-0 p-0">candidati qualificati</p>
@@ -214,7 +216,7 @@ const MainProfile = () => {
                         </p>
                       </Col>
                       {(param.id === "me" || param.id === profile._id) && (
-                        <Col xs={2} className="p-0">
+                        <Col xs={2} className="">
                           <HiOutlinePencil></HiOutlinePencil>
                         </Col>
                       )}
@@ -227,7 +229,9 @@ const MainProfile = () => {
                 <>
                   <Card className="d-flex m-3 position-relative">
                     <Card.Body>
-                      <Card.Title>Consigliato per te</Card.Title>
+                      <Card.Title className="fw-bold">
+                        Consigliato per te
+                      </Card.Title>
                       <p className="m-0 p-0 d-flex align-items-center  text-secondary ">
                         <BsFillEyeFill className="me-2" />
                         Solo per te
@@ -236,7 +240,7 @@ const MainProfile = () => {
                   </Card>
                   <Card className="d-flex m-3 position-relative">
                     <Card.Body>
-                      <Card.Title>Analisi</Card.Title>
+                      <Card.Title className="fw-bold">Analisi</Card.Title>
                       <p className="m-0 p-0 d-flex align-items-center  text-secondary">
                         <BsFillEyeFill className="me-2" />
                         Solo per te
@@ -297,7 +301,7 @@ const MainProfile = () => {
                 <Card.Body className="d-flex flex-column position-relative">
                   <Row className="d-flex align-items-center justify-content-between pe-3">
                     <Col xs={8}>
-                      <Card.Title className="d-flex align-items-center p-0">
+                      <Card.Title className="d-flex align-items-center p-0 fw-bold">
                         Informazioni
                       </Card.Title>
                     </Col>
@@ -322,7 +326,7 @@ const MainProfile = () => {
                     <Card.Body className="d-flex flex-column">
                       <Row className="d-flex align-items-center justify-content-between pe-3">
                         <Col xs={8}>
-                          <Card.Title className="d-flex align-items-center p-0">
+                          <Card.Title className="d-flex align-items-center p-0 fw-bold">
                             Esperienza
                           </Card.Title>
                         </Col>
@@ -393,7 +397,7 @@ const MainProfile = () => {
               )}
               <Card className="d-flex m-3 position-relative">
                 <Card.Body className="d-flex flex-column">
-                  <Card.Title>Formazione</Card.Title>
+                  <Card.Title className="fw-bold">Formazione</Card.Title>
                   <section className="d-flex ">
                     <div className="col-1">
                       <Image
@@ -413,7 +417,9 @@ const MainProfile = () => {
               </Card>
               <Card className="d-flex m-3 position-relative">
                 <Card.Body className="d-flex flex-column">
-                  <Card.Title>Licenze e certificazioni</Card.Title>
+                  <Card.Title className="fw-bold">
+                    Licenze e certificazioni
+                  </Card.Title>
                   <section className="d-flex ">
                     <div className="col-1">
                       <Image
@@ -432,7 +438,7 @@ const MainProfile = () => {
               </Card>
               <Card className="d-flex m-3 position-relative">
                 <Card.Body className="d-flex flex-column">
-                  <Card.Title>Lingue</Card.Title>
+                  <Card.Title className="fw-bold">Lingue</Card.Title>
                   <section className="d-flex flex-column mt-1 ">
                     <div>
                       <h6>Inglese</h6>
