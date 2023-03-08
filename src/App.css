@@ -390,3 +390,8 @@
 .select {
   background-color: #ff0000 !important;
 }
+.closeIcon {
+  color: rgba(6, 2, 2, 0.429);
+  right: 5px;
+  top: 5px;
+}
