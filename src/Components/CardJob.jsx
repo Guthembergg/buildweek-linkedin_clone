@@ -47,7 +47,11 @@ const JobCard = (props) => {
       </div>
       <div className="d-flex align-items-center text-align col-1">
         <div className="bookmarkJob p-3 rounded-circle">
-          {myJobs?.includes(props?.singleJob) ? (
+          {myJobs
+            ?.map((e) => {
+              return e._id;
+            })
+            .includes(props?.singleJob._id) ? (
             <BsFillBookmarkFill
               style={{ fontSize: "1.6em" }}
               onClick={() =>
