@@ -30,7 +30,7 @@ const CardRete = ({ id }) => {
 
   return (
     <Col xs={6} md={3}>
-      <Card className="mb-3 position-relative" style={{ height: "16rem" }}>
+      <Card className="mb-3 position-relative">
         <RiCloseCircleFill
           className="closeIcon position-absolute fs-3"
           onClick={() =>
