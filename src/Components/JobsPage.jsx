@@ -89,7 +89,12 @@ const JobsPage = () => {
 
   return (
     <Row className="d-flex flex-column justify-content-center align-items-center flex-lg-row align-items-xl-start  py-3 m-0 w-100 ">
-      <Col xs={10} md={10} xl={2} className="p-0">
+      <Col
+        xs={10}
+        md={10}
+        xl={2}
+        className="px-3 mb-3 d-flex flex-column justify-content-center"
+      >
         <Card className="mb-3 p-0">
           <Card.Body>
             <div className="my-2 text-secondary fw-bold">
@@ -133,6 +138,7 @@ const JobsPage = () => {
           </span>{" "}
           Pubblica offerta gratuita
         </Button>
+        {favourites.length > 0 && <JobFav />}
       </Col>
       <Col xs={10} md={10} xl={5}>
         {searchSection && (
@@ -168,9 +174,8 @@ const JobsPage = () => {
             ))}
         </Card>
       </Col>
-      <Col className="d-none d-xl-block p-0" xl={3}>
-        {favourites !== 0 && <JobFav />}
-        <CardAndFooter />
+      <Col className="d-none d-xl-block px-3" xl={3}>
+        <CardAndFooter className="my-3" />
       </Col>
     </Row>
   );
