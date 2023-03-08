@@ -1,6 +1,6 @@
 import { Button, Card, Col, Image, NavDropdown, Row } from "react-bootstrap";
 import { SlLike } from "react-icons/sl";
-import { AiOutlineComment } from "react-icons/ai";
+import { BiCommentDetail } from "react-icons/bi";
 import { FiSend } from "react-icons/fi";
 import { ImLoop } from "react-icons/im";
 import { BiWorld } from "react-icons/bi";
@@ -191,7 +191,7 @@ const FeedNews = (props) => {
           }}
         >
           <span className="me-2">
-            <AiOutlineComment style={{ fontSize: "1.4em" }} />
+            <BiCommentDetail style={{ fontSize: "1.4em" }} />
           </span>
           <span className="d-none d-md-inline text-secondary">Commenta</span>
         </div>
