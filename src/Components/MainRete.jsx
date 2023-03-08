@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 
 const MainRete = () => {
   const follow = useSelector((state) => state.seguiti);
+  const myProfile = useSelector((state) => state.myProfile._id);
+
   console.log(follow);
   return (
     <Row className="d-flex justify-content-center py-3 m-0 w-100">
@@ -16,7 +18,9 @@ const MainRete = () => {
         <Row className="d-flex justify-content-evenly">
           {" "}
           {follow &&
-            follow.map((e, i) => <CardProfileRete key={`follow${i}`} id={e} />)}
+            follow
+              .filter((e) => e !== myProfile)
+              .map((e, i) => <CardProfileRete key={`follow${i}`} id={e} />)}
         </Row>
       </Col>
       <Col className="d-none d-xl-block p-0" xl={2}>

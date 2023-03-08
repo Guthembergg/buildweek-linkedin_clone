@@ -18,9 +18,12 @@ const MainNews = () => {
   const [numberedPost, setNumberedPost] = useState([]);
   const token = process.env.REACT_APP_TOKEN;
   const newPost = useSelector((state) => state.newPost);
+  const myProfileId = useSelector((state) => state.myProfile._id);
+
   const modifiedPost = useSelector((state) => state.modifiedPost);
   const deletedPost = useSelector((state) => state.deletedPost);
   const followArray = useSelector((state) => state.seguiti);
+
   const numeroPerPagina = 5;
 
   let numeroPagine = Math.round(

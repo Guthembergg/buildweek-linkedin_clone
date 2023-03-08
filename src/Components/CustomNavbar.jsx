@@ -130,7 +130,7 @@ const CustomNavbar = () => {
             <li className="text-center position-relative">
               {" "}
               <span className="position-absolute top-10 start-90 translate-middle badge rounded-pill bg-danger">
-                {follow.length}
+                {follow.length - 1 === -1 ? 0 : follow.length - 1}
               </span>
               <BsFillPeopleFill className="navIcon" />
               <span className="d-none d-lg-block">Rete</span>
