@@ -11,6 +11,7 @@ const MainChat = () => {
 
   const [query, setQuery] = useState();
   const [msg, setMsg] = useState();
+  console.log(msg);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -50,7 +51,7 @@ const MainChat = () => {
     });
 
     socket.on("joined", (bouncedMessage) => {
-      console.log(bouncedMessage);
+      setMsg(bouncedMessage);
     });
     socket.emit("setIdentity", setIdentity);
     socket.emit("joinRoom", joinRoom);
@@ -65,8 +66,26 @@ const MainChat = () => {
       <Col xs={10} md={8} lg={6}>
         <Card>
           <Card.Body>
-            <div>msg 1</div>
-            <Form onSubmit={handleSubmit}>
+            <div>
+              {msg &&
+                msg.msgs
+                  /*   .sort((a, b) => (a < b ? 1 : a > b ? -1 : 0)) */
+
+                  .slice(0, 10)
+                  .map((e) => (
+                    <p>
+                      <span>
+                        <strong>
+                          {e?.User.first_name}
+                          {e?.User.last_name}
+                        </strong>{" "}
+                        :
+                      </span>
+                      {e?.content}
+                    </p>
+                  ))}
+            </div>
+            <Form onSubmit={(e) => handleSubmit(e)}>
               <Form.Control
                 type="text"
                 onChange={(e) => handleChange(e.target.value)}
