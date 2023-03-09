@@ -111,7 +111,7 @@ const MainChat = () => {
                       </div>
                     ) : (
                       <div
-                        key={`msgNumber-${i}`}
+                        key={`msgNumber2-${i}`}
                         className="m-1 p-2 w-75 "
                         style={{
                           backgroundColor: "lightblue",
