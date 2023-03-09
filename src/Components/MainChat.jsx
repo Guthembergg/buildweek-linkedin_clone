@@ -50,7 +50,7 @@ const MainChat = () => {
     });
     socket.emit("joinRoom", joinRoom);
     socket.on("joined", (bouncedMessage) => {
-      setMsg(bouncedMessage.msgs.slice(0, 10));
+      setMsg(bouncedMessage.msgs);
     });
     socket.emit("setIdentity", setIdentity);
 
@@ -67,6 +67,7 @@ const MainChat = () => {
           <Card.Body>
             <div>
               {msg
+                ?.slice(msg.length - 10)
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
                 ?.map((e, i) => (
                   <div
