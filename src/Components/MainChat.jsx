@@ -15,6 +15,7 @@ const MainChat = () => {
 
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState();
+  const [newMsg, setNewMsg] = useState();
   const [inRoom, setInRoom] = useState(true);
 
   const handleChange = (e) => {
@@ -40,23 +41,29 @@ const MainChat = () => {
   };
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log(`Connection established!${socket.id}`);
-    });
     socket.on("joined", (bouncedMessage) => {
       setMsg(bouncedMessage);
     });
-    socket.emit("setIdentity", setIdentity);
-    if (inRoom === true) {
+
+    /*    if (inRoom === true) {
       socket.emit("joinRoom", joinRoom);
       setInRoom(false);
     } else {
       setInRoom(true);
-    }
+    } */
     return () => {
       socket.disconnect();
     };
   }, [msg]);
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(`Connection established!${socket.id}`);
+    });
+
+    socket.emit("setIdentity", setIdentity);
+    socket.emit("joinRoom", joinRoom);
+  }, []);
 
   return (
     <Row>
@@ -69,8 +76,10 @@ const MainChat = () => {
                 msg.msgs
                   .sort((a, b) => moment(b.createdAt).diff(a.createdAt))
                   .slice(0, 10)
-                  .map((e) => (
+                  .reverse()
+                  .map((e, i) => (
                     <div
+                      key={`msgNumber-${i}`}
                       className="m-1 p-2 w-75"
                       style={{
                         backgroundColor: "lightblue",
@@ -79,7 +88,7 @@ const MainChat = () => {
                     >
                       <div className=" mb-1">
                         <strong>
-                          {e?.User.first_name}
+                          {e?.User.first_name} {""}
                           {e?.User.last_name}
                         </strong>
                       </div>
