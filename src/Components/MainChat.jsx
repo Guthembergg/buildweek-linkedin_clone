@@ -1,5 +1,4 @@
 import { Card, Col, Row } from "react-bootstrap";
-import CardAndFooter from "./CardAndFooter";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
@@ -7,18 +6,17 @@ import moment from "moment/moment";
 import "moment/locale/it";
 import { BsDot } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { BsFillCircleFill } from "react-icons/bs";
 
 const MainChat = () => {
   const ADDRESS = "https://chat-api-epicode.herokuapp.com";
   const socket = io(ADDRESS, { transports: ["websocket"] });
   const token = process.env.REACT_APP_TOKEN;
   moment.locale("it");
-  const [color, setColor] = useState("");
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState([]);
-  const [newMsg, setNewMsg] = useState([]);
-  const [inRoom, setInRoom] = useState(true);
   const myProfileId = useSelector((state) => state.myProfile._id);
+  const [onlineUser, setOnlineUser] = useState(true);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -56,20 +54,26 @@ const MainChat = () => {
       setMsg(bouncedMessage.msgs);
     });
     socket.emit("setIdentity", setIdentity);
-
     return () => {
       socket.disconnect();
     };
   }, []);
 
+  useEffect(() => {
+    socket.on("newUserHasLoggedIn", (bouncedMessage) => {
+      setOnlineUser(bouncedMessage);
+      console.log("useeffect di user");
+    });
+  }, [onlineUser]);
+
   return (
-    <Row className="w-100">
-      <Col className="d-none d-md-block p-0" md={3} xl={2}></Col>
-      <Col xs={10} md={8} lg={6}>
+    <Row className="w-100 d-flex justify-content-center">
+      <Col xs={10} md={6} lg={4}>
         <Card>
           <Card.Body>
             <div>
               {msg
+                ?.slice(msg.length - 10)
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
                 ?.slice(msg.length - 10)
                 ?.map((e, i) => (
@@ -154,9 +158,28 @@ const MainChat = () => {
           </Card.Body>
         </Card>
       </Col>
-      <Col className="d-none d-xl-block p-0" xl={2}>
-        {" "}
-        <CardAndFooter />{" "}
+      <Col md={3}>
+        <Card>
+          <Card.Title className="text-center p-2">
+            <strong>Utenti online: {onlineUser?.onlineUsers?.length}</strong>
+          </Card.Title>
+          <Card.Body>
+            {onlineUser?.onlineUsers?.map((e, i) => (
+              <Card.Text
+                key={`user-${i}`}
+                className="d-flex align-items-center"
+              >
+                {" "}
+                <span>
+                  <BsFillCircleFill style={{ color: "green" }} />
+                </span>
+                <span className="ms-2">
+                  {e?.first_name} {e?.last_name}
+                </span>
+              </Card.Text>
+            ))}
+          </Card.Body>
+        </Card>{" "}
       </Col>
     </Row>
   );
