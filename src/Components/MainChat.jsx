@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import moment from "moment/moment";
 import "moment/locale/it";
+import { BsDot } from "react-icons/bs";
 
 const MainChat = () => {
   const ADDRESS = "https://chat-api-epicode.herokuapp.com";
@@ -14,7 +15,7 @@ const MainChat = () => {
 
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState();
-  console.log(msg);
+  const [inRoom, setInRoom] = useState(true);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -38,27 +39,20 @@ const MainChat = () => {
     msg: query,
   };
 
-  /*  const fetchRoom = async () => {
-    try {
-      const response = await fetch(`${socket}/all`);
-      if (response.ok) {
-        const listChat = await response.json();
-        console.log(listChat);
-      }
-    } catch (errore) {}
-  }; */
-
   useEffect(() => {
-    /*     fetchRoom(); */
     socket.on("connect", () => {
       console.log(`Connection established!${socket.id}`);
     });
-
     socket.on("joined", (bouncedMessage) => {
       setMsg(bouncedMessage);
     });
     socket.emit("setIdentity", setIdentity);
-    socket.emit("joinRoom", joinRoom);
+    if (inRoom === true) {
+      socket.emit("joinRoom", joinRoom);
+      setInRoom(false);
+    } else {
+      setInRoom(true);
+    }
     return () => {
       socket.disconnect();
     };
@@ -76,16 +70,34 @@ const MainChat = () => {
                   .sort((a, b) => moment(b.createdAt).diff(a.createdAt))
                   .slice(0, 10)
                   .map((e) => (
-                    <div>
-                      <div>
-                        NOME:
+                    <div
+                      className="m-1 p-2 w-75"
+                      style={{
+                        backgroundColor: "lightblue",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <div className=" mb-1">
                         <strong>
                           {e?.User.first_name}
                           {e?.User.last_name}
                         </strong>
                       </div>
-                      <div>data {e?.createdAt.slice(11, 19)}</div>
-                      <div>{e?.content}</div>
+
+                      <div className="ps-2 pe-2">{e?.content}</div>
+                      <div
+                        className="d-flex justify-content-end"
+                        style={{ color: "gray", fontSize: "0.7em" }}
+                      >
+                        <span className="d-none d-md-inline">
+                          {e?.createdAt.slice(11, 19)}
+                        </span>
+
+                        <span className="d-none d-lg-inline">
+                          <BsDot />
+                          {e?.createdAt.slice(0, 10)}
+                        </span>
+                      </div>
                     </div>
                   ))}
             </div>
