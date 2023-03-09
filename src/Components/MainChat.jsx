@@ -3,13 +3,16 @@ import CardAndFooter from "./CardAndFooter";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
+import moment from "moment/moment";
+import "moment/locale/it";
 
 const MainChat = () => {
   const ADDRESS = "https://chat-api-epicode.herokuapp.com";
   const socket = io(ADDRESS, { transports: ["websocket"] });
   const token = process.env.REACT_APP_TOKEN;
+  moment.locale("it");
 
-  const [query, setQuery] = useState();
+  const [query, setQuery] = useState("");
   const [msg, setMsg] = useState();
   console.log(msg);
 
@@ -19,6 +22,7 @@ const MainChat = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit("sendMsg", sendMsg);
+    setQuery("");
   };
 
   const setIdentity = { token: `Bearer ${token}` };
@@ -58,7 +62,7 @@ const MainChat = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [msg]);
 
   return (
     <Row>
@@ -69,24 +73,25 @@ const MainChat = () => {
             <div>
               {msg &&
                 msg.msgs
-                  /*   .sort((a, b) => (a < b ? 1 : a > b ? -1 : 0)) */
-
+                  .sort((a, b) => moment(b.createdAt).diff(a.createdAt))
                   .slice(0, 10)
                   .map((e) => (
-                    <p>
-                      <span>
+                    <div>
+                      <div>
+                        NOME:
                         <strong>
                           {e?.User.first_name}
                           {e?.User.last_name}
-                        </strong>{" "}
-                        :
-                      </span>
-                      {e?.content}
-                    </p>
+                        </strong>
+                      </div>
+                      <div>data {e?.createdAt.slice(11, 19)}</div>
+                      <div>{e?.content}</div>
+                    </div>
                   ))}
             </div>
-            <Form onSubmit={(e) => handleSubmit(e)}>
+            <Form onSubmit={handleSubmit}>
               <Form.Control
+                value={query}
                 type="text"
                 onChange={(e) => handleChange(e.target.value)}
               ></Form.Control>
