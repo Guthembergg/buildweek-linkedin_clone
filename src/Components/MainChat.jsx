@@ -14,8 +14,8 @@ const MainChat = () => {
   moment.locale("it");
 
   const [query, setQuery] = useState("");
-  const [msg, setMsg] = useState();
-  const [newMsg, setNewMsg] = useState();
+  const [msg, setMsg] = useState([]);
+  const [newMsg, setNewMsg] = useState([]);
   const [inRoom, setInRoom] = useState(true);
 
   const handleChange = (e) => {
@@ -41,74 +41,65 @@ const MainChat = () => {
   };
 
   useEffect(() => {
-    socket.on("joined", (bouncedMessage) => {
-      setMsg(bouncedMessage);
-    });
-
-    /*    if (inRoom === true) {
-      socket.emit("joinRoom", joinRoom);
-      setInRoom(false);
-    } else {
-      setInRoom(true);
-    } */
-    return () => {
-      socket.disconnect();
-    };
+    socket.on("message", (data) => setMsg((msg) => [...msg, data]));
   }, [msg]);
 
   useEffect(() => {
     socket.on("connect", () => {
       console.log(`Connection established!${socket.id}`);
     });
-
-    socket.emit("setIdentity", setIdentity);
     socket.emit("joinRoom", joinRoom);
+    socket.on("joined", (bouncedMessage) => {
+      setMsg(bouncedMessage.msgs.slice(0, 10));
+    });
+    socket.emit("setIdentity", setIdentity);
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   return (
-    <Row>
+    <Row className="w-100">
       <Col className="d-none d-md-block p-0" md={3} xl={2}></Col>
       <Col xs={10} md={8} lg={6}>
         <Card>
           <Card.Body>
             <div>
-              {msg &&
-                msg.msgs
-                  .sort((a, b) => moment(b.createdAt).diff(a.createdAt))
-                  .slice(0, 10)
-                  .reverse()
-                  .map((e, i) => (
-                    <div
-                      key={`msgNumber-${i}`}
-                      className="m-1 p-2 w-75"
-                      style={{
-                        backgroundColor: "lightblue",
-                        borderRadius: "10px",
-                      }}
-                    >
-                      <div className=" mb-1">
-                        <strong>
-                          {e?.User.first_name} {""}
-                          {e?.User.last_name}
-                        </strong>
-                      </div>
-
-                      <div className="ps-2 pe-2">{e?.content}</div>
-                      <div
-                        className="d-flex justify-content-end"
-                        style={{ color: "gray", fontSize: "0.7em" }}
-                      >
-                        <span className="d-none d-md-inline">
-                          {e?.createdAt.slice(11, 19)}
-                        </span>
-
-                        <span className="d-none d-lg-inline">
-                          <BsDot />
-                          {e?.createdAt.slice(0, 10)}
-                        </span>
-                      </div>
+              {msg
+                ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
+                ?.map((e, i) => (
+                  <div
+                    key={`msgNumber-${i}`}
+                    className="m-1 p-2 w-75"
+                    style={{
+                      backgroundColor: "lightblue",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div className=" mb-1">
+                      <strong>
+                        {e?.User?.first_name} {""}
+                        {e?.User?.last_name}
+                      </strong>
                     </div>
-                  ))}
+
+                    <div className="ps-2 pe-2">{e?.content}</div>
+                    <div
+                      className="d-flex justify-content-end"
+                      style={{ color: "gray", fontSize: "0.7em" }}
+                    >
+                      <span className="d-none d-md-inline">
+                        {e?.createdAt.slice(11, 19)}
+                      </span>
+
+                      <span className="d-none d-lg-inline">
+                        <BsDot />
+                        {e?.createdAt.slice(0, 10)}
+                      </span>
+                    </div>
+                  </div>
+                ))}
             </div>
             <Form onSubmit={handleSubmit}>
               <Form.Control
