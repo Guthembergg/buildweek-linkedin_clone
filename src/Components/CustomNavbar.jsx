@@ -146,10 +146,12 @@ const CustomNavbar = () => {
               <span className="d-none d-lg-block">Lavoro</span>
             </li>
           </Link>
-          <li className="d-none d-md-block text-center ">
-            <AiFillMessage className="navIcon" />
-            <span className="d-none d-lg-block">Messaggistica</span>
-          </li>
+          <Link className="text-decoration-none text-secondary" to={"/chat"}>
+            <li className="d-none d-md-block text-center ">
+              <AiFillMessage className="navIcon" />
+              <span className="d-none d-lg-block">Messaggistica</span>
+            </li>
+          </Link>
           <li className="d-none d-md-block text-center ">
             <MdNotifications className="navIcon" />
             <span className="d-none d-lg-block">Notifiche</span>
