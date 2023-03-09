@@ -6,17 +6,19 @@ import { Form } from "react-bootstrap";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { BsDot } from "react-icons/bs";
+import { useSelector } from "react-redux";
 
 const MainChat = () => {
   const ADDRESS = "https://chat-api-epicode.herokuapp.com";
   const socket = io(ADDRESS, { transports: ["websocket"] });
   const token = process.env.REACT_APP_TOKEN;
   moment.locale("it");
-
+  const [color, setColor] = useState("");
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState([]);
   const [newMsg, setNewMsg] = useState([]);
   const [inRoom, setInRoom] = useState(true);
+  const myProfileId = useSelector((state) => state.myProfile._id);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -42,6 +44,7 @@ const MainChat = () => {
 
   useEffect(() => {
     socket.on("message", (data) => setMsg((msg) => [...msg, data]));
+    console.log(msg);
   }, [msg]);
 
   useEffect(() => {
@@ -67,39 +70,78 @@ const MainChat = () => {
           <Card.Body>
             <div>
               {msg
-                ?.slice(msg.length - 10)
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
+                ?.slice(msg.length - 10)
                 ?.map((e, i) => (
-                  <div
-                    key={`msgNumber-${i}`}
-                    className="m-1 p-2 w-75"
-                    style={{
-                      backgroundColor: "lightblue",
-                      borderRadius: "10px",
-                    }}
-                  >
-                    <div className=" mb-1">
-                      <strong>
-                        {e?.User?.first_name} {""}
-                        {e?.User?.last_name}
-                      </strong>
-                    </div>
+                  <>
+                    {e.User.linkedinId === myProfileId ? (
+                      <div className="d-flex flex-column align-items-end">
+                        <div
+                          key={`msgNumber-${i}`}
+                          className="m-1 p-2 w-75 d-flex flex-column "
+                          style={{
+                            backgroundColor: "lightgreen",
+                            borderRadius: "10px",
+                          }}
+                        >
+                          <div className=" mb-1 d-flex justify-content-end">
+                            <strong>
+                              {e?.User?.first_name} {""}
+                              {e?.User?.last_name}
+                            </strong>
+                          </div>
 
-                    <div className="ps-2 pe-2">{e?.content}</div>
-                    <div
-                      className="d-flex justify-content-end"
-                      style={{ color: "gray", fontSize: "0.7em" }}
-                    >
-                      <span className="d-none d-md-inline">
-                        {e?.createdAt.slice(11, 19)}
-                      </span>
+                          <div className="ps-2 pe-2 d-flex justify-content-end">
+                            {e?.content}
+                          </div>
+                          <div
+                            className="d-flex justify-content-start"
+                            style={{ color: "gray", fontSize: "0.7em" }}
+                          >
+                            <span className="d-none d-md-flex  justify-content-start">
+                              {e?.createdAt.slice(11, 19)}
+                            </span>
 
-                      <span className="d-none d-lg-inline">
-                        <BsDot />
-                        {e?.createdAt.slice(0, 10)}
-                      </span>
-                    </div>
-                  </div>
+                            <span className="d-none d-lg-flex  justify-content-start">
+                              <BsDot />
+                              {e?.createdAt.slice(0, 10)}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        key={`msgNumber-${i}`}
+                        className="m-1 p-2 w-75 "
+                        style={{
+                          backgroundColor: "lightblue",
+                          borderRadius: "10px",
+                        }}
+                      >
+                        <div className=" mb-1">
+                          <strong>
+                            {e?.User?.first_name} {""}
+                            {e?.User?.last_name}
+                          </strong>
+                        </div>
+
+                        <div className="ps-2 pe-2">{e?.content}</div>
+                        <div
+                          className="d-flex justify-content-end"
+                          style={{ color: "gray", fontSize: "0.7em" }}
+                        >
+                          <span className="d-none d-md-inline">
+                            {e?.createdAt.slice(11, 19)}
+                          </span>
+
+                          <span className="d-none d-lg-inline">
+                            <BsDot />
+                            {e?.createdAt.slice(0, 10)}
+                          </span>
+                        </div>
+                      </div>
+                    )}
+                  </>
                 ))}
             </div>
             <Form onSubmit={handleSubmit}>
