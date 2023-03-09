@@ -16,9 +16,7 @@ const MainChat = () => {
 
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState([]);
-  const [newMsg, setNewMsg] = useState([]);
   const [onlineUser, setOnlineUser] = useState(true);
-  console.log(onlineUser);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -44,9 +42,6 @@ const MainChat = () => {
 
   useEffect(() => {
     socket.on("message", (data) => setMsg((msg) => [...msg, data]));
-    socket.on("newUserHasLoggedIn", (bouncedMessage) => {
-      setOnlineUser(bouncedMessage);
-    });
   }, [msg]);
 
   useEffect(() => {
@@ -58,16 +53,21 @@ const MainChat = () => {
       setMsg(bouncedMessage.msgs.slice(0, 10));
     });
     socket.emit("setIdentity", setIdentity);
-
     return () => {
       socket.disconnect();
     };
   }, []);
 
+  useEffect(() => {
+    socket.on("newUserHasLoggedIn", (bouncedMessage) => {
+      setOnlineUser(bouncedMessage);
+      console.log("useeffect di user");
+    });
+  }, [onlineUser]);
+
   return (
-    <Row className="w-100">
-      <Col className="d-none d-md-block p-0" md={3} xl={2}></Col>
-      <Col xs={10} md={8} lg={6}>
+    <Row className="w-100 d-flex justify-content-center">
+      <Col xs={10} md={6} lg={4}>
         <Card>
           <Card.Body>
             <div>
@@ -117,14 +117,17 @@ const MainChat = () => {
           </Card.Body>
         </Card>
       </Col>
-      <Col className="d-none d-xl-block p-0" xl={2}>
+      <Col md={3}>
         <Card>
           <Card.Title className="text-center p-2">
             <strong>Utenti online: {onlineUser?.onlineUsers?.length}</strong>
           </Card.Title>
           <Card.Body>
-            {onlineUser?.onlineUsers?.map((e) => (
-              <Card.Text className="d-flex align-items-center">
+            {onlineUser?.onlineUsers?.map((e, i) => (
+              <Card.Text
+                key={`user-${i}`}
+                className="d-flex align-items-center"
+              >
                 {" "}
                 <span>
                   <BsFillCircleFill style={{ color: "green" }} />
@@ -136,7 +139,6 @@ const MainChat = () => {
             ))}
           </Card.Body>
         </Card>{" "}
-        <CardAndFooter />{" "}
       </Col>
     </Row>
   );
