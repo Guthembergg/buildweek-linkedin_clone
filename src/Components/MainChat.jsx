@@ -16,7 +16,8 @@ const MainChat = () => {
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState([]);
   const myProfileId = useSelector((state) => state.myProfile._id);
-  const [onlineUser, setOnlineUser] = useState(true);
+  const [onlineUser, setOnlineUser] = useState([]);
+  console.log(onlineUser);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -73,15 +74,16 @@ const MainChat = () => {
           <Card.Body>
             <div>
               {msg
-                ?.slice(msg.length - 10)
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
                 ?.slice(msg.length - 10)
                 ?.map((e, i) => (
                   <>
                     {e.User.linkedinId === myProfileId ? (
-                      <div className="d-flex flex-column align-items-end">
+                      <div
+                        key={`msgNumber-${i}`}
+                        className="d-flex flex-column align-items-end"
+                      >
                         <div
-                          key={`msgNumber-${i}`}
                           className="m-1 p-2 w-75 d-flex flex-column "
                           style={{
                             backgroundColor: "lightgreen",
