@@ -55,6 +55,10 @@ const MainChat = () => {
       setMsg(bouncedMessage.msgs);
     });
     socket.emit("setIdentity", setIdentity);
+    socket.on("loggedIn", (bouncedMessage) => {
+      setOnlineUser(bouncedMessage);
+      console.log("useeffect di user");
+    });
     return () => {
       socket.disconnect();
     };
