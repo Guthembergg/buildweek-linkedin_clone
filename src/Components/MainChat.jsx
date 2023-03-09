@@ -6,6 +6,7 @@ import { Form } from "react-bootstrap";
 import moment from "moment/moment";
 import "moment/locale/it";
 import { BsDot } from "react-icons/bs";
+import { BsFillCircleFill } from "react-icons/bs";
 
 const MainChat = () => {
   const ADDRESS = "https://chat-api-epicode.herokuapp.com";
@@ -16,7 +17,8 @@ const MainChat = () => {
   const [query, setQuery] = useState("");
   const [msg, setMsg] = useState([]);
   const [newMsg, setNewMsg] = useState([]);
-  const [inRoom, setInRoom] = useState(true);
+  const [onlineUser, setOnlineUser] = useState(true);
+  console.log(onlineUser);
 
   const handleChange = (e) => {
     setQuery(e);
@@ -42,6 +44,9 @@ const MainChat = () => {
 
   useEffect(() => {
     socket.on("message", (data) => setMsg((msg) => [...msg, data]));
+    socket.on("newUserHasLoggedIn", (bouncedMessage) => {
+      setOnlineUser(bouncedMessage);
+    });
   }, [msg]);
 
   useEffect(() => {
@@ -67,6 +72,7 @@ const MainChat = () => {
           <Card.Body>
             <div>
               {msg
+                ?.slice(msg.length - 10)
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
                 ?.map((e, i) => (
                   <div
@@ -112,7 +118,24 @@ const MainChat = () => {
         </Card>
       </Col>
       <Col className="d-none d-xl-block p-0" xl={2}>
-        {" "}
+        <Card>
+          <Card.Title className="text-center p-2">
+            <strong>Utenti online: {onlineUser?.onlineUsers?.length}</strong>
+          </Card.Title>
+          <Card.Body>
+            {onlineUser?.onlineUsers?.map((e) => (
+              <Card.Text className="d-flex align-items-center">
+                {" "}
+                <span>
+                  <BsFillCircleFill style={{ color: "green" }} />
+                </span>
+                <span className="ms-2">
+                  {e?.first_name} {e?.last_name}
+                </span>
+              </Card.Text>
+            ))}
+          </Card.Body>
+        </Card>{" "}
         <CardAndFooter />{" "}
       </Col>
     </Row>
