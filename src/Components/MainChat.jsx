@@ -263,7 +263,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
             </div>
           </div>
           <Card.Body>
-            <ScrollToBottom className="overflow">
+            <ScrollToBottom className="overflow" useAnimatingToEnd={false}>
               {msg
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
                 ?.slice(msg?.length - 50)
@@ -293,12 +293,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
                             style={{ color: "gray", fontSize: "0.7em" }}
                           >
                             <span className="d-none d-md-flex  justify-content-start">
-                              {e?.createdAt.slice(11, 19)}
-                            </span>
-
-                            <span className="d-none d-lg-flex  justify-content-start">
-                              <BsDot />
-                              {e?.createdAt.slice(0, 10)}
+                              {moment(e?.createdAt).fromNow()}
                             </span>
                           </div>
                         </div>
@@ -325,12 +320,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
                           style={{ color: "gray", fontSize: "0.7em" }}
                         >
                           <span className="d-none d-md-inline">
-                            {e?.createdAt.slice(11, 19)}
-                          </span>
-
-                          <span className="d-none d-lg-inline">
-                            <BsDot />
-                            {e?.createdAt.slice(0, 10)}
+                            {moment(e?.createdAt).fromNow()}
                           </span>
                         </div>
                       </div>
