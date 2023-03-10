@@ -17,6 +17,7 @@ const MainChat = () => {
   const [msg, setMsg] = useState([]);
   const myProfileId = useSelector((state) => state.myProfile._id);
   const [onlineUser, setOnlineUser] = useState([]);
+  const [singleRoom, setSingleRoom] = useState("");
   console.log(onlineUser);
 
   const handleChange = (e) => {
@@ -31,12 +32,12 @@ const MainChat = () => {
   const setIdentity = { token: `Bearer ${token}` };
 
   const joinRoom = {
-    id: "7c2453a1-8dbf-436a-a50d-deac46f17314",
+    id: singleRoom.id,
     token: `Bearer ${token}`,
   };
 
   const sendMsg = {
-    room: "7c2453a1-8dbf-436a-a50d-deac46f17314",
+    room: singleRoom.id,
     token: `Bearer ${token}`,
     msg: query,
   };
@@ -111,18 +112,21 @@ const MainChat = () => {
   };
   useEffect(() => {
     getRooms();
-  }, []);
+  }, [NewRoomTitle, NewNameRoom]);
 
   console.log("stanze", room);
 
-  //fine fetch DePascale
+  /*  createdAt: "2023-03-10T09:24:21.690Z"
+id: "2a7c4f4d-bc3f-4557-864b-477c671cf8eb"
+name: "due Prove"
+updatedAt: "2023-03-10T09:57:28.883Z" */
 
-  const [roomId, setRoomId] = useState("b683822a-2542-4f6a-b9b7-bdb5ef382bd8");
+  //fine fetch DePascale
 
   const editRoomFetch = async () => {
     try {
       const response = await fetch(
-        `https://chat-api-epicode.herokuapp.com/api/${roomId}`,
+        `https://chat-api-epicode.herokuapp.com/api/${singleRoom.id}`,
         {
           method: "PUT",
           headers: {
@@ -157,7 +161,7 @@ const MainChat = () => {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [singleRoom]);
 
   useEffect(() => {
     socket.on("newUserHasLoggedIn", (bouncedMessage) => {
@@ -168,7 +172,32 @@ const MainChat = () => {
 
   return (
     <Row className="w-100 d-flex justify-content-center py-3 m-0">
-      <Col md={3} xl={2}>
+      <Col xs={4} md={4} lg={3} xl={3}>
+        <Card>
+          <Card.Title className="text-center p-2">
+            <strong>Stanze disponibili: {room?.length} </strong>
+          </Card.Title>
+          <Card.Body>
+            {room?.map((e, i) => (
+              <Card.Text
+                key={`room-${i}`}
+                className="d-flex align-items-center"
+              >
+                <span>
+                  <Button
+                    variant="outline-primary"
+                    onClick={() => setSingleRoom(e)}
+                  >
+                    <span>
+                      <BsFillCircleFill style={{ color: "green" }} />
+                    </span>
+                    <span className="ms-2">{e?.name}</span>
+                  </Button>
+                </span>
+              </Card.Text>
+            ))}
+          </Card.Body>
+        </Card>{" "}
         <div className="d-flex flex-column justify-content-center p-2">
           <Form onSubmit={createNewRoomSubmit}>
             <Form.Control
@@ -185,12 +214,34 @@ const MainChat = () => {
             </Button>
           </Form>
         </div>
+        <Card>
+          <Card.Title className="text-center p-2">
+            <strong>Utenti online: {onlineUser?.onlineUsers?.length}</strong>
+          </Card.Title>
+          <Card.Body>
+            {onlineUser?.onlineUsers?.map((e, i) => (
+              <Card.Text
+                key={`user-${i}`}
+                className="d-flex align-items-center"
+              >
+                {" "}
+                <span>
+                  <BsFillCircleFill style={{ color: "green" }} />
+                </span>
+                <span className="ms-2">
+                  {e?.first_name} {e?.last_name}
+                </span>
+              </Card.Text>
+            ))}
+          </Card.Body>
+        </Card>{" "}
       </Col>
-      <Col xs={10} md={8} lg={6}>
+
+      <Col xs={8} md={8} lg={6} xl={4}>
         <Card>
           <div className="d-flex justify-content-between align-items-center">
             <Card.Title className="px-5 pt-3">
-              <strong>NOME</strong>
+              <strong>{singleRoom.name}</strong>
             </Card.Title>
             <div className="d-flex flex-nowrap justify-content-center p-2">
               <Form className="d-flex" onSubmit={editNewNameSubmit}>
@@ -295,29 +346,6 @@ const MainChat = () => {
             </Form>
           </Card.Body>
         </Card>
-      </Col>
-      <Col md={3}>
-        <Card>
-          <Card.Title className="text-center p-2">
-            <strong>Utenti online: {onlineUser?.onlineUsers?.length}</strong>
-          </Card.Title>
-          <Card.Body>
-            {onlineUser?.onlineUsers?.map((e, i) => (
-              <Card.Text
-                key={`user-${i}`}
-                className="d-flex align-items-center"
-              >
-                {" "}
-                <span>
-                  <BsFillCircleFill style={{ color: "green" }} />
-                </span>
-                <span className="ms-2">
-                  {e?.first_name} {e?.last_name}
-                </span>
-              </Card.Text>
-            ))}
-          </Card.Body>
-        </Card>{" "}
       </Col>
     </Row>
   );
