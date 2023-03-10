@@ -173,7 +173,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
   }, [onlineUser]);
 
   return (
-    <Row className="w-100 d-flex flex-column-reverse flex-md-row justify-content-center py-3 m-0">
+    <Row className="w-100 d-flex flex-column-reverse flex-md-row justify-content-center align-items-center py-3 m-0">
       <Col xs={10} md={4} lg={3} xl={3}>
         <Card>
           <Card.Title className="text-center p-2">
@@ -246,7 +246,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
       <Col xs={10} md={8} lg={6} xl={4}>
         <Card>
           <div className="d-flex justify-content-between align-items-center">
-            <Card.Title className="px-5 pt-3">
+            <Card.Title className="px-5 pt-3 text-uppercase">
               <strong>{singleRoom.name}</strong>
             </Card.Title>
             <div className="d-flex flex-nowrap justify-content-center p-2">

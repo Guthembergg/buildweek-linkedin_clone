@@ -137,7 +137,7 @@ const FeedNews = (props) => {
           </Col>
           <Col xs={2} className="d-flex justify-content-end">
             {myId === props.news.user._id && (
-              <div className="d-flex ">
+              <div className="d-flex justify-content-center align-items-center">
                 <NavDropdown
                   className="iconPost rounded-circle p-2"
                   title={
