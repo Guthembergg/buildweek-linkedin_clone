@@ -91,6 +91,32 @@ const MainChat = () => {
     name: NewNameRoom,
   };
 
+  //inizio fetch DePascale
+  const [room, setRoom] = useState([]);
+
+  const getRooms = async () => {
+    try {
+      const response = await fetch(
+        `https://chat-api-epicode.herokuapp.com/api/all`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setRoom(data);
+      } else {
+        console.log("errore in if di getRooms");
+      }
+    } catch (err) {
+      console.log("errore nel catch di getRooms");
+    }
+  };
+  useEffect(() => {
+    getRooms();
+  }, []);
+
+  console.log("stanze", room);
+
+  //fine fetch DePascale
+
   const [roomId, setRoomId] = useState("b683822a-2542-4f6a-b9b7-bdb5ef382bd8");
 
   const editRoomFetch = async () => {
