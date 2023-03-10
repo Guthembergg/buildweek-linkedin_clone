@@ -143,7 +143,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
   useEffect(() => {
     socket.on("message", (data) => setMsg((msg) => [...msg, data]));
     console.log(msg);
-  }, [msg]);
+  }, [singleRoom, msg]);
 
   useEffect(() => {
     socket.on("connect", () => {
@@ -265,7 +265,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
             <div>
               {msg
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
-                ?.slice(msg.length - 10)
+                ?.slice(msg?.length - 10)
                 ?.map((e, i) => (
                   <>
                     {e.User.linkedinId === myProfileId ? (
