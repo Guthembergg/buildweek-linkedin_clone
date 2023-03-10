@@ -6,6 +6,7 @@ import moment from "moment/moment";
 import "moment/locale/it";
 import { BsDot } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { FaRegHandPointLeft } from "react-icons/fa";
 import { BsFillCircleFill } from "react-icons/bs";
 
 const MainChat = () => {
@@ -171,49 +172,53 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
   }, [onlineUser]);
 
   return (
-    <Row className="w-100 d-flex justify-content-center py-3 m-0">
-      <Col xs={4} md={4} lg={3} xl={3}>
+    <Row className="w-100 d-flex flex-column-reverse flex-md-row justify-content-center py-3 m-0">
+      <Col xs={10} md={4} lg={3} xl={3}>
         <Card>
           <Card.Title className="text-center p-2">
             <strong>Stanze disponibili: {room?.length} </strong>
           </Card.Title>
           <Card.Body>
             {room?.map((e, i) => (
-              <Card.Text
-                key={`room-${i}`}
-                className="d-flex align-items-center"
-              >
-                <span>
+              <Card.Text key={`room-${i}`}>
+                <span className="w-100">
                   <Button
-                    variant="outline-primary"
+                    className="w-100 d-flex justify-content-between"
+                    variant="outline-secondary"
                     onClick={() => setSingleRoom(e)}
                   >
-                    <span>
-                      <BsFillCircleFill style={{ color: "green" }} />
+                    <span className="ms-2 text-uppercase text-dark fw-bold">
+                      {e?.name}
                     </span>
-                    <span className="ms-2">{e?.name}</span>
+                    <span>
+                      <FaRegHandPointLeft style={{ color: "green" }} />
+                    </span>
                   </Button>
                 </span>
               </Card.Text>
             ))}
           </Card.Body>
         </Card>{" "}
-        <div className="d-flex flex-column justify-content-center p-2">
-          <Form onSubmit={createNewRoomSubmit}>
+        <Card className="my-3">
+          <Form
+            onSubmit={createNewRoomSubmit}
+            className="d-flex flex-column justify-content-center align-content-center p-2"
+          >
             <Form.Control
+              className="text-center"
               type="text"
-              placeholder="nuova stanza"
+              placeholder="Nome della nuova stanza"
               onChange={(e) => newRoom(e.target.value)}
             ></Form.Control>
             <Button
               variant="outline-secondary"
-              className="mx-2"
+              className="text-dark mt-2"
               onClick={() => createNewRoom()}
             >
               Crea nuova stanza
             </Button>
           </Form>
-        </div>
+        </Card>
         <Card>
           <Card.Title className="text-center p-2">
             <strong>Utenti online: {onlineUser?.onlineUsers?.length}</strong>
@@ -237,7 +242,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
         </Card>{" "}
       </Col>
 
-      <Col xs={8} md={8} lg={6} xl={4}>
+      <Col xs={10} md={8} lg={6} xl={4}>
         <Card>
           <div className="d-flex justify-content-between align-items-center">
             <Card.Title className="px-5 pt-3">
@@ -248,12 +253,12 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
                 <Form.Control
                   className="rounded-pill text-center p-1"
                   type="text"
-                  placeholder="..nuovo nome"
+                  placeholder="Modifica il nome"
                   onChange={(e) => editNewName(e.target.value)}
                 ></Form.Control>
                 <Button
                   variant="outline-secondary"
-                  className="mx-2 rounded-pill"
+                  className="mx-2 rounded-pill text-dark"
                   onClick={() => changeName()}
                 >
                   Modifica
@@ -265,7 +270,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
             <div>
               {msg
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
-                ?.slice(msg?.length - 10)
+                ?.slice(msg?.length - 50)
                 ?.map((e, i) => (
                   <>
                     {e.User.linkedinId === myProfileId ? (
