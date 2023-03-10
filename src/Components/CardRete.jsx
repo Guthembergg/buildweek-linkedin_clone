@@ -47,7 +47,10 @@ const CardRete = ({ id }) => {
         />
         <Card.Body className=" position-relative border-bottom border-tertiary text-center">
           <Card.Title className="mt-1  m-0 fs-6">
-            <Link className="text-decoration-none text-dark" to={`/profile/me`}>
+            <Link
+              className="text-decoration-none text-dark"
+              to={`/profile/${singleProfile?._id}`}
+            >
               {singleProfile?.name} <br /> {singleProfile?.surname}
             </Link>
             <Image

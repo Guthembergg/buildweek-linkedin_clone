@@ -157,72 +157,76 @@ const MainProfile = () => {
                       </Card.Title>
                       <p className="m-0 p-0">{me.title}</p>
                       <i className="m-0 p-0">{me.area}</i>
-                      <div className="mt-2 d-flex flex-wrap-nowrap">
-                        <Button variant="primary rounded-pill">
-                          Disponibile per
-                        </Button>
-                        <Button
-                          className="ms-2"
-                          variant="outline-primary rounded-pill"
-                        >
-                          Aggiungi sezione del profilo
-                        </Button>
-                        <Button
-                          className="ms-2"
-                          variant="outline-secondary rounded-pill"
-                        >
-                          <HiDotsHorizontal></HiDotsHorizontal>
-                        </Button>
-                      </div>
+                      {(param.id === "me" || param.id === profile._id) && (
+                        <div className="mt-2 d-flex flex-wrap-nowrap">
+                          <Button variant="primary rounded-pill">
+                            Disponibile per
+                          </Button>
+                          <Button
+                            className="ms-2"
+                            variant="outline-primary rounded-pill"
+                          >
+                            Aggiungi sezione del profilo
+                          </Button>
+                          <Button
+                            className="ms-2"
+                            variant="outline-secondary rounded-pill"
+                          >
+                            <HiDotsHorizontal></HiDotsHorizontal>
+                          </Button>
+                        </div>
+                      )}
                     </>
                   )}
                 </Card.Body>
-                <div className="d-flex ms-3 pb-3">
-                  <Card className="p-2 d-flex ">
-                    <Row>
-                      <Col>
-                        <h6 className="mb-1 fw-semibold">
-                          Disponibile a lavorare
-                        </h6>
-                        <p className="m-0 p-0">Ruoli specialista IT</p>
-                        <p
-                          href="s"
-                          className="fw-semibold mb-0"
-                          style={{ color: "blue" }}
-                        >
-                          inizia
-                        </p>
-                      </Col>
-                      {(param.id === "me" || param.id === profile._id) && (
-                        <Col xs={2} className="p-0">
-                          <HiOutlinePencil></HiOutlinePencil>
+                {(param.id === "me" || param.id === profile._id) && (
+                  <div className="d-flex ms-3 pb-3">
+                    <Card className="p-2 d-flex ">
+                      <Row>
+                        <Col>
+                          <h6 className="mb-1 fw-semibold">
+                            Disponibile a lavorare
+                          </h6>
+                          <p className="m-0 p-0">Ruoli specialista IT</p>
+                          <p
+                            href="s"
+                            className="fw-semibold mb-0"
+                            style={{ color: "blue" }}
+                          >
+                            inizia
+                          </p>
                         </Col>
-                      )}
-                    </Row>
-                  </Card>
-                  <Card className="p-2 ms-3">
-                    <Row>
-                      <Col>
-                        <h6 className="mb-1 fw-semibold">
-                          Fai sapere che stai facendo selezione
-                        </h6>
-                        <p className="m-0 p-0">candidati qualificati</p>
-                        <p
-                          href="s"
-                          className="fw-semibold mb-0"
-                          style={{ color: "blue" }}
-                        >
-                          inizia
-                        </p>
-                      </Col>
-                      {(param.id === "me" || param.id === profile._id) && (
-                        <Col xs={2} className="">
-                          <HiOutlinePencil></HiOutlinePencil>
+                        {(param.id === "me" || param.id === profile._id) && (
+                          <Col xs={2} className="p-0">
+                            <HiOutlinePencil></HiOutlinePencil>
+                          </Col>
+                        )}
+                      </Row>
+                    </Card>
+                    <Card className="p-2 ms-3">
+                      <Row>
+                        <Col>
+                          <h6 className="mb-1 fw-semibold">
+                            Fai sapere che stai facendo selezione
+                          </h6>
+                          <p className="m-0 p-0">candidati qualificati</p>
+                          <p
+                            href="s"
+                            className="fw-semibold mb-0"
+                            style={{ color: "blue" }}
+                          >
+                            inizia
+                          </p>
                         </Col>
-                      )}
-                    </Row>
-                  </Card>
-                </div>
+                        {(param.id === "me" || param.id === profile._id) && (
+                          <Col xs={2} className="">
+                            <HiOutlinePencil></HiOutlinePencil>
+                          </Col>
+                        )}
+                      </Row>
+                    </Card>
+                  </div>
+                )}
               </Card>
 
               {(param.id === "me" || param.id === profile._id) && (

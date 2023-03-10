@@ -173,7 +173,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
   }, [onlineUser]);
 
   return (
-    <Row className="w-100 d-flex flex-column-reverse flex-md-row justify-content-center align-items-center py-3 m-0">
+    <Row className="w-100 d-flex flex-column-reverse flex-md-row justify-content-center align-items-center align-items-md-start py-3 m-0 ">
       <Col xs={10} md={4} lg={3} xl={3}>
         <Card>
           <Card.Title className="text-center p-2">
