@@ -7,6 +7,7 @@ import "moment/locale/it";
 import { BsDot } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { BsFillCircleFill } from "react-icons/bs";
+import ScrollToBottom from "react-scroll-to-bottom";
 
 const MainChat = () => {
   const ADDRESS = "https://chat-api-epicode.herokuapp.com";
@@ -262,10 +263,10 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
             </div>
           </div>
           <Card.Body>
-            <div>
+            <ScrollToBottom className="overflow">
               {msg
                 ?.sort((a, b) => moment(a.createdAt).diff(b.createdAt))
-                ?.slice(msg?.length - 10)
+                ?.slice(msg?.length - 50)
                 ?.map((e, i) => (
                   <>
                     {e.User.linkedinId === myProfileId ? (
@@ -336,7 +337,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
                     )}
                   </>
                 ))}
-            </div>
+            </ScrollToBottom>
             <Form className="py-2" onSubmit={handleSubmit}>
               <Form.Control
                 value={query}
