@@ -1,4 +1,4 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
@@ -41,6 +41,75 @@ const MainChat = () => {
     msg: query,
   };
 
+  /////////////////////////////////// nuova stanza
+  const createNewRoomSubmit = (e) => {
+    e.preventDefault();
+  };
+  const createNewRoom = () => {
+    newRoomFetch();
+  };
+
+  const newRoom = (e) => {
+    setNewRoomTitle(e);
+  };
+
+  const [NewRoomTitle, setNewRoomTitle] = useState("");
+
+  const NewRoom = {
+    name: NewRoomTitle,
+  };
+
+  const newRoomFetch = async () => {
+    try {
+      const response = await fetch(
+        "https://chat-api-epicode.herokuapp.com/api/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(NewRoom),
+        }
+      );
+    } catch (error) {
+      console.log("errore nella creazione della nuova stanza");
+    }
+  };
+
+  ////////////// modifica nome stanza
+  const editNewNameSubmit = (e) => {
+    e.preventDefault();
+  };
+  const [NewNameRoom, setNewNameRoom] = useState("");
+  const editNewName = (e) => {
+    setNewNameRoom(e);
+  };
+  const changeName = () => {
+    editRoomFetch();
+  };
+  const editNameRoom = {
+    name: NewNameRoom,
+  };
+
+  const [roomId, setRoomId] = useState("b683822a-2542-4f6a-b9b7-bdb5ef382bd8");
+
+  const editRoomFetch = async () => {
+    try {
+      const response = await fetch(
+        `https://chat-api-epicode.herokuapp.com/api/${roomId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editNameRoom),
+        }
+      );
+    } catch (error) {
+      console.log("errore nella creazione della nuova stanza");
+    }
+  };
+
   useEffect(() => {
     socket.on("message", (data) => setMsg((msg) => [...msg, data]));
     console.log(msg);
@@ -73,8 +142,46 @@ const MainChat = () => {
 
   return (
     <Row className="w-100 d-flex justify-content-center">
-      <Col xs={10} md={6} lg={4}>
+      <Col md={3} xl={2}>
+        <div className="d-flex flex-column justify-content-center p-2">
+          <Form onSubmit={createNewRoomSubmit}>
+            <Form.Control
+              type="text"
+              placeholder="nuova stanza"
+              onChange={(e) => newRoom(e.target.value)}
+            ></Form.Control>
+            <Button
+              variant="outline-secondary"
+              className="mx-2"
+              onClick={() => createNewRoom()}
+            >
+              Crea nuova stanza
+            </Button>
+          </Form>
+        </div>
+        <div className="d-flex justify-content-center p-2">
+          <Form onSubmit={editNewNameSubmit}>
+            <Form.Control
+              type="text"
+              placeholder="modifica nome stanza"
+              onChange={(e) => editNewName(e.target.value)}
+            ></Form.Control>
+            <Button
+              variant="outline-secondary"
+              className="mx-2"
+              onClick={() => changeName()}
+            >
+              Modifica il nome della stanza
+            </Button>
+          </Form>
+        </div>
+      </Col>
+      <Col xs={10} md={8} lg={6}>
         <Card>
+          <div>
+            <Card.Title></Card.Title>
+          </div>
+
           <Card.Body>
             <div>
               {msg
@@ -94,11 +201,8 @@ const MainChat = () => {
                             borderRadius: "10px",
                           }}
                         >
-                          <div className=" mb-1 d-flex justify-content-end">
-                            <strong>
-                              {e?.User?.first_name} {""}
-                              {e?.User?.last_name}
-                            </strong>
+                          <div className=" mb-1 d-flex justify-content-start">
+                            <strong>TU:</strong>
                           </div>
 
                           <div className="ps-2 pe-2 d-flex justify-content-end">
