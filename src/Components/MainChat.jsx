@@ -141,7 +141,7 @@ const MainChat = () => {
   }, [onlineUser]);
 
   return (
-    <Row className="w-100 d-flex justify-content-center">
+    <Row className="w-100 d-flex justify-content-center py-3 m-0">
       <Col md={3} xl={2}>
         <div className="d-flex flex-column justify-content-center p-2">
           <Form onSubmit={createNewRoomSubmit}>
@@ -159,29 +159,31 @@ const MainChat = () => {
             </Button>
           </Form>
         </div>
-        <div className="d-flex justify-content-center p-2">
-          <Form onSubmit={editNewNameSubmit}>
-            <Form.Control
-              type="text"
-              placeholder="modifica nome stanza"
-              onChange={(e) => editNewName(e.target.value)}
-            ></Form.Control>
-            <Button
-              variant="outline-secondary"
-              className="mx-2"
-              onClick={() => changeName()}
-            >
-              Modifica il nome della stanza
-            </Button>
-          </Form>
-        </div>
       </Col>
       <Col xs={10} md={8} lg={6}>
         <Card>
-          <div>
-            <Card.Title></Card.Title>
+          <div className="d-flex justify-content-between align-items-center">
+            <Card.Title className="px-5 pt-3">
+              <strong>NOME</strong>
+            </Card.Title>
+            <div className="d-flex flex-nowrap justify-content-center p-2">
+              <Form className="d-flex" onSubmit={editNewNameSubmit}>
+                <Form.Control
+                  className="rounded-pill text-center p-1"
+                  type="text"
+                  placeholder="..nuovo nome"
+                  onChange={(e) => editNewName(e.target.value)}
+                ></Form.Control>
+                <Button
+                  variant="outline-secondary"
+                  className="mx-2 rounded-pill"
+                  onClick={() => changeName()}
+                >
+                  Modifica
+                </Button>
+              </Form>
+            </div>
           </div>
-
           <Card.Body>
             <div>
               {msg
@@ -258,7 +260,7 @@ const MainChat = () => {
                   </>
                 ))}
             </div>
-            <Form onSubmit={handleSubmit}>
+            <Form className="py-2" onSubmit={handleSubmit}>
               <Form.Control
                 value={query}
                 type="text"
