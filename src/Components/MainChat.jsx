@@ -298,7 +298,7 @@ updatedAt: "2023-03-10T09:57:28.883Z" */
                             style={{ color: "gray", fontSize: "0.7em" }}
                           >
                             <span className="d-none d-md-flex  justify-content-start">
-                              {moment(e?.createdAt).fromNow()}
+                              {moment(e?.createdAt).fromNow(true)}
                             </span>
                           </div>
                         </div>
