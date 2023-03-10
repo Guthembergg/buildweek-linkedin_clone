@@ -23,7 +23,7 @@ const MainNews = () => {
   const deletedPost = useSelector((state) => state.deletedPost);
   const followArray = useSelector((state) => state.seguiti);
   const [currentPage, setCurrentPage] = useState(314);
-  const numeroPerPagina = 5;
+  const numeroPerPagina = 10;
 
   let numeroPagine = Math.round(
     postList.filter((e) => followArray.includes(e?.user?._id)).length /
